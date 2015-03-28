@@ -14,7 +14,6 @@ body{
   color: #000000;
   font-size: 2em;
   padding-bottom: 800px;
-
 }
 
 header{
@@ -24,9 +23,17 @@ header{
       margin: 0 auto;
     }
     width: 100%;
+
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 0;
+
+    text-align: center;
+    img{
+        margin: 0 auto;
+        max-width: 640px;
+    }
 }
 
 .content{
@@ -37,9 +44,9 @@ header{
 nav{
 
   a{
-    @media (min-width: 641px){
-      display: inline-block;
-    }
+    // @media (min-width: 641px){
+    //   display: inline-block;
+    // }
     display: block;
 
     text-align: center;

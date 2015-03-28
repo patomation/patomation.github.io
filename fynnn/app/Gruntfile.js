@@ -18,7 +18,7 @@ module.exports = function(grunt) {
           style: 'expanded'
         },
         files: {                         // Dictionary of files
-          'build/css/style.css': 'dev/scss/main.scss'      // 'destination': 'source'
+          'dist/css/style.css': 'dev/scss/main.scss'      // 'destination': 'source'
         }
       }
     },
@@ -58,6 +58,38 @@ module.exports = function(grunt) {
         },
       },
     },
+    'http-server': {
+
+    'dev': {
+
+        // the server root directory
+        root: '../',
+
+        // the server port
+        // can also be written as a function, e.g.
+        // port: function() { return 8282; }
+        port: 8282,
+
+
+        // the host ip address
+        // If specified to, for example, "127.0.0.1" the server will
+        // only be available on that ip.
+        // Specify "0.0.0.0" to be available everywhere
+        host: "localhost",
+
+        cache: 'app/temp',
+        showDir : true,
+        autoIndex: true,
+
+        // server default file extension
+        ext: "html",
+
+        // run in parallel with other tasks
+        runInBackground: true|false
+
+    }
+
+}
 
   });
 
@@ -67,11 +99,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-rename');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-http-server');
 
   // Default task(s).
   grunt.registerTask('default', ['sass']);
 
 
-  grunt.registerTask('package', ['sass','copy', 'rename']);
+  // grunt.registerTask('package', ['sass','copy', 'rename']);
+
+
 
 };
