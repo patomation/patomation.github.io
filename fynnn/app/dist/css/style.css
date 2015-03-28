@@ -1,0 +1,147 @@
+/* FIXES */
+a, a:active, a:focus {
+  outline: none;
+}
+
+img {
+  width: 100%;
+}
+
+/* STYLES */
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 2em;
+  padding-bottom: 800px;
+}
+
+header {
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+header .image {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.content {
+  background: red;
+  padding-top: 360px;
+}
+
+nav {
+  padding-bottom: 5%;
+  text-align: center;
+}
+nav a {
+  display: block;
+  text-align: center;
+  padding: 2%;
+  color: black;
+  color: #000000;
+  font-size: 50%;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-align: center;
+}
+@media (min-width: 641px) {
+  nav a {
+    display: inline-block;
+  }
+}
+nav a:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+footer {
+  width: 100%;
+  text-align: center;
+}
+footer nav {
+  padding-bottom: 5%;
+  text-align: center;
+}
+footer nav a {
+  width: 10%;
+  display: inline-block;
+  text-align: center;
+  padding: 2%;
+  color: black;
+  color: #000000;
+  font-size: 50%;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-align: center;
+}
+footer nav a img {
+  width: 70%;
+  padding-bottom: 4%;
+}
+
+.ember-application {
+  margin: 20px;
+}
+
+.active {
+  font-weight: bold;
+}
+
+#container {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.mpc {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  text-transform: uppercase;
+}
+.mpc li {
+  text-align: center;
+  margin: 0;
+  width: 25%;
+  display: inline-block;
+  margin-right: -4px;
+  padding-bottom: 25%;
+  position: relative;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+.mpc li div {
+  top: 2%;
+  left: 2%;
+  position: absolute;
+  width: 96%;
+  height: 96%;
+  background-color: gray;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.active_pad {
+  background-color: red;
+}
+
+.home {
+  text-align: center;
+}
+.home img {
+  width: 50%;
+}
+
+.bio {
+  text-align: center;
+}
+.bio img {
+  width: 50%;
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,162 @@
+/* FIXES */
+a, a:active, a:focus {
+  outline: none;
+}
+img{
+  width: 100%;
+}
+
+/* STYLES */
+body{
+  padding: 0;
+  margin: 0;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 2em;
+  padding-bottom: 800px;
+
+}
+
+header{
+    text-align: center;
+    .image{
+      width: 100%;
+      margin: 0 auto;
+    }
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.content{
+  background: red;
+  padding-top: 360px;
+}
+
+nav{
+
+  a{
+    @media (min-width: 641px){
+      display: inline-block;
+    }
+    display: block;
+
+    text-align: center;
+    padding: 2%;
+    color: black;
+    // background-color: gray;
+    color: #000000;
+    font-size: 50%;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    &:hover{
+      background: #000000;
+      color: #ffffff;
+    }
+  }
+  padding-bottom: 5%;
+  text-align: center;
+  // RoboXotic
+}
+
+
+footer{
+  // position: fixed;
+  // bottom: 0;
+  // left: 0;
+  width: 100%;
+  text-align: center;
+  nav{
+    a{
+      width: 10%;
+      display: inline-block;
+      text-align: center;
+      padding: 2%;
+      color: black;
+      // background-color: gray;
+      color: #000000;
+      font-size: 50%;
+      text-decoration: none;
+      text-transform: uppercase;
+      text-align: center;
+      img{
+        width: 70%;
+        padding-bottom: 4%;
+      }
+    }
+    padding-bottom: 5%;
+    text-align: center;
+
+  }
+}
+
+
+.ember-application {
+    margin: 20px;
+}
+
+.active{
+  font-weight: bold;
+}
+
+
+
+#container{
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+
+.mpc{
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  text-transform: uppercase;
+  li{
+    text-align: center;
+    margin: 0;
+    width: percentage(1/4);
+    display: inline-block;
+    margin-right: -4px;
+    padding-bottom: percentage(1/4);
+    // margin-bottom: 1px;
+    // padding: 2%;
+    // background-color: red;
+    position: relative;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    div{
+      // display: block;
+      top: 2%;
+      left: 2%;
+      position: absolute;
+      width: 96%;
+      height: 96%;
+      // padding-bottom: 100%;
+      background-color: gray;
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+    }
+  }
+}
+
+
+.active_pad{
+  background-color: red;
+}
+
+.home{
+  text-align: center;
+  img{
+    width: 50%;
+  }
+}
+.bio{
+  text-align: center;
+  img{
+    width: 50%;
+  }
+}

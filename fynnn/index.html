@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+  <title>FYN</title>
+  <link rel="stylesheet" href="app/dist/css/normalize.css">
+  <link rel="stylesheet" href="app/dist/css/style.css">
+</head>
+<body>
+  <script type="text/x-handlebars">
+    <div id="container">
+
+
+      <header>
+        <img class='image' src="app/dist/images/logo.png" />
+      </header>
+      <div class="content">
+        <nav>
+          {{#link-to 'cloths'}}<span>Cloths</span>{{/link-to}}
+          {{#link-to 'alterations'}}<span>Alterations</span>{{/link-to}}
+          {{#link-to 'appointments'}}<span>Appointments</span>{{/link-to}}
+          {{#link-to 'about'}}<span>About Us</span>{{/link-to}}
+        </nav>
+
+        {{outlet}}
+
+      </div>
+
+    </div>
+
+
+  </script>
+
+  <script type="text/x-handlebars" id="home">
+    <div class="home">
+      <img src="app/dist/images/logo.png" />
+      <footer>
+        <nav>
+          {{#link-to 'cloths'}}<img src="app/dist/images/fyn_icons-01.png" /><div>Cloths</div>{{/link-to}}
+          {{#link-to 'alterations'}}<img src="app/dist/images/fyn_icons-02.png" /><div>Alterations</div>{{/link-to}}
+          {{#link-to 'appointments'}}<img src="app/dist/images/fyn_icons-03.png" /><div>Appointments</div>{{/link-to}}
+          {{#link-to 'about'}}<img src="app/dist/images/fyn_icons-04.png" /><div>About Us</div>{{/link-to}}
+        </nav>
+      </footer>
+    </div>
+  </script>
+  <script type="text/x-handlebars" id="cloths">
+    Cloths!!!
+  </script>
+  <script type="text/x-handlebars" id="alterations">
+    alterations!!!
+  </script>
+  <script type="text/x-handlebars" id="appointments">
+    appointments!!!
+  </script>
+  <script type="text/x-handlebars" id="about">
+    <div class="bio">
+       <img src="images/BIO_Fine.png" />
+    </div>
+  </script>
+
+
+
+
+
+
+  <script src="app/dist/js/libs/soundmanager2.js"></script>
+  <script src="app/dist/js/libs/jquery-1.10.2.js"></script>
+  <script src="app/dist/js/libs/handlebars-v2.0.0.js"></script>
+  <script src="app/dist/js/libs/ember-1.9.1.js"></script>
+  <script src="app/dist/js/app.js"></script>
+  <!-- to activate the test runner, add the "?test" query string parameter -->
+  <!-- <script src="tests/runner.js"></script> -->
+</body>
+</html>
