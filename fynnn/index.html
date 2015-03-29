@@ -10,22 +10,25 @@
 <body>
   <script type="text/x-handlebars">
     <div id="container">
+        <div class='loader'><img src="app/dist/images/logo.png"/></div>
 
+        <header>
+          <img class='image' src="app/dist/images/logo.png" />
+        </header>
 
-      <header>
-        <img class='image' src="app/dist/images/logo.png" />
-      </header>
-      <div class="content">
-        <nav>
+        <div class="content">
+          {{outlet}}
+        </div>
+
+        <nav id='nav' data-nav >
+          <div class='nav-toggle' data-nav-toggle >
+            <div class='arrow-up' data-nav-arrow ></div>
+          </div>
           {{#link-to 'cloths'}}<span>Cloths</span>{{/link-to}}
           {{#link-to 'alterations'}}<span>Alterations</span>{{/link-to}}
           {{#link-to 'appointments'}}<span>Appointments</span>{{/link-to}}
           {{#link-to 'about'}}<span>About Us</span>{{/link-to}}
         </nav>
-
-        {{outlet}}
-
-      </div>
 
     </div>
 
@@ -69,6 +72,7 @@
   <script src="app/dist/js/libs/jquery-1.10.2.js"></script>
   <script src="app/dist/js/libs/handlebars-v2.0.0.js"></script>
   <script src="app/dist/js/libs/ember-1.9.1.js"></script>
+  <script src="//localhost:35729/livereload.js"></script>
   <script src="app/dist/js/app.js"></script>
   <!-- to activate the test runner, add the "?test" query string parameter -->
   <!-- <script src="tests/runner.js"></script> -->
