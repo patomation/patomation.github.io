@@ -90,8 +90,27 @@ var fancyNavBar = {
 
 }
 
+var IOSscrollJumpFix = function(){
+  //Iphone Scroll jumping fix
+  //window.scrollTo(0, 1);
+  $('body, html')
+    .animate({scrollTop: 0})
+    .scrollTop(0);
+
+  // set percentage height to fixed px height. This should fix it.
+  var targetHeight = $('header').height();
+  $('header').css('height',targetHeight);
+
+}
+
+
+
 $( document ).ready(function() {
     console.log( "ready!" );
+
+
+    IOSscrollJumpFix();
+
 
     fancyNavBar.initialize();
 
