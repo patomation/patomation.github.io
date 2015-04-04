@@ -121,7 +121,7 @@ header{
 
 nav{
 
- @include boxShadow( 10 , 0.3 );
+  @include boxShadow( 10 , 0.3 );
   .nav-toggle{
     display: block;
     width :100%;
@@ -130,6 +130,7 @@ nav{
     div{
       @include center-align;
     }
+    background-color: #ffffff;
   }
   a{
     // @media (min-width: 641px){
