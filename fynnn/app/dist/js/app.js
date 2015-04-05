@@ -90,10 +90,19 @@ var fancyNavBar = {
         toggleHeight = $('div[data-nav-toggle]').height();
 
 
+    //Help me get rid of scroll bar on .content area
+    $('.content').css('width', (windowWidth + 20) + 'px' );
+    $( window ).resize(function() {
+      windowWidth = $windowSizeSampleElm.width();
+      $('.content').css('width', (windowWidth + 20) + 'px' );
+    });
+
+    // Were doing something here...
     if( targetHeight < windowHeight ){
       $target.css('height',windowHeight);
     }
     $target.css('margin-top', windowHeight - toggleHeight );
+
 
     //hide nav when a link/Route is clicked
     $("nav a").on('click',function(){
@@ -211,6 +220,9 @@ $( document ).ready(function() {
 
 
     fancyNavBar.initialize();
+
+
+
 
     loader.hide();
 });

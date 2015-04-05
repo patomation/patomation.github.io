@@ -24,6 +24,10 @@ body {
   padding-bottom: 800px;
 }
 
+body {
+  overflow-y: hidden;
+}
+
 .loader {
   position: fixed;
   width: 100%;
@@ -66,12 +70,28 @@ header .image {
 
 .content {
   position: fixed;
-  width: 100%;
+  width: 104%;
   height: 100%;
   top: 0;
   left: 0;
   background-color: #ffffff;
   overflow: scroll;
+  overflow: -moz-scrollbars-none;
+  padding-bottom: 80px;
+}
+.content ::-webkit-scrollbar {
+  display: none;
+}
+.content div {
+  padding-bottom: 100px;
+}
+.content .float-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 nav {
@@ -170,9 +190,14 @@ nav a:hover {
 
 .bio {
   text-align: center;
+  padding: 40px;
 }
-.bio img {
-  width: 50%;
+
+.bio__p {
+  padding-top: 40px;
+  text-align: center;
+  font-size: 90%;
+  line-height: 110%;
 }
 
 /*# sourceMappingURL=style.css.map */

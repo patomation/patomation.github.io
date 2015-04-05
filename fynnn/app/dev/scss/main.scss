@@ -95,6 +95,11 @@ body{
   padding-bottom: 800px;
 }
 
+
+body {
+    overflow-y:hidden;
+}
+
 .loader{
   position: fixed;
   width: 100%;
@@ -130,13 +135,25 @@ header{
 
 .content{
   position: fixed;
-  width: 100%;
+  width: 104%;
   height: 100%;
   top: 0;
   left: 0;
   background-color: $color1;
 
   overflow: scroll;
+  overflow: -moz-scrollbars-none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  padding-bottom: 80px;
+  div{
+    padding-bottom: 100px // 60 + 40
+  }
+  .float-image{
+   @include center-align()
+  }
 }
 
 
@@ -207,7 +224,7 @@ nav{
 }
 
 .ember-application {
-    margin: 20px;
+  margin: 20px;
 }
 
 .active{
@@ -224,7 +241,16 @@ nav{
 }
 .bio{
   text-align: center;
-  img{
-    width: 50%;
-  }
+  padding: 40px;
+}
+
+.bio__img{
+
+}
+
+.bio__p{
+  padding-top: 40px;
+  text-align: center;
+  font-size: 90%;
+  line-height: 110%;
 }
