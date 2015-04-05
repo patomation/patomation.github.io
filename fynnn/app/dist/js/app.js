@@ -221,7 +221,9 @@ $( document ).ready(function() {
 
     fancyNavBar.initialize();
 
-
+    $('nav').on('click',function(){
+      $('header').css('display','none');
+    });
 
 
     loader.hide();
