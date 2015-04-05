@@ -58,38 +58,23 @@ module.exports = function(grunt) {
         },
       },
     },
-    'http-server': {
-
-    'dev': {
-
-        // the server root directory
-        root: '../',
-
-        // the server port
-        // can also be written as a function, e.g.
-        // port: function() { return 8282; }
-        port: 8282,
-
-
-        // the host ip address
-        // If specified to, for example, "127.0.0.1" the server will
-        // only be available on that ip.
-        // Specify "0.0.0.0" to be available everywhere
-        host: "localhost",
-
-        cache: 'app/temp',
-        showDir : true,
-        autoIndex: true,
-
-        // server default file extension
-        ext: "html",
-
-        // run in parallel with other tasks
-        runInBackground: true|false
-
+    connect: {
+        options: {
+            port: 9000,
+            livereload: 35729,
+            hostname: '0.0.0.0'
+        },
+        livereload: {
+            options: {
+                open: {
+                     target: 'http://localhost:9000'
+                },
+                base: [
+                    '../'
+                ]
+            }
+        }
     }
-
-}
 
   });
 
@@ -99,10 +84,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-rename');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-http-server');
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Default task(s).
   grunt.registerTask('default', ['sass']);
+  grunt.registerTask('serve', ['connect', 'watch']);
 
 
   // grunt.registerTask('package', ['sass','copy', 'rename']);
