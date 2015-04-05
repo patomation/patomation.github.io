@@ -123,16 +123,21 @@ var fancyNavBar = {
         if( position < windowHeight/2 ) { //800/2=400, 800/4 = 200
           if (thisScrollTop > lastScrollTop){
             // downscroll
+            console.log('downscroll');
           } else {
             // upscroll
+            console.log('upscroll');
             self.hide();
           }
-        } else {
+        } else if ( position > ( windowHeight - (windowHeight/2) ) ) { //800 - (800/4) = 800 - 200 = 600, < 600
           if (thisScrollTop > lastScrollTop){
             // downscroll
+            console.log('downscroll');
             self.show();
           } else {
             // upscroll
+            console.log('upscroll');
+            self.show();
           }
         }
         lastScrollTop = thisScrollTop;
