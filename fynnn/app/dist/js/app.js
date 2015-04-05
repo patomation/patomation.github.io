@@ -120,7 +120,7 @@ var fancyNavBar = {
 
 
         var thisScrollTop = $(this).scrollTop();
-        if( position < windowHeight/4 ) { //800/2=400 800/4 = 200
+        if( position < windowHeight/2 ) { //800/2=400, 800/4 = 200
           if (thisScrollTop > lastScrollTop){
             // downscroll
           } else {
@@ -136,7 +136,7 @@ var fancyNavBar = {
           }
         }
         lastScrollTop = thisScrollTop;
-        
+
         //
         // var thisScrollTop = $(this).scrollTop();
         // if (thisScrollTop > lastScrollTop){
