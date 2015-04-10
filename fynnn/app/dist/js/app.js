@@ -7,13 +7,14 @@ App.Router.map(function() {
   this.resource('alterations');
   this.resource('appointments');
   this.resource('about');
+  this.resource('home');
 });
 
 
 App.IndexRoute = Ember.Route.extend({
     redirect: function() {
         // this redirects / to /Index
-        // this.transitionTo('home');
+        this.transitionTo('home');
     }
 });
 
@@ -91,11 +92,11 @@ var fancyNavBar = {
 
 
     //Help me get rid of scroll bar on .content area
-    $('.content').css('width', (windowWidth + 20) + 'px' );
-    $( window ).resize(function() {
-      windowWidth = $windowSizeSampleElm.width();
-      $('.content').css('width', (windowWidth + 20) + 'px' );
-    });
+    // $('.content').css('width', (windowWidth + 20) + 'px' );
+    // $( window ).resize(function() {
+    //   windowWidth = $windowSizeSampleElm.width();
+    //   $('.content').css('width', (windowWidth + 20) + 'px' );
+    // });
 
     // Were doing something here...
     if( targetHeight < windowHeight ){

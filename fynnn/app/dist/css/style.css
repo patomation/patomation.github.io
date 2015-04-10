@@ -17,15 +17,88 @@ img {
 /* STYLES */
 body {
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
   background-color: #ffffff;
   color: #000000;
-  font-size: 2em;
+  font-size: 1em;
   padding-bottom: 800px;
 }
 
 body {
   overflow-y: hidden;
+}
+
+.content {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #ffffff;
+  overflow: scroll;
+  overflow: -moz-scrollbars-none;
+}
+.content ::-webkit-scrollbar {
+  display: none;
+}
+.content .float-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.content div:first-child {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  padding-bottom: 80px;
+  max-width: 640px;
+}
+.content div:first-child img:first-child {
+  padding-top: 2%;
+  padding-bottom: 2%;
+  width: 20%;
+}
+@media (min-width: 641px) {
+  .content div:first-child img:first-child {
+    width: 50%;
+  }
+}
+
+h1 {
+  text-align: center;
+  margin: 0;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+h2 {
+  font-size: 110%;
+  padding-top: 8%;
+  padding-bottom: 8%;
+}
+
+p {
+  padding-top: 2%;
+  padding-bottom: 2%;
+  text-align: left;
+  font-size: 110%;
+  line-height: 110%;
+  width: 100%;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+li {
+  padding: 2%;
 }
 
 .loader {
@@ -54,7 +127,7 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 600;
+  z-index: 0;
   text-align: center;
   pointer-events: none;
 }
@@ -69,33 +142,8 @@ header .image {
   width: 50%;
 }
 
-.content {
-  position: fixed;
-  width: 104%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-color: #ffffff;
-  overflow: scroll;
-  overflow: -moz-scrollbars-none;
-  padding-bottom: 80px;
-}
-.content ::-webkit-scrollbar {
-  display: none;
-}
-.content div {
-  padding-bottom: 100px;
-}
-.content .float-image {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
 nav {
+  font-size: 200%;
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.45);
   -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.45);
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.45);
@@ -180,25 +228,6 @@ nav a:hover {
 
 .ember-application {
   margin: 20px;
-}
-
-.home {
-  text-align: center;
-}
-.home img {
-  width: 50%;
-}
-
-.bio {
-  text-align: center;
-  padding: 40px;
-}
-
-.bio__p {
-  padding-top: 40px;
-  text-align: center;
-  font-size: 90%;
-  line-height: 110%;
 }
 
 /*# sourceMappingURL=style.css.map */
