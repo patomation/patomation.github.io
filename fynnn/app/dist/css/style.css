@@ -37,6 +37,7 @@ body {
   background-color: #ffffff;
   overflow: scroll;
   overflow: -moz-scrollbars-none;
+  -webkit-overflow-scrolling: touch;
 }
 .content ::-webkit-scrollbar {
   display: none;
