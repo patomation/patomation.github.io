@@ -1,5 +1,0 @@
-.idea
-.DS_Store
-node_modules
-public/dev/bower_components
-.sass-cache
