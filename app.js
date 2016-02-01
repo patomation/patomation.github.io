@@ -98,9 +98,21 @@
 
 	      styles: {
 	        layout: {},
-	        header: {},
-	        content: {},
-	        footer: {}
+	        header: {
+	          backgroundColor: 'black',
+	          color: '#ffffff'
+	        },
+	        content: {
+	          backgroundColor: 'black',
+	          position: 'absolute',
+	          top: '0',
+	          width: '100%',
+	          height: '100%',
+	          textAlign: 'center'
+	        },
+	        footer: {
+	          backgroundColor: 'black'
+	        }
 	      },
 
 	      render: function render() {
@@ -109,18 +121,14 @@
 	          headerStyle: this.styles.header,
 	          contentStyle: this.styles.content,
 	          footerStyle: this.styles.footer,
-	          headerContent: 'header content',
-	          footerContent: 'footer content' }, 'Hello World', _react2['default'].createElement('br', null), _react2['default'].createElement('img', { src: _imagesCHAT2Gif2['default'] }), _react2['default'].createElement(_componentsSvgSvg2['default'], {
+	          headerContent: '',
+	          footerContent: '' }, _react2['default'].createElement('img', {
+	          className: 'centerAlign',
 	          style: {
 	            width: '30%',
-	            fill: 'gold'
+	            top: '45%'
 	          },
-	          src: _imagesLogoutSvg2['default'] }), _react2['default'].createElement('img', {
-	          style: {
-	            width: '30%',
-	            fill: 'red'
-	          },
-	          src: _imagesLogoutSvg2['default'] })));
+	          src: _imagesCHAT2Gif2['default'] })));
 	      }
 	    });
 
@@ -19770,7 +19778,7 @@
 
 
 	// module
-	exports.push([module.id, "html, body {\n  padding: 0;\n  margin: 0; }\n\nsvg {\n  width: 100%;\n  height: 100%; }\n\nsvg:hover path {\n  fill: green; }\n\n.verticalAlign {\n  position: absolute;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n  -ms-transform: translateY(-50%);\n  transform: translateY(-50%); }\n\n.spinner {\n  margin: 60px auto;\n  font-size: 10px;\n  position: relative;\n  text-indent: -9999em;\n  border-top: 1.1em solid rgba(255, 255, 255, 0.2);\n  border-right: 1.1em solid rgba(255, 255, 255, 0.2);\n  border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);\n  border-left: 1.1em solid #ffffff;\n  -webkit-transform: translateZ(0);\n  -ms-transform: translateZ(0);\n  transform: translateZ(0);\n  -webkit-animation: load8 1.1s infinite linear;\n  animation: load8 1.1s infinite linear; }\n\n.spinner,\n.spinner:after {\n  border-radius: 50%;\n  width: 10em;\n  height: 10em; }\n\n@-webkit-keyframes load8 {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg); } }\n\n@keyframes load8 {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg); } }\n", ""]);
+	exports.push([module.id, "html, body {\n  padding: 0;\n  margin: 0; }\n\nsvg {\n  width: 100%;\n  height: 100%; }\n\nsvg:hover path {\n  fill: green; }\n\n.verticalAlign {\n  position: absolute;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n  -ms-transform: translateY(-50%);\n  transform: translateY(-50%); }\n\n.centerAlign {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  -ms-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%); }\n\n.spinner {\n  margin: 60px auto;\n  font-size: 10px;\n  position: relative;\n  text-indent: -9999em;\n  border-top: 1.1em solid rgba(255, 255, 255, 0.2);\n  border-right: 1.1em solid rgba(255, 255, 255, 0.2);\n  border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);\n  border-left: 1.1em solid #ffffff;\n  -webkit-transform: translateZ(0);\n  -ms-transform: translateZ(0);\n  transform: translateZ(0);\n  -webkit-animation: load8 1.1s infinite linear;\n  animation: load8 1.1s infinite linear; }\n\n.spinner,\n.spinner:after {\n  border-radius: 50%;\n  width: 10em;\n  height: 10em; }\n\n@-webkit-keyframes load8 {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg); } }\n\n@keyframes load8 {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg); } }\n", ""]);
 
 	// exports
 
