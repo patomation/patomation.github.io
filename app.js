@@ -69,32 +69,44 @@
 
 	    var _reactDom2 = _interopRequireDefault(_reactDom);
 
+	    var _jquery = __webpack_require__(159);
+
+	    var _jquery2 = _interopRequireDefault(_jquery);
+
 	    //CSS
 
-	    __webpack_require__(159);
+	    __webpack_require__(160);
 
 	    //Components
 
-	    var _componentsLayoutLayout = __webpack_require__(163);
-
-	    var _componentsLayoutLayout2 = _interopRequireDefault(_componentsLayoutLayout);
-
-	    var _componentsSvgSvg = __webpack_require__(170);
+	    var _componentsSvgSvg = __webpack_require__(164);
 
 	    var _componentsSvgSvg2 = _interopRequireDefault(_componentsSvgSvg);
 
+	    //Views
+
+	    var _viewsGitHubProjectsGitHubProjects = __webpack_require__(165);
+
+	    var _viewsGitHubProjectsGitHubProjects2 = _interopRequireDefault(_viewsGitHubProjectsGitHubProjects);
+
 	    //IMAGES
 
-	    var _imagesCHAT2Gif = __webpack_require__(171);
+	    var _imagesCHAT2Gif = __webpack_require__(167);
 
 	    var _imagesCHAT2Gif2 = _interopRequireDefault(_imagesCHAT2Gif);
 
-	    var _imagesLogoutSvg = __webpack_require__(172);
+	    var _imagesLogoutSvg = __webpack_require__(168);
 
 	    var _imagesLogoutSvg2 = _interopRequireDefault(_imagesLogoutSvg);
 
 	    var App = _react2['default'].createClass({
 	      displayName: 'App',
+
+	      getInitialState: function getInitialState() {
+	        return {
+	          gitHubProjects: null
+	        };
+	      },
 
 	      styles: {
 	        layout: {},
@@ -103,32 +115,42 @@
 	          color: '#ffffff'
 	        },
 	        content: {
-	          backgroundColor: 'black',
+	          backgroundColor: 'gray',
 	          position: 'absolute',
 	          top: '0',
 	          width: '100%',
 	          height: '100%',
-	          textAlign: 'center'
+	          textAlign: 'center',
+	          fontSize: '16px'
 	        },
 	        footer: {
 	          backgroundColor: 'black'
+	        },
+	        projects: {
+	          fontSize: 'inherit'
 	        }
 	      },
 
+	      getGitHubProjects: function getGitHubProjects() {
+	        _jquery2['default'].ajax({
+	          url: 'https://api.github.com/repos/patomation/patomation.github.io/contents/projects',
+	          dataType: 'json',
+	          success: (function (projects) {
+	            this.setState({
+	              gitHubProjects: projects
+	            });
+	          }).bind(this)
+	        });
+	      },
+
+	      componentDidMount: function componentDidMount() {
+	        this.getGitHubProjects();
+	      },
+
 	      render: function render() {
-	        return _react2['default'].createElement('div', { className: 'app' }, _react2['default'].createElement(_componentsLayoutLayout2['default'], {
-	          style: {},
-	          headerStyle: this.styles.header,
-	          contentStyle: this.styles.content,
-	          footerStyle: this.styles.footer,
-	          headerContent: '',
-	          footerContent: '' }, _react2['default'].createElement('img', {
-	          className: 'centerAlign',
-	          style: {
-	            width: '30%',
-	            top: '45%'
-	          },
-	          src: _imagesCHAT2Gif2['default'] })));
+	        return _react2['default'].createElement('div', { className: 'app' }, _react2['default'].createElement(_viewsGitHubProjectsGitHubProjects2['default'], {
+	          projects: this.state.gitHubProjects,
+	          style: this.styles.projects }));
 	      }
 	    });
 
@@ -18772,7 +18794,7 @@
 
 	'use strict';
 
-	module.exports = '0.14.6';
+	module.exports = '0.14.7';
 
 /***/ },
 /* 147 */
@@ -19745,701 +19767,6 @@
 
 /***/ },
 /* 159 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(160);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(162)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/sass-loader/index.js!./main.scss", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/sass-loader/index.js!./main.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 160 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(161)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "html, body {\n  padding: 0;\n  margin: 0; }\n\nsvg {\n  width: 100%;\n  height: 100%; }\n\nsvg:hover path {\n  fill: green; }\n\n.verticalAlign {\n  position: absolute;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n  -ms-transform: translateY(-50%);\n  transform: translateY(-50%); }\n\n.centerAlign {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  -ms-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%); }\n\n.spinner {\n  margin: 60px auto;\n  font-size: 10px;\n  position: relative;\n  text-indent: -9999em;\n  border-top: 1.1em solid rgba(255, 255, 255, 0.2);\n  border-right: 1.1em solid rgba(255, 255, 255, 0.2);\n  border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);\n  border-left: 1.1em solid #ffffff;\n  -webkit-transform: translateZ(0);\n  -ms-transform: translateZ(0);\n  transform: translateZ(0);\n  -webkit-animation: load8 1.1s infinite linear;\n  animation: load8 1.1s infinite linear; }\n\n.spinner,\n.spinner:after {\n  border-radius: 50%;\n  width: 10em;\n  height: 10em; }\n\n@-webkit-keyframes load8 {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg); } }\n\n@keyframes load8 {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg); } }\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 161 */
-/***/ function(module, exports) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	// css base code, injected by the css-loader
-	module.exports = function() {
-		var list = [];
-
-		// return the list of modules as css string
-		list.toString = function toString() {
-			var result = [];
-			for(var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if(item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
-
-		// import a list of modules into the list
-		list.i = function(modules, mediaQuery) {
-			if(typeof modules === "string")
-				modules = [[null, modules, ""]];
-			var alreadyImportedModules = {};
-			for(var i = 0; i < this.length; i++) {
-				var id = this[i][0];
-				if(typeof id === "number")
-					alreadyImportedModules[id] = true;
-			}
-			for(i = 0; i < modules.length; i++) {
-				var item = modules[i];
-				// skip already imported module
-				// this implementation is not 100% perfect for weird media query combinations
-				//  when a module is imported multiple times with different media queries.
-				//  I hope this will never occur (Hey this way we have smaller bundles)
-				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-					if(mediaQuery && !item[2]) {
-						item[2] = mediaQuery;
-					} else if(mediaQuery) {
-						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-					}
-					list.push(item);
-				}
-			}
-		};
-		return list;
-	};
-
-
-/***/ },
-/* 162 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	var stylesInDom = {},
-		memoize = function(fn) {
-			var memo;
-			return function () {
-				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-				return memo;
-			};
-		},
-		isOldIE = memoize(function() {
-			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
-		}),
-		getHeadElement = memoize(function () {
-			return document.head || document.getElementsByTagName("head")[0];
-		}),
-		singletonElement = null,
-		singletonCounter = 0;
-
-	module.exports = function(list, options) {
-		if(false) {
-			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-		}
-
-		options = options || {};
-		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-		// tags it will allow on a page
-		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
-
-		var styles = listToStyles(list);
-		addStylesToDom(styles, options);
-
-		return function update(newList) {
-			var mayRemove = [];
-			for(var i = 0; i < styles.length; i++) {
-				var item = styles[i];
-				var domStyle = stylesInDom[item.id];
-				domStyle.refs--;
-				mayRemove.push(domStyle);
-			}
-			if(newList) {
-				var newStyles = listToStyles(newList);
-				addStylesToDom(newStyles, options);
-			}
-			for(var i = 0; i < mayRemove.length; i++) {
-				var domStyle = mayRemove[i];
-				if(domStyle.refs === 0) {
-					for(var j = 0; j < domStyle.parts.length; j++)
-						domStyle.parts[j]();
-					delete stylesInDom[domStyle.id];
-				}
-			}
-		};
-	}
-
-	function addStylesToDom(styles, options) {
-		for(var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-			if(domStyle) {
-				domStyle.refs++;
-				for(var j = 0; j < domStyle.parts.length; j++) {
-					domStyle.parts[j](item.parts[j]);
-				}
-				for(; j < item.parts.length; j++) {
-					domStyle.parts.push(addStyle(item.parts[j], options));
-				}
-			} else {
-				var parts = [];
-				for(var j = 0; j < item.parts.length; j++) {
-					parts.push(addStyle(item.parts[j], options));
-				}
-				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-			}
-		}
-	}
-
-	function listToStyles(list) {
-		var styles = [];
-		var newStyles = {};
-		for(var i = 0; i < list.length; i++) {
-			var item = list[i];
-			var id = item[0];
-			var css = item[1];
-			var media = item[2];
-			var sourceMap = item[3];
-			var part = {css: css, media: media, sourceMap: sourceMap};
-			if(!newStyles[id])
-				styles.push(newStyles[id] = {id: id, parts: [part]});
-			else
-				newStyles[id].parts.push(part);
-		}
-		return styles;
-	}
-
-	function createStyleElement() {
-		var styleElement = document.createElement("style");
-		var head = getHeadElement();
-		styleElement.type = "text/css";
-		head.appendChild(styleElement);
-		return styleElement;
-	}
-
-	function createLinkElement() {
-		var linkElement = document.createElement("link");
-		var head = getHeadElement();
-		linkElement.rel = "stylesheet";
-		head.appendChild(linkElement);
-		return linkElement;
-	}
-
-	function addStyle(obj, options) {
-		var styleElement, update, remove;
-
-		if (options.singleton) {
-			var styleIndex = singletonCounter++;
-			styleElement = singletonElement || (singletonElement = createStyleElement());
-			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
-			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
-		} else if(obj.sourceMap &&
-			typeof URL === "function" &&
-			typeof URL.createObjectURL === "function" &&
-			typeof URL.revokeObjectURL === "function" &&
-			typeof Blob === "function" &&
-			typeof btoa === "function") {
-			styleElement = createLinkElement();
-			update = updateLink.bind(null, styleElement);
-			remove = function() {
-				styleElement.parentNode.removeChild(styleElement);
-				if(styleElement.href)
-					URL.revokeObjectURL(styleElement.href);
-			};
-		} else {
-			styleElement = createStyleElement();
-			update = applyToTag.bind(null, styleElement);
-			remove = function() {
-				styleElement.parentNode.removeChild(styleElement);
-			};
-		}
-
-		update(obj);
-
-		return function updateStyle(newObj) {
-			if(newObj) {
-				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
-					return;
-				update(obj = newObj);
-			} else {
-				remove();
-			}
-		};
-	}
-
-	var replaceText = (function () {
-		var textStore = [];
-
-		return function (index, replacement) {
-			textStore[index] = replacement;
-			return textStore.filter(Boolean).join('\n');
-		};
-	})();
-
-	function applyToSingletonTag(styleElement, index, remove, obj) {
-		var css = remove ? "" : obj.css;
-
-		if (styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = replaceText(index, css);
-		} else {
-			var cssNode = document.createTextNode(css);
-			var childNodes = styleElement.childNodes;
-			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
-			if (childNodes.length) {
-				styleElement.insertBefore(cssNode, childNodes[index]);
-			} else {
-				styleElement.appendChild(cssNode);
-			}
-		}
-	}
-
-	function applyToTag(styleElement, obj) {
-		var css = obj.css;
-		var media = obj.media;
-		var sourceMap = obj.sourceMap;
-
-		if(media) {
-			styleElement.setAttribute("media", media)
-		}
-
-		if(styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = css;
-		} else {
-			while(styleElement.firstChild) {
-				styleElement.removeChild(styleElement.firstChild);
-			}
-			styleElement.appendChild(document.createTextNode(css));
-		}
-	}
-
-	function updateLink(linkElement, obj) {
-		var css = obj.css;
-		var media = obj.media;
-		var sourceMap = obj.sourceMap;
-
-		if(sourceMap) {
-			// http://stackoverflow.com/a/26603875
-			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-		}
-
-		var blob = new Blob([css], { type: "text/css" });
-
-		var oldSrc = linkElement.href;
-
-		linkElement.href = URL.createObjectURL(blob);
-
-		if(oldSrc)
-			URL.revokeObjectURL(oldSrc);
-	}
-
-
-/***/ },
-/* 163 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */"use strict";
-
-	if (false) {
-	  (function () {
-	    var ReactHotAPI = require("/x/react-web-pack-test/node_modules/react-hot-api/modules/index.js"),
-	        React = require("react");module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(React);
-	  })();
-	}try {
-	  (function () {
-
-	    //Modules
-	    'use strict';
-
-	    Object.defineProperty(exports, '__esModule', {
-	      value: true
-	    });
-
-	    function _interopRequireDefault(obj) {
-	      return obj && obj.__esModule ? obj : { 'default': obj };
-	    }
-
-	    var _react = __webpack_require__(1);
-
-	    var _react2 = _interopRequireDefault(_react);
-
-	    //Components
-
-	    var _header = __webpack_require__(164);
-
-	    var _header2 = _interopRequireDefault(_header);
-
-	    var _footer = __webpack_require__(165);
-
-	    var _footer2 = _interopRequireDefault(_footer);
-
-	    var _loader = __webpack_require__(166);
-
-	    var _loader2 = _interopRequireDefault(_loader);
-
-	    var Layout = _react2['default'].createClass({
-	      displayName: 'Layout',
-
-	      Props: {
-	        style: _react2['default'].PropTypes.object,
-	        headerStyle: _react2['default'].PropTypes.object,
-	        contentStyle: _react2['default'].PropTypes.object,
-	        footerStyle: _react2['default'].PropTypes.object,
-	        headerContent: _react2['default'].PropTypes.object,
-	        footerContent: _react2['default'].PropTypes.object
-	      },
-
-	      styles: {
-	        layout: {},
-	        header: {
-	          padding: '2%',
-	          color: '#ffffff',
-	          backgroundColor: 'gray',
-	          textAlign: 'center'
-	        },
-	        content: {
-	          padding: '2%',
-	          paddingBottom: '6%'
-	        },
-	        footer: {
-	          padding: '2%',
-	          color: '#ffffff',
-	          backgroundColor: 'gray',
-	          position: 'fixed',
-	          bottom: '0',
-	          width: '100%',
-	          textAlign: 'center'
-	        }
-	      },
-
-	      merge: function merge(obj1, obj2) {
-	        var obj3 = {};
-	        for (var attrname in obj1) {
-	          obj3[attrname] = obj1[attrname];
-	        }
-	        for (var attrname in obj2) {
-	          obj3[attrname] = obj2[attrname];
-	        }
-	        return obj3;
-	      },
-
-	      render: function render() {
-
-	        return _react2['default'].createElement('div', {
-	          className: 'layout',
-	          style: this.merge(this.styles.layout, this.props.style) }, _react2['default'].createElement(_loader2['default'], null), _react2['default'].createElement(_header2['default'], {
-	          style: this.merge(this.styles.header, this.props.headerStyle) }, this.props.headerContent), _react2['default'].createElement('div', {
-	          className: 'content',
-	          style: this.merge(this.styles.content, this.props.contentStyle) }, this.props.children), _react2['default'].createElement(_footer2['default'], {
-	          style: this.merge(this.styles.footer, this.props.footerStyle) }, this.props.footerContent));
-	      }
-	    });
-
-	    exports['default'] = Layout;
-	    module.exports = exports['default'];
-
-	    /* REACT HOT LOADER */
-	  }).call(undefined);
-	} finally {
-	  if (false) {
-	    (function () {
-	      var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false;if (module.exports && module.makeHot) {
-	        var makeExportsHot = require("/x/react-web-pack-test/node_modules/react-hot-loader/makeExportsHot.js");if (makeExportsHot(module, require("react"))) {
-	          foundReactClasses = true;
-	        }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
-	          module.hot.accept(function (err) {
-	            if (err) {
-	              console.error("Cannot apply hot update to " + "layout.js" + ": " + err.message);
-	            }
-	          });
-	        }
-	      }module.hot.dispose(function (data) {
-	        data.makeHot = module.makeHot;data.foundReactClasses = foundReactClasses;
-	      });
-	    })();
-	  }
-	}
-
-/***/ },
-/* 164 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */"use strict";
-
-	if (false) {
-	  (function () {
-	    var ReactHotAPI = require("/x/react-web-pack-test/node_modules/react-hot-api/modules/index.js"),
-	        React = require("react");module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(React);
-	  })();
-	}try {
-	  (function () {
-
-	    "use strict";
-
-	    Object.defineProperty(exports, "__esModule", {
-	      value: true
-	    });
-
-	    function _interopRequireDefault(obj) {
-	      return obj && obj.__esModule ? obj : { "default": obj };
-	    }
-
-	    var _react = __webpack_require__(1);
-
-	    var _react2 = _interopRequireDefault(_react);
-
-	    exports["default"] = _react2["default"].createClass({
-	      displayName: "header",
-
-	      render: function render() {
-	        return _react2["default"].createElement("div", {
-	          className: "header",
-	          style: this.props.style }, this.props.children);
-	      }
-	    });
-	    module.exports = exports["default"];
-
-	    /* REACT HOT LOADER */
-	  }).call(undefined);
-	} finally {
-	  if (false) {
-	    (function () {
-	      var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false;if (module.exports && module.makeHot) {
-	        var makeExportsHot = require("/x/react-web-pack-test/node_modules/react-hot-loader/makeExportsHot.js");if (makeExportsHot(module, require("react"))) {
-	          foundReactClasses = true;
-	        }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
-	          module.hot.accept(function (err) {
-	            if (err) {
-	              console.error("Cannot apply hot update to " + "header.js" + ": " + err.message);
-	            }
-	          });
-	        }
-	      }module.hot.dispose(function (data) {
-	        data.makeHot = module.makeHot;data.foundReactClasses = foundReactClasses;
-	      });
-	    })();
-	  }
-	}
-
-/***/ },
-/* 165 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */"use strict";
-
-	if (false) {
-	  (function () {
-	    var ReactHotAPI = require("/x/react-web-pack-test/node_modules/react-hot-api/modules/index.js"),
-	        React = require("react");module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(React);
-	  })();
-	}try {
-	  (function () {
-
-	    "use strict";
-
-	    Object.defineProperty(exports, "__esModule", {
-	      value: true
-	    });
-
-	    function _interopRequireDefault(obj) {
-	      return obj && obj.__esModule ? obj : { "default": obj };
-	    }
-
-	    var _react = __webpack_require__(1);
-
-	    var _react2 = _interopRequireDefault(_react);
-
-	    exports["default"] = _react2["default"].createClass({
-	      displayName: "footer",
-
-	      render: function render() {
-	        return _react2["default"].createElement("div", {
-	          className: "footer",
-	          style: this.props.style }, this.props.children);
-	      }
-	    });
-	    module.exports = exports["default"];
-
-	    /* REACT HOT LOADER */
-	  }).call(undefined);
-	} finally {
-	  if (false) {
-	    (function () {
-	      var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false;if (module.exports && module.makeHot) {
-	        var makeExportsHot = require("/x/react-web-pack-test/node_modules/react-hot-loader/makeExportsHot.js");if (makeExportsHot(module, require("react"))) {
-	          foundReactClasses = true;
-	        }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
-	          module.hot.accept(function (err) {
-	            if (err) {
-	              console.error("Cannot apply hot update to " + "footer.js" + ": " + err.message);
-	            }
-	          });
-	        }
-	      }module.hot.dispose(function (data) {
-	        data.makeHot = module.makeHot;data.foundReactClasses = foundReactClasses;
-	      });
-	    })();
-	  }
-	}
-
-/***/ },
-/* 166 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */"use strict";
-
-	if (false) {
-	  (function () {
-	    var ReactHotAPI = require("/x/react-web-pack-test/node_modules/react-hot-api/modules/index.js"),
-	        React = require("react");module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(React);
-	  })();
-	}try {
-	  (function () {
-
-	    //Modules
-	    'use strict';
-
-	    Object.defineProperty(exports, '__esModule', {
-	      value: true
-	    });
-
-	    function _interopRequireDefault(obj) {
-	      return obj && obj.__esModule ? obj : { 'default': obj };
-	    }
-
-	    var _react = __webpack_require__(1);
-
-	    var _react2 = _interopRequireDefault(_react);
-
-	    var _jquery = __webpack_require__(167);
-
-	    var _jquery2 = _interopRequireDefault(_jquery);
-
-	    var _utilities = __webpack_require__(168);
-
-	    var _utilities2 = _interopRequireDefault(_utilities);
-
-	    //Components
-
-	    var _spinner = __webpack_require__(169);
-
-	    var _spinner2 = _interopRequireDefault(_spinner);
-
-	    exports['default'] = _react2['default'].createClass({
-	      displayName: 'loader',
-
-	      styles: {
-	        container: {
-	          position: 'fixed',
-	          width: '100%',
-	          height: '100%',
-	          zIndex: '100'
-	        },
-	        topDoor: {
-	          position: 'fixed',
-	          width: '100%',
-	          height: '50%',
-	          top: '0',
-	          backgroundColor: 'black',
-	          zIndex: '101'
-	        },
-	        bottomDoor: {
-	          position: 'fixed',
-	          width: '100%',
-	          height: '50%',
-	          bottom: '0',
-	          backgroundColor: 'black',
-	          zIndex: '101'
-	        },
-	        spinner: {
-	          zIndex: '200',
-	          top: '42.5%'
-	        }
-	      },
-
-	      animation: {
-	        hideSpinner: function hideSpinner(callback) {
-	          (0, _jquery2['default'])('.spinner').animate({ opacity: '0' }, 500, function () {
-	            callback ? callback() : null;
-	          });
-	        },
-	        openDoors: function openDoors(callback) {
-	          (0, _jquery2['default'])('.topDoor').animate({ top: '-50%' }, 2000, 'swing', callback ? callback() : null);
-	          (0, _jquery2['default'])('.bottomDoor').animate({ bottom: '-50%' }, 2000, callback ? callback() : null);
-	        }
-	      },
-
-	      componentDidMount: function componentDidMount() {
-	        //ANIMATION Entrance point
-	        setTimeout((function () {
-	          this.animation.hideSpinner(this.animation.openDoors());
-	        }).bind(this), 1000);
-
-	        //Open Door After Loading done
-	      },
-
-	      render: function render() {
-	        return _react2['default'].createElement('div', {
-	          className: 'loader-animation',
-	          style: _utilities2['default'].merge(this.styles.container, this.props.style) }, _react2['default'].createElement(_spinner2['default'], { style: this.styles.spinner }), _react2['default'].createElement('div', { className: 'topDoor', style: this.styles.topDoor }), _react2['default'].createElement('div', { className: 'bottomDoor', style: this.styles.bottomDoor }));
-	      }
-	    });
-	    module.exports = exports['default'];
-
-	    /* REACT HOT LOADER */
-	  }).call(undefined);
-	} finally {
-	  if (false) {
-	    (function () {
-	      var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false;if (module.exports && module.makeHot) {
-	        var makeExportsHot = require("/x/react-web-pack-test/node_modules/react-hot-loader/makeExportsHot.js");if (makeExportsHot(module, require("react"))) {
-	          foundReactClasses = true;
-	        }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
-	          module.hot.accept(function (err) {
-	            if (err) {
-	              console.error("Cannot apply hot update to " + "loader.js" + ": " + err.message);
-	            }
-	          });
-	        }
-	      }module.hot.dispose(function (data) {
-	        data.makeHot = module.makeHot;data.foundReactClasses = foundReactClasses;
-	      });
-	    })();
-	  }
-	}
-
-/***/ },
-/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -30276,76 +29603,328 @@
 
 
 /***/ },
-/* 168 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* REACT HOT LOADER */"use strict";
+	// style-loader: Adds some css to the DOM by adding a <style> tag
 
-	if (false) {
-	  (function () {
-	    var ReactHotAPI = require("/x/react-web-pack-test/node_modules/react-hot-api/modules/index.js"),
-	        React = require("react");module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(React);
-	  })();
-	}try {
-	  (function () {
-
-	    "use strict";
-
-	    Object.defineProperty(exports, "__esModule", {
-	      value: true
-	    });
-	    var Utilities = {
-
-	      /*
-	      * Merge Objects
-	      */
-	      merge: function merge(obj1, obj2) {
-	        var obj3 = {};
-	        for (var attrname in obj1) {
-	          obj3[attrname] = obj1[attrname];
-	        }
-	        for (var attrname in obj2) {
-	          obj3[attrname] = obj2[attrname];
-	        }
-	        return obj3;
-	      },
-
-	      /*
-	      * Clone Object
-	      */
-	      clone: function clone(obj) {
-	        return JSON.parse(JSON.stringify(obj));
-	      }
-
-	    };
-
-	    exports["default"] = Utilities;
-	    module.exports = exports["default"];
-
-	    /* REACT HOT LOADER */
-	  }).call(undefined);
-	} finally {
-	  if (false) {
-	    (function () {
-	      var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false;if (module.exports && module.makeHot) {
-	        var makeExportsHot = require("/x/react-web-pack-test/node_modules/react-hot-loader/makeExportsHot.js");if (makeExportsHot(module, require("react"))) {
-	          foundReactClasses = true;
-	        }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
-	          module.hot.accept(function (err) {
-	            if (err) {
-	              console.error("Cannot apply hot update to " + "utilities.js" + ": " + err.message);
-	            }
-	          });
-	        }
-	      }module.hot.dispose(function (data) {
-	        data.makeHot = module.makeHot;data.foundReactClasses = foundReactClasses;
-	      });
-	    })();
-	  }
+	// load the styles
+	var content = __webpack_require__(161);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(163)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/sass-loader/index.js!./main.scss", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/sass-loader/index.js!./main.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
 	}
 
 /***/ },
-/* 169 */
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(162)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "html, body {\n  padding: 0;\n  margin: 0; }\n\n.app {\n  min-width: 400px;\n  max-width: 640px;\n  margin: 0 auto; }\n\nsvg {\n  width: 100%;\n  height: 100%; }\n\nsvg:hover path {\n  fill: green; }\n\n.verticalAlign {\n  position: absolute;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n  -ms-transform: translateY(-50%);\n  transform: translateY(-50%); }\n\n.centerAlign {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  -ms-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%); }\n\n.spinner {\n  margin: 60px auto;\n  font-size: 10px;\n  position: relative;\n  text-indent: -9999em;\n  border-top: 1.1em solid rgba(255, 255, 255, 0.2);\n  border-right: 1.1em solid rgba(255, 255, 255, 0.2);\n  border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);\n  border-left: 1.1em solid #ffffff;\n  -webkit-transform: translateZ(0);\n  -ms-transform: translateZ(0);\n  transform: translateZ(0);\n  -webkit-animation: load8 1.1s infinite linear;\n  animation: load8 1.1s infinite linear; }\n\n.spinner,\n.spinner:after {\n  border-radius: 50%;\n  width: 10em;\n  height: 10em; }\n\n@-webkit-keyframes load8 {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg); } }\n\n@keyframes load8 {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg); } }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 162 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	var stylesInDom = {},
+		memoize = function(fn) {
+			var memo;
+			return function () {
+				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+				return memo;
+			};
+		},
+		isOldIE = memoize(function() {
+			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+		}),
+		getHeadElement = memoize(function () {
+			return document.head || document.getElementsByTagName("head")[0];
+		}),
+		singletonElement = null,
+		singletonCounter = 0;
+
+	module.exports = function(list, options) {
+		if(false) {
+			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+		}
+
+		options = options || {};
+		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+		// tags it will allow on a page
+		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+
+		var styles = listToStyles(list);
+		addStylesToDom(styles, options);
+
+		return function update(newList) {
+			var mayRemove = [];
+			for(var i = 0; i < styles.length; i++) {
+				var item = styles[i];
+				var domStyle = stylesInDom[item.id];
+				domStyle.refs--;
+				mayRemove.push(domStyle);
+			}
+			if(newList) {
+				var newStyles = listToStyles(newList);
+				addStylesToDom(newStyles, options);
+			}
+			for(var i = 0; i < mayRemove.length; i++) {
+				var domStyle = mayRemove[i];
+				if(domStyle.refs === 0) {
+					for(var j = 0; j < domStyle.parts.length; j++)
+						domStyle.parts[j]();
+					delete stylesInDom[domStyle.id];
+				}
+			}
+		};
+	}
+
+	function addStylesToDom(styles, options) {
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			if(domStyle) {
+				domStyle.refs++;
+				for(var j = 0; j < domStyle.parts.length; j++) {
+					domStyle.parts[j](item.parts[j]);
+				}
+				for(; j < item.parts.length; j++) {
+					domStyle.parts.push(addStyle(item.parts[j], options));
+				}
+			} else {
+				var parts = [];
+				for(var j = 0; j < item.parts.length; j++) {
+					parts.push(addStyle(item.parts[j], options));
+				}
+				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+			}
+		}
+	}
+
+	function listToStyles(list) {
+		var styles = [];
+		var newStyles = {};
+		for(var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var id = item[0];
+			var css = item[1];
+			var media = item[2];
+			var sourceMap = item[3];
+			var part = {css: css, media: media, sourceMap: sourceMap};
+			if(!newStyles[id])
+				styles.push(newStyles[id] = {id: id, parts: [part]});
+			else
+				newStyles[id].parts.push(part);
+		}
+		return styles;
+	}
+
+	function createStyleElement() {
+		var styleElement = document.createElement("style");
+		var head = getHeadElement();
+		styleElement.type = "text/css";
+		head.appendChild(styleElement);
+		return styleElement;
+	}
+
+	function createLinkElement() {
+		var linkElement = document.createElement("link");
+		var head = getHeadElement();
+		linkElement.rel = "stylesheet";
+		head.appendChild(linkElement);
+		return linkElement;
+	}
+
+	function addStyle(obj, options) {
+		var styleElement, update, remove;
+
+		if (options.singleton) {
+			var styleIndex = singletonCounter++;
+			styleElement = singletonElement || (singletonElement = createStyleElement());
+			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+		} else if(obj.sourceMap &&
+			typeof URL === "function" &&
+			typeof URL.createObjectURL === "function" &&
+			typeof URL.revokeObjectURL === "function" &&
+			typeof Blob === "function" &&
+			typeof btoa === "function") {
+			styleElement = createLinkElement();
+			update = updateLink.bind(null, styleElement);
+			remove = function() {
+				styleElement.parentNode.removeChild(styleElement);
+				if(styleElement.href)
+					URL.revokeObjectURL(styleElement.href);
+			};
+		} else {
+			styleElement = createStyleElement();
+			update = applyToTag.bind(null, styleElement);
+			remove = function() {
+				styleElement.parentNode.removeChild(styleElement);
+			};
+		}
+
+		update(obj);
+
+		return function updateStyle(newObj) {
+			if(newObj) {
+				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+					return;
+				update(obj = newObj);
+			} else {
+				remove();
+			}
+		};
+	}
+
+	var replaceText = (function () {
+		var textStore = [];
+
+		return function (index, replacement) {
+			textStore[index] = replacement;
+			return textStore.filter(Boolean).join('\n');
+		};
+	})();
+
+	function applyToSingletonTag(styleElement, index, remove, obj) {
+		var css = remove ? "" : obj.css;
+
+		if (styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = replaceText(index, css);
+		} else {
+			var cssNode = document.createTextNode(css);
+			var childNodes = styleElement.childNodes;
+			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+			if (childNodes.length) {
+				styleElement.insertBefore(cssNode, childNodes[index]);
+			} else {
+				styleElement.appendChild(cssNode);
+			}
+		}
+	}
+
+	function applyToTag(styleElement, obj) {
+		var css = obj.css;
+		var media = obj.media;
+		var sourceMap = obj.sourceMap;
+
+		if(media) {
+			styleElement.setAttribute("media", media)
+		}
+
+		if(styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = css;
+		} else {
+			while(styleElement.firstChild) {
+				styleElement.removeChild(styleElement.firstChild);
+			}
+			styleElement.appendChild(document.createTextNode(css));
+		}
+	}
+
+	function updateLink(linkElement, obj) {
+		var css = obj.css;
+		var media = obj.media;
+		var sourceMap = obj.sourceMap;
+
+		if(sourceMap) {
+			// http://stackoverflow.com/a/26603875
+			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+		}
+
+		var blob = new Blob([css], { type: "text/css" });
+
+		var oldSrc = linkElement.href;
+
+		linkElement.href = URL.createObjectURL(blob);
+
+		if(oldSrc)
+			URL.revokeObjectURL(oldSrc);
+	}
+
+
+/***/ },
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */"use strict";
@@ -30358,7 +29937,6 @@
 	}try {
 	  (function () {
 
-	    //Modules
 	    "use strict";
 
 	    Object.defineProperty(exports, "__esModule", {
@@ -30373,74 +29951,7 @@
 
 	    var _react2 = _interopRequireDefault(_react);
 
-	    var _utilities = __webpack_require__(168);
-
-	    var _utilities2 = _interopRequireDefault(_utilities);
-
-	    exports["default"] = _react2["default"].createClass({
-	      displayName: "spinner",
-
-	      style: {},
-
-	      render: function render() {
-	        return _react2["default"].createElement("div", {
-	          className: "spinner verticalAlign",
-	          style: _utilities2["default"].merge(this.style, this.props.style) });
-	      }
-	    });
-	    module.exports = exports["default"];
-
-	    /* REACT HOT LOADER */
-	  }).call(undefined);
-	} finally {
-	  if (false) {
-	    (function () {
-	      var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false;if (module.exports && module.makeHot) {
-	        var makeExportsHot = require("/x/react-web-pack-test/node_modules/react-hot-loader/makeExportsHot.js");if (makeExportsHot(module, require("react"))) {
-	          foundReactClasses = true;
-	        }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
-	          module.hot.accept(function (err) {
-	            if (err) {
-	              console.error("Cannot apply hot update to " + "spinner.js" + ": " + err.message);
-	            }
-	          });
-	        }
-	      }module.hot.dispose(function (data) {
-	        data.makeHot = module.makeHot;data.foundReactClasses = foundReactClasses;
-	      });
-	    })();
-	  }
-	}
-
-/***/ },
-/* 170 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */"use strict";
-
-	if (false) {
-	  (function () {
-	    var ReactHotAPI = require("/x/react-web-pack-test/node_modules/react-hot-api/modules/index.js"),
-	        React = require("react");module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(React);
-	  })();
-	}try {
-	  (function () {
-
-	    "use strict";
-
-	    Object.defineProperty(exports, "__esModule", {
-	      value: true
-	    });
-
-	    function _interopRequireDefault(obj) {
-	      return obj && obj.__esModule ? obj : { "default": obj };
-	    }
-
-	    var _react = __webpack_require__(1);
-
-	    var _react2 = _interopRequireDefault(_react);
-
-	    var _jquery = __webpack_require__(167);
+	    var _jquery = __webpack_require__(159);
 
 	    var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -30529,13 +30040,208 @@
 	}
 
 /***/ },
-/* 171 */
+/* 165 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */"use strict";
+
+	if (false) {
+	  (function () {
+	    var ReactHotAPI = require("/x/react-web-pack-test/node_modules/react-hot-api/modules/index.js"),
+	        React = require("react");module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(React);
+	  })();
+	}try {
+	  (function () {
+
+	    //Modules
+	    'use strict';
+
+	    Object.defineProperty(exports, '__esModule', {
+	      value: true
+	    });
+
+	    function _interopRequireDefault(obj) {
+	      return obj && obj.__esModule ? obj : { 'default': obj };
+	    }
+
+	    var _react = __webpack_require__(1);
+
+	    var _react2 = _interopRequireDefault(_react);
+
+	    var _utilities = __webpack_require__(166);
+
+	    var _utilities2 = _interopRequireDefault(_utilities);
+
+	    var Projects = _react2['default'].createClass({
+	      displayName: 'Projects',
+
+	      Props: {
+	        projects: _react2['default'].PropTypes.object //Github contents object handled by app
+	      },
+
+	      getInitialState: function getInitialState() {
+	        return {
+	          projects: null
+	        };
+	      },
+
+	      styles: {
+	        container: {
+	          display: 'block',
+	          textAlign: 'left',
+	          position: 'relative'
+	        },
+	        img: {
+	          width: '49%',
+	          display: 'block'
+	        },
+	        span: {
+	          width: '100%',
+	          display: 'inline-block',
+	          top: '0',
+	          height: '100%',
+	          position: 'absolute',
+	          textAlign: 'center'
+	        },
+	        innerspan: {
+	          position: 'absolute',
+	          top: '50%',
+	          WebkitTransform: 'translateY(-50%)',
+	          MSTransform: 'translateY(-50%)',
+	          transform: 'translateY(-50%)',
+	          width: '50%',
+	          right: '0'
+	        },
+	        h2: {},
+	        a: {}
+
+	      },
+
+	      componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	        console.log('props??');
+	        console.log(nextProps);
+	        var projects = nextProps.projects.map((function (project, index) {
+	          var containerStyle = _utilities2['default'].clone(this.styles.container);
+	          //Every other container gets an opacity backgrounds
+	          containerStyle.background = index & 1 ? 'null' : 'rgba(0,0,0,0.25)';
+	          return _react2['default'].createElement('div', { key: index, style: containerStyle }, _react2['default'].createElement('img', { style: this.styles.img, src: 'http://patomation.github.io/' + project.path + '/thumbnail.png' }), _react2['default'].createElement('span', { style: this.styles.span }, _react2['default'].createElement('span', { style: this.styles.innerspan }, _react2['default'].createElement('h2', { style: this.styles.h2 }, project.name), _react2['default'].createElement('a', { style: this.styles.a, href: 'http://patomation.github.io/' + project.path }, 'Demo'))));
+	        }).bind(this));
+	        this.setState({
+	          projects: projects
+	        });
+	      },
+
+	      render: function render() {
+
+	        return _react2['default'].createElement('div', {
+	          className: 'projects',
+	          style: _utilities2['default'].merge(this.props.style, this.style) }, _react2['default'].createElement('h1', { style: {
+	            textAlign: 'center' } }, 'Patrick\'s Projects '), this.state.projects);
+	      }
+	    });
+
+	    exports['default'] = Projects;
+	    module.exports = exports['default'];
+
+	    /* REACT HOT LOADER */
+	  }).call(undefined);
+	} finally {
+	  if (false) {
+	    (function () {
+	      var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false;if (module.exports && module.makeHot) {
+	        var makeExportsHot = require("/x/react-web-pack-test/node_modules/react-hot-loader/makeExportsHot.js");if (makeExportsHot(module, require("react"))) {
+	          foundReactClasses = true;
+	        }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
+	          module.hot.accept(function (err) {
+	            if (err) {
+	              console.error("Cannot apply hot update to " + "git-hub-projects.js" + ": " + err.message);
+	            }
+	          });
+	        }
+	      }module.hot.dispose(function (data) {
+	        data.makeHot = module.makeHot;data.foundReactClasses = foundReactClasses;
+	      });
+	    })();
+	  }
+	}
+
+/***/ },
+/* 166 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */"use strict";
+
+	if (false) {
+	  (function () {
+	    var ReactHotAPI = require("/x/react-web-pack-test/node_modules/react-hot-api/modules/index.js"),
+	        React = require("react");module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(React);
+	  })();
+	}try {
+	  (function () {
+
+	    "use strict";
+
+	    Object.defineProperty(exports, "__esModule", {
+	      value: true
+	    });
+	    var Utilities = {
+
+	      /*
+	      * Merge Objects
+	      */
+	      merge: function merge(obj1, obj2) {
+	        var obj3 = {};
+	        for (var attrname in obj1) {
+	          obj3[attrname] = obj1[attrname];
+	        }
+	        for (var attrname in obj2) {
+	          obj3[attrname] = obj2[attrname];
+	        }
+	        return obj3;
+	      },
+
+	      /*
+	      * Clone Object
+	      */
+	      clone: function clone(obj) {
+	        return JSON.parse(JSON.stringify(obj));
+	      }
+
+	    };
+
+	    exports["default"] = Utilities;
+	    module.exports = exports["default"];
+
+	    /* REACT HOT LOADER */
+	  }).call(undefined);
+	} finally {
+	  if (false) {
+	    (function () {
+	      var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false;if (module.exports && module.makeHot) {
+	        var makeExportsHot = require("/x/react-web-pack-test/node_modules/react-hot-loader/makeExportsHot.js");if (makeExportsHot(module, require("react"))) {
+	          foundReactClasses = true;
+	        }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
+	          module.hot.accept(function (err) {
+	            if (err) {
+	              console.error("Cannot apply hot update to " + "utilities.js" + ": " + err.message);
+	            }
+	          });
+	        }
+	      }module.hot.dispose(function (data) {
+	        data.makeHot = module.makeHot;data.foundReactClasses = foundReactClasses;
+	      });
+	    })();
+	  }
+	}
+
+/***/ },
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "e3761a972270b6db0940a7443d615901.gif";
 
 /***/ },
-/* 172 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "14270637273b7570b93cfff394dbde43.svg";
