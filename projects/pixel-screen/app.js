@@ -98,13 +98,7 @@
 	      },
 
 	      render: function render() {
-	        return _react2['default'].createElement('div', { className: 'app' }, _react2['default'].createElement(_componentsLayoutLayout2['default'], {
-	          style: {},
-	          headerStyle: this.styles.header,
-	          contentStyle: this.styles.content,
-	          footerStyle: this.styles.footer,
-	          headerContent: 'header content',
-	          footerContent: 'footer content' }, _react2['default'].createElement(_componentsPixelScreenPixelScreen2['default'], null)));
+	        return _react2['default'].createElement('div', { className: 'app' }, _react2['default'].createElement(_componentsPixelScreenPixelScreen2['default'], null));
 	      }
 	    });
 
@@ -20331,7 +20325,8 @@
 	        return {
 	          activeColumn: 0,
 	          columns: 16,
-	          pixelPerColumn: 8
+	          pixelPerColumn: 8,
+	          audioFiles: []
 	        };
 	      },
 
@@ -20340,39 +20335,6 @@
 	          width: '100%'
 	        }
 	      },
-	      audioFiles: [{
-	        name: 'big-whip.mp3'
-	      }, {
-	        name: 'classic-punch.mp3'
-	      }, {
-	        name: 'crumble-slap.mp3'
-	      }, {
-	        name: 'forceful-reload.mp3'
-	      }, {
-	        name: 'gun-reload-slow.mp3'
-	      }, {
-	        name: 'gun-shot-with-silencer.mp3'
-	      }, {
-	        name: 'huge-glass-smash.mp3'
-	      }, {
-	        name: 'kung-fu-chop.mp3'
-	      }, {
-	        name: 'trap-hihat-09.mp3'
-	      }, {
-	        name: 'scarey-gong.mp3'
-	      }, {
-	        name: 'slap.mp3'
-	      }, {
-	        name: 'to-your-doom.mp3'
-	      }, {
-	        name: 'Kick6.mp3'
-	      }, {
-	        name: 'Kick12.mp3'
-	      }, {
-	        name: 'Kick13.mp3'
-	      }, {
-	        name: 'Kick22.mp3'
-	      }],
 
 	      tick: function tick() {
 	        console.log('Tick');
@@ -20401,6 +20363,7 @@
 	        var dir = "./audio";
 	        // var dir = "http://patomation.github.io/projects/"; //Doesnt work
 	        var fileextension = ".mp3";
+	        var self = this;
 	        _jquery2['default'].ajax({
 	          //This will retrieve the contents of the folder if the folder is configured as 'browsable'
 	          url: dir,
@@ -20408,11 +20371,16 @@
 	            console.log('success');
 	            console.log(data);
 	            //List all .png file names in the page
+	            var audioFiles = [];
 	            (0, _jquery2['default'])(data).find("a:contains(" + fileextension + ")").each(function () {
 	              var filename = this.href.replace(window.location.host, "").replace("http://", "");
 	              console.log('test');
 	              console.log(filename);
+	              audioFiles.push({ name: filename });
 	              // $("body").append("<img src='" + dir + filename + "'>");
+	            });
+	            self.setState({
+	              audioFiles: audioFiles
 	            });
 	          }
 	        });
@@ -20420,12 +20388,13 @@
 
 	      getPixels: function getPixels(activeColumnIndex) {
 
-	        var pixels = this.audioFiles.map((function (audioFile, i) {
+	        var pixels = this.state.audioFiles.map((function (audioFile, i) {
 	          return _react2['default'].createElement(_pixel2['default'], {
 	            key: i,
 	            active: this.state.activeColumn === activeColumnIndex ? true : false,
-	            audio: 'audio/' + audioFile.name });
+	            audio: audioFile.name });
 	        }).bind(this));
+
 	        return pixels;
 	      },
 
