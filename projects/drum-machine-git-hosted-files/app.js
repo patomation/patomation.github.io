@@ -30053,8 +30053,8 @@
 	          WebkitBorderRadius: '1em',
 	          MozBorderRadius: '1em',
 	          borderRadius: '0.5em',
-	          color: 'darkgreen'
-
+	          color: 'darkgreen',
+	          overflow: 'hidden' //help the text to not overflow
 	        }
 	      },
 
@@ -30069,17 +30069,20 @@
 	        return obj3;
 	      },
 
-	      getGithub: function getGithub() {
+	      getPackSoundFromGithub: function getPackSoundFromGithub(packName) {
 	        _jQuery2['default'].ajax({
-	          url: 'http://api.github.com/repos/patomation/sound-packs/contents/MZ_Andes',
+	          url: window.location.href.split(':')[0] + '://api.github.com/repos/patomation/sound-packs/contents/' + packName,
 	          dataType: 'json',
 	          success: (function (data) {
 	            console.log(data);
 	            var items = [];
 	            var audioInstances = [];
 	            data.map(function (item) {
-	              items.push(item.download_url);
-	              audioInstances.push(new Audio(item.download_url));
+	              items.push(item.download_url); //Why?
+	              audioInstances.push({
+	                name: item.name.replace('.mp3', ''),
+	                audio: new Audio(item.download_url)
+	              });
 	            });
 	            this.setState({
 	              soundURLS: items,
@@ -30094,7 +30097,8 @@
 	        console.log('MOUNT');
 
 	        //Get pack from github. Needs to be refactored....
-	        this.getGithub();
+	        // this.getPackSoundFromGithub('MZ_Andes');
+	        this.getPackSoundFromGithub('content-pack');
 
 	        //HANDLE HOTKEYS
 	        document.onkeypress = (function (e) {
@@ -30106,18 +30110,18 @@
 	        }).bind(this);
 
 	        //Get Github sound pack stuff
-	        _utilities2['default'].getGitPath('http://github.com/patomation/sound-packs', function (data) {
-	          console.log(data);
-	        });
+	        // Utilities.getGitPath( window.location.href.split(':')[0] + '://github.com/patomation/sound-packs',function(data){
+	        //   console.log(data);
+	        // });
 	      },
 
 	      play: function play(index) {
 	        //Dont error if not in index
 	        if (this.state.audioInstances[index]) {
 
-	          this.state.audioInstances[index].pause();
-	          this.state.audioInstances[index].currentTime = 0;
-	          this.state.audioInstances[index].play();
+	          this.state.audioInstances[index].audio.pause();
+	          this.state.audioInstances[index].audio.currentTime = 0;
+	          this.state.audioInstances[index].audio.play();
 
 	          //Animate Pad
 	          //Set active index so that correct pad will change opacity
@@ -30145,8 +30149,7 @@
 	            //Props
 	            var props = {
 	              key: index,
-	              hotkey: audio.hotkey,
-	              topLabel: 'hit meh',
+	              topLabel: audio.name,
 	              bottomLabel: this.state.hotkeys[index],
 	              style: this.merge_objects(this.style.pad, {
 	                opacity: index === this.state.activeIndex ? 0.5 : null
