@@ -83,74 +83,120 @@
 
 	    var _componentsSvgSvg2 = _interopRequireDefault(_componentsSvgSvg);
 
+	    var _componentsTemplateIndexJs = __webpack_require__(165);
+
+	    var _componentsTemplateIndexJs2 = _interopRequireDefault(_componentsTemplateIndexJs);
+
 	    //Views
 
-	    var _viewsGitHubProjectsGitHubProjects = __webpack_require__(165);
+	    var _viewsGitHubProjectsGitHubProjects = __webpack_require__(173);
 
 	    var _viewsGitHubProjectsGitHubProjects2 = _interopRequireDefault(_viewsGitHubProjectsGitHubProjects);
 
 	    //IMAGES
 
-	    var _imagesCHAT2Gif = __webpack_require__(167);
+	    var _imagesThumbsAssets1Png = __webpack_require__(175);
 
-	    var _imagesCHAT2Gif2 = _interopRequireDefault(_imagesCHAT2Gif);
+	    var _imagesThumbsAssets1Png2 = _interopRequireDefault(_imagesThumbsAssets1Png);
 
-	    var _imagesLogoutSvg = __webpack_require__(168);
+	    var _imagesThumbsAssets2Png = __webpack_require__(176);
 
-	    var _imagesLogoutSvg2 = _interopRequireDefault(_imagesLogoutSvg);
+	    var _imagesThumbsAssets2Png2 = _interopRequireDefault(_imagesThumbsAssets2Png);
+
+	    var _imagesThumbsAssets3Png = __webpack_require__(177);
+
+	    var _imagesThumbsAssets3Png2 = _interopRequireDefault(_imagesThumbsAssets3Png);
+
+	    //THE DATER - some swcifi refference
+
+	    var _dataJson = __webpack_require__(178);
+
+	    var _dataJson2 = _interopRequireDefault(_dataJson);
 
 	    var App = _react2['default'].createClass({
 	      displayName: 'App',
 
 	      getInitialState: function getInitialState() {
 	        return {
-	          gitHubProjects: null
+	          viewController: "home",
+	          worksIndex: 0
+
 	        };
 	      },
 
-	      styles: {
-	        layout: {},
-	        header: {
-	          backgroundColor: 'black',
-	          color: '#ffffff'
-	        },
-	        content: {
-	          backgroundColor: 'gray',
-	          position: 'absolute',
-	          top: '0',
-	          width: '100%',
-	          height: '100%',
-	          textAlign: 'center',
-	          fontSize: '16px'
-	        },
-	        footer: {
-	          backgroundColor: 'black'
-	        },
-	        projects: {
-	          fontSize: 'inherit'
-	        }
-	      },
+	      componentDidMount: function componentDidMount() {},
 
-	      getGitHubProjects: function getGitHubProjects() {
-	        _jquery2['default'].ajax({
-	          url: 'https://api.github.com/repos/patomation/patomation.github.io/contents/projects',
-	          dataType: 'json',
-	          success: (function (projects) {
-	            this.setState({
-	              gitHubProjects: projects
-	            });
-	          }).bind(this)
+	      handleWorksItemClick: function handleWorksItemClick(index) {
+	        this.setState({
+	          viewController: "project",
+	          worksIndex: index
 	        });
 	      },
 
-	      componentDidMount: function componentDidMount() {
-	        this.getGitHubProjects();
+	      getButtons: function getButtons(items) {
+	        console.log(items);
+	        return items.map(function (item, index) {
+	          return _react2['default'].createElement('span', { className: 'paddingBottom1em', key: index }, _react2['default'].createElement('a', { href: item.link }, _react2['default'].createElement('button', null, item.title)));
+	        });
+	      },
+
+	      getCodeLinks: function getCodeLinks(item) {
+	        if (item.codeLinks) {
+	          return _react2['default'].createElement('div', { className: 'box-info' }, _react2['default'].createElement('h4', { className: 'border-top' }, item.codeTitle), _react2['default'].createElement('p', null, this.getButtons(item.codeLinks)));
+	        }
+	      },
+
+	      getDemoLinks: function getDemoLinks(item) {
+	        if (item.demoLinks) {
+	          return _react2['default'].createElement('div', { className: 'box-info' }, _react2['default'].createElement('h4', { className: 'border-top' }, item.demoTitle), _react2['default'].createElement('p', null, this.getButtons(item.demoLinks)));
+	        }
+	      },
+
+	      getProperImage: function getProperImage(index) {
+	        var image = undefined;
+	        switch (index) {
+	          case index = 0:
+	            image = _imagesThumbsAssets1Png2['default'];
+	            break;
+	          case index = 1:
+	            image = _imagesThumbsAssets2Png2['default'];
+	            break;
+	          case index = 2:
+	            image = _imagesThumbsAssets3Png2['default'];
+	            break;
+	          default:
+	            image = _imagesThumbsAssets1Png2['default'];
+	            break;
+	        }
+
+	        return image;
+	      },
+
+	      getWorks: function getWorks() {
+	        return _dataJson2['default'].portfolioItems.map((function (item, index) {
+	          return _react2['default'].createElement('a', { key: index, onClick: this.handleWorksItemClick.bind(this, index), className: 'permalink', style: { "cursor": "pointer" } }, _react2['default'].createElement('div', { className: 'desktop-3 mobile-half columns' }, _react2['default'].createElement('div', { className: 'item first-row' }, _react2['default'].createElement('h3', null, item.title), _react2['default'].createElement('span', { className: 'category' }, item.subTitle), _react2['default'].createElement('img', { src: this.getProperImage(index), alt: '' }))));
+	        }).bind(this));
+	      },
+
+	      getWorksView: function getWorksView() {
+	        return _react2['default'].createElement('section', { id: 'works' }, _react2['default'].createElement('div', { className: 'container' }, _react2['default'].createElement('div', { className: 'desktop-12 columns' }, _react2['default'].createElement('div', { className: 'border-top' })), this.getWorks()));
+	      },
+
+	      getSingleWorksView: function getSingleWorksView() {
+	        var item = _dataJson2['default'].portfolioItems[this.state.worksIndex];
+	        return _react2['default'].createElement('section', { id: 'works', className: 'page single' }, _react2['default'].createElement('div', { className: 'container' }, _react2['default'].createElement('div', { className: 'desktop-3 tablet-12 nested columns' }, _react2['default'].createElement('div', { className: 'sidebar sticky' }, _react2['default'].createElement('div', { className: 'desktop-3 tablet-12 columns' }, _react2['default'].createElement('div', { className: 'box-info' }, _react2['default'].createElement('h3', { className: 'border-top' }, item.title), _react2['default'].createElement('p', { className: 'project-desc' }, item.subTitle), _react2['default'].createElement('p', null, item.description))), _react2['default'].createElement('div', { className: 'desktop-3 tablet-6 mobile-half columns' }, this.getDemoLinks(item), this.getCodeLinks(item)), _react2['default'].createElement('div', { className: 'clear' }))), _react2['default'].createElement('div', { className: 'desktop-9 tablet-12 columns' }, _react2['default'].createElement('img', { src: this.getProperImage(this.state.worksIndex), alt: '' })), _react2['default'].createElement('div', { className: 'clear' })));
 	      },
 
 	      render: function render() {
-	        return _react2['default'].createElement('div', { className: 'app' }, _react2['default'].createElement(_viewsGitHubProjectsGitHubProjects2['default'], {
-	          projects: this.state.gitHubProjects,
-	          style: this.styles.projects }));
+	        var view = {};
+
+	        if (this.state.viewController == "home") {
+	          view = this.getWorksView();
+	        } else {
+	          view = this.getSingleWorksView();
+	        }
+
+	        return _react2['default'].createElement('div', { className: 'app' }, _react2['default'].createElement(_componentsTemplateIndexJs2['default'], null, view));
 	      }
 	    });
 
@@ -29637,7 +29683,7 @@
 
 
 	// module
-	exports.push([module.id, "html, body {\n  padding: 0;\n  margin: 0; }\n\n.app {\n  min-width: 400px;\n  max-width: 640px;\n  margin: 0 auto; }\n\nsvg {\n  width: 100%;\n  height: 100%; }\n\nsvg:hover path {\n  fill: green; }\n\n.verticalAlign {\n  position: absolute;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n  -ms-transform: translateY(-50%);\n  transform: translateY(-50%); }\n\n.centerAlign {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  -ms-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%); }\n\n.spinner {\n  margin: 60px auto;\n  font-size: 10px;\n  position: relative;\n  text-indent: -9999em;\n  border-top: 1.1em solid rgba(255, 255, 255, 0.2);\n  border-right: 1.1em solid rgba(255, 255, 255, 0.2);\n  border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);\n  border-left: 1.1em solid #ffffff;\n  -webkit-transform: translateZ(0);\n  -ms-transform: translateZ(0);\n  transform: translateZ(0);\n  -webkit-animation: load8 1.1s infinite linear;\n  animation: load8 1.1s infinite linear; }\n\n.spinner,\n.spinner:after {\n  border-radius: 50%;\n  width: 10em;\n  height: 10em; }\n\n@-webkit-keyframes load8 {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg); } }\n\n@keyframes load8 {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg); } }\n", ""]);
+	exports.push([module.id, "html, body {\n  padding: 0;\n  margin: 0; }\n\n.app {\n  min-width: 400px;\n  margin: 0 auto; }\n\nsvg {\n  width: 100%;\n  height: 100%; }\n\nsvg:hover path {\n  fill: green; }\n\n.verticalAlign {\n  position: absolute;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n  -ms-transform: translateY(-50%);\n  transform: translateY(-50%); }\n\n.centerAlign {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  -ms-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%); }\n\n.spinner {\n  margin: 60px auto;\n  font-size: 10px;\n  position: relative;\n  text-indent: -9999em;\n  border-top: 1.1em solid rgba(255, 255, 255, 0.2);\n  border-right: 1.1em solid rgba(255, 255, 255, 0.2);\n  border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);\n  border-left: 1.1em solid #ffffff;\n  -webkit-transform: translateZ(0);\n  -ms-transform: translateZ(0);\n  transform: translateZ(0);\n  -webkit-animation: load8 1.1s infinite linear;\n  animation: load8 1.1s infinite linear; }\n\n.spinner,\n.spinner:after {\n  border-radius: 50%;\n  width: 10em;\n  height: 10em; }\n\n@-webkit-keyframes load8 {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg); } }\n\n@keyframes load8 {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg); } }\n\n.paddingBottom1em {\n  padding-bottom: 1em;\n  display: inline-block; }\n", ""]);
 
 	// exports
 
@@ -30053,6 +30099,205 @@
 	}try {
 	  (function () {
 
+	    "use strict";
+
+	    Object.defineProperty(exports, "__esModule", {
+	      value: true
+	    });
+
+	    function _interopRequireDefault(obj) {
+	      return obj && obj.__esModule ? obj : { "default": obj };
+	    }
+
+	    var _react = __webpack_require__(1);
+
+	    var _react2 = _interopRequireDefault(_react);
+
+	    __webpack_require__(166);
+
+	    __webpack_require__(168);
+
+	    __webpack_require__(170);
+
+	    //Images
+
+	    var _imagesLogo_text_halfPng = __webpack_require__(172);
+
+	    var _imagesLogo_text_halfPng2 = _interopRequireDefault(_imagesLogo_text_halfPng);
+
+	    exports["default"] = _react2["default"].createClass({
+	      displayName: "index",
+
+	      render: function render() {
+	        return _react2["default"].createElement("div", {
+	          className: "template",
+	          style: {} }, _react2["default"].createElement("section", { id: "header" }, _react2["default"].createElement("div", { className: "logo-wrap" }, _react2["default"].createElement("div", { className: "container" }, _react2["default"].createElement("div", { className: "desktop-6 columns" }, _react2["default"].createElement("h1", null, _react2["default"].createElement("a", { href: "index.html", title: "Home" }, _react2["default"].createElement("img", { src: _imagesLogo_text_halfPng2["default"], alt: "" })))), _react2["default"].createElement("div", { className: "desktop-6 columns" }, _react2["default"].createElement("p", { className: "site-desc" }, "Patrick Kelly", _react2["default"].createElement("br", null), _react2["default"].createElement("span", { className: "font-color-primary" }, "Plan + Design + Develop + Animate"))), _react2["default"].createElement("div", { className: "clear" })))), this.props.children, _react2["default"].createElement("div", { className: "clear" }), _react2["default"].createElement("section", { id: "footer" }, _react2["default"].createElement("div", { className: "container" }, _react2["default"].createElement("div", { className: "desktop-3 columns" }), _react2["default"].createElement("div", { className: "desktop-9 columns" }, _react2["default"].createElement("ul", { id: "social" }, _react2["default"].createElement("li", null, _react2["default"].createElement("a", { href: "https://www.facebook.com/patricknolankelly", className: "hoverMe" }, "Facebook")), _react2["default"].createElement("li", null, _react2["default"].createElement("a", { href: "https://www.linkedin.com/in/patomation", className: "hoverMe" }, "LinkedIn")))), _react2["default"].createElement("div", { className: "clear" }))));
+	      }
+	    });
+	    module.exports = exports["default"];
+
+	    /* REACT HOT LOADER */
+	  }).call(undefined);
+	} finally {
+	  if (false) {
+	    (function () {
+	      var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false;if (module.exports && module.makeHot) {
+	        var makeExportsHot = require("/x/react-web-pack-test/node_modules/react-hot-loader/makeExportsHot.js");if (makeExportsHot(module, require("react"))) {
+	          foundReactClasses = true;
+	        }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
+	          module.hot.accept(function (err) {
+	            if (err) {
+	              console.error("Cannot apply hot update to " + "index.js" + ": " + err.message);
+	            }
+	          });
+	        }
+	      }module.hot.dispose(function (data) {
+	        data.makeHot = module.makeHot;data.foundReactClasses = foundReactClasses;
+	      });
+	    })();
+	  }
+	}
+
+/***/ },
+/* 166 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(167);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(163)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./cssreset-min.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./cssreset-min.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 167 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(162)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "/*\nYUI 3.8.0 (build 5744)\nCopyright 2012 Yahoo! Inc. All rights reserved.\nLicensed under the BSD License.\nhttp://yuilibrary.com/license/\n*/\nhtml{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit}input,textarea,select{*font-size:100%}legend{color:#000}#yui3-css-stamp.cssreset{display:none}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 168 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(169);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(163)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./typegrid.scss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./typegrid.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 169 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(162)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "/*--------------------------------------------------------------------------\n  1. Grid System\n--------------------------------------------------------------------------*/\n.container {\n  position: relative; }\n\n/* Container */\n.container {\n  width: 960px;\n  margin: 0 auto;\n  /* Columns */ }\n\n.container .column,\n.container .columns {\n  float: left;\n  display: inline;\n  padding-left: 20px;\n  padding-right: 20px;\n  position: relative;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box; }\n\n.container .column.nest,\n.container .columns.nest,\n.container .column.nested,\n.container .columns.nested {\n  padding-left: 0;\n  padding-right: 0; }\n\n.desktop-1 {\n  width: 80px; }\n\n.desktop-2 {\n  width: 160px; }\n\n.desktop-3 {\n  width: 240px; }\n\n.desktop-4 {\n  width: 320px; }\n\n.desktop-5 {\n  width: 400px; }\n\n.desktop-6 {\n  width: 480px; }\n\n.desktop-7 {\n  width: 560px; }\n\n.desktop-8 {\n  width: 640px; }\n\n.desktop-9 {\n  width: 720px; }\n\n.desktop-10 {\n  width: 800px; }\n\n.desktop-11 {\n  width: 880px; }\n\n.desktop-12 {\n  width: 960px; }\n\n.offset-1 {\n  margin-left: 80px; }\n\n.offset-2 {\n  margin-left: 160px; }\n\n.offset-3 {\n  margin-left: 240px; }\n\n.offset-4 {\n  margin-left: 320px; }\n\n.offset-5 {\n  margin-left: 400px; }\n\n.offset-6 {\n  margin-left: 480px; }\n\n.offset-7 {\n  margin-left: 560px; }\n\n.offset-8 {\n  margin-left: 640px; }\n\n.offset-9 {\n  margin-left: 720px; }\n\n.offset-10 {\n  margin-left: 800px; }\n\n.offset-11 {\n  margin-left: 880px; }\n\n.pull-1 {\n  right: 80px; }\n\n.pull-2 {\n  right: 160px; }\n\n.pull-3 {\n  right: 240px; }\n\n.pull-4 {\n  right: 320px; }\n\n.pull-5 {\n  right: 400px; }\n\n.pull-6 {\n  right: 480px; }\n\n.pull-7 {\n  right: 560px; }\n\n.pull-8 {\n  right: 640px; }\n\n.pull-9 {\n  right: 720px; }\n\n.pull-10 {\n  right: 800px; }\n\n.pull-11 {\n  right: 880px; }\n\n.push-1 {\n  left: 80px; }\n\n.push-2 {\n  left: 160px; }\n\n.push-3 {\n  left: 240px; }\n\n.push-4 {\n  left: 320px; }\n\n.push-5 {\n  left: 400px; }\n\n.push-6 {\n  left: 480px; }\n\n.push-7 {\n  left: 560px; }\n\n.push-8 {\n  left: 640px; }\n\n.push-9 {\n  left: 720px; }\n\n.push-10 {\n  left: 800px; }\n\n.push-11 {\n  left: 880px; }\n\n/* Widescreen */\n@media screen and (min-width: 1300px) {\n  .container {\n    width: 1200px; }\n  .desktop-1 {\n    width: 100px; }\n  .desktop-2 {\n    width: 200px; }\n  .desktop-3 {\n    width: 300px; }\n  .desktop-4 {\n    width: 400px; }\n  .desktop-5 {\n    width: 500px; }\n  .desktop-6 {\n    width: 600px; }\n  .desktop-7 {\n    width: 700px; }\n  .desktop-8 {\n    width: 800px; }\n  .desktop-9 {\n    width: 900px; }\n  .desktop-10 {\n    width: 1000px; }\n  .desktop-11 {\n    width: 1100px; }\n  .desktop-12 {\n    width: 1200px; }\n  .offset-1 {\n    margin-left: 100px; }\n  .offset-2 {\n    margin-left: 200px; }\n  .offset-3 {\n    margin-left: 300px; }\n  .offset-4 {\n    margin-left: 400px; }\n  .offset-5 {\n    margin-left: 500px; }\n  .offset-6 {\n    margin-left: 600px; }\n  .offset-7 {\n    margin-left: 700px; }\n  .offset-8 {\n    margin-left: 800px; }\n  .offset-9 {\n    margin-left: 900px; }\n  .offset-10 {\n    margin-left: 1000px; }\n  .offset-11 {\n    margin-left: 1100px; }\n  .pull-1 {\n    right: 100px; }\n  .pull-2 {\n    right: 200px; }\n  .pull-3 {\n    right: 300px; }\n  .pull-4 {\n    right: 400px; }\n  .pull-5 {\n    right: 500px; }\n  .pull-6 {\n    right: 600px; }\n  .pull-7 {\n    right: 700px; }\n  .pull-8 {\n    right: 800px; }\n  .pull-9 {\n    right: 900px; }\n  .pull-10 {\n    right: 1000px; }\n  .pull-11 {\n    right: 1100px; }\n  .push-1 {\n    left: 100px; }\n  .push-2 {\n    left: 200px; }\n  .push-3 {\n    left: 300px; }\n  .push-4 {\n    left: 400px; }\n  .push-5 {\n    left: 500px; }\n  .push-6 {\n    left: 600px; }\n  .push-7 {\n    left: 700px; }\n  .push-8 {\n    left: 800px; }\n  .push-9 {\n    left: 900px; }\n  .push-10 {\n    left: 1000px; }\n  .push-11 {\n    left: 1100px; } }\n\n/* Tablet */\n@media screen and (min-width: 768px) and (max-width: 959px) {\n  .container {\n    width: 660px; }\n  .desktop-1 {\n    width: 55px; }\n  .desktop-2 {\n    width: 110px; }\n  .desktop-3 {\n    width: 165px; }\n  .desktop-4 {\n    width: 220px; }\n  .desktop-5 {\n    width: 275px; }\n  .desktop-6 {\n    width: 330px; }\n  .desktop-7 {\n    width: 385px; }\n  .desktop-8 {\n    width: 440px; }\n  .desktop-9 {\n    width: 495px; }\n  .desktop-10 {\n    width: 550px; }\n  .desktop-11 {\n    width: 605px; }\n  .desktop-12 {\n    width: 660px; }\n  .tablet-1 {\n    width: 55px; }\n  .tablet-2 {\n    width: 110px; }\n  .tablet-3 {\n    width: 165px; }\n  .tablet-4 {\n    width: 220px; }\n  .tablet-5 {\n    width: 275px; }\n  .tablet-6 {\n    width: 330px; }\n  .tablet-7 {\n    width: 385px; }\n  .tablet-8 {\n    width: 440px; }\n  .tablet-9 {\n    width: 495px; }\n  .tablet-10 {\n    width: 550px; }\n  .tablet-11 {\n    width: 605px; }\n  .tablet-12 {\n    width: 660px; }\n  .offset-1 {\n    margin-left: 55px; }\n  .offset-2 {\n    margin-left: 110px; }\n  .offset-3 {\n    margin-left: 165px; }\n  .offset-4 {\n    margin-left: 220px; }\n  .offset-5 {\n    margin-left: 275px; }\n  .offset-6 {\n    margin-left: 330px; }\n  .offset-7 {\n    margin-left: 385px; }\n  .offset-8 {\n    margin-left: 440px; }\n  .offset-9 {\n    margin-left: 495px; }\n  .offset-10 {\n    margin-left: 550px; }\n  .offset-11 {\n    margin-left: 605px; }\n  .tablet-offset-0 {\n    margin-left: 0px; }\n  .tablet-offset-1 {\n    margin-left: 55px; }\n  .tablet-offset-2 {\n    margin-left: 110px; }\n  .tablet-offset-3 {\n    margin-left: 165px; }\n  .tablet-offset-4 {\n    margin-left: 220px; }\n  .tablet-offset-5 {\n    margin-left: 275px; }\n  .tablet-offset-6 {\n    margin-left: 330px; }\n  .tablet-offset-7 {\n    margin-left: 385px; }\n  .tablet-offset-8 {\n    margin-left: 440px; }\n  .tablet-offset-9 {\n    margin-left: 495px; }\n  .tablet-offset-10 {\n    margin-left: 550px; }\n  .tablet-offset-11 {\n    margin-left: 605px; }\n  .pull-1 {\n    right: 55px; }\n  .pull-2 {\n    right: 110px; }\n  .pull-3 {\n    right: 165px; }\n  .pull-4 {\n    right: 220px; }\n  .pull-5 {\n    right: 275px; }\n  .pull-6 {\n    right: 330px; }\n  .pull-7 {\n    right: 385px; }\n  .pull-8 {\n    right: 440px; }\n  .pull-9 {\n    right: 495px; }\n  .pull-10 {\n    right: 550px; }\n  .pull-11 {\n    right: 605px; }\n  .push-1 {\n    left: 55px; }\n  .push-2 {\n    left: 110px; }\n  .push-3 {\n    left: 165px; }\n  .push-4 {\n    left: 220px; }\n  .push-5 {\n    left: 275px; }\n  .push-6 {\n    left: 330px; }\n  .push-7 {\n    left: 385px; }\n  .push-8 {\n    left: 440px; }\n  .push-9 {\n    left: 495px; }\n  .push-10 {\n    left: 550px; }\n  .push-11 {\n    left: 605px; }\n  .tablet-pull-0 {\n    right: 0px; }\n  .tablet-pull-1 {\n    right: 55px; }\n  .tablet-pull-2 {\n    right: 110px; }\n  .tablet-pull-3 {\n    right: 165px; }\n  .tablet-pull-4 {\n    right: 220px; }\n  .tablet-pull-5 {\n    right: 275px; }\n  .tablet-pull-6 {\n    right: 330px; }\n  .tablet-pull-7 {\n    right: 385px; }\n  .tablet-pull-8 {\n    right: 440px; }\n  .tablet-pull-9 {\n    right: 495px; }\n  .tablet-pull-10 {\n    right: 550px; }\n  .tablet-pull-11 {\n    right: 605px; }\n  .tablet-push-0 {\n    left: 0px; }\n  .tablet-push-1 {\n    left: 55px; }\n  .tablet-push-2 {\n    left: 110px; }\n  .tablet-push-3 {\n    left: 165px; }\n  .tablet-push-4 {\n    left: 220px; }\n  .tablet-push-5 {\n    left: 275px; }\n  .tablet-push-6 {\n    left: 330px; }\n  .tablet-push-7 {\n    left: 385px; }\n  .tablet-push-8 {\n    left: 440px; }\n  .tablet-push-9 {\n    left: 495px; }\n  .tablet-push-10 {\n    left: 550px; }\n  .tablet-push-11 {\n    left: 605px; } }\n\n/* Mobile - Portrait */\n@media screen and (max-width: 767px) {\n  .container {\n    width: 280px; }\n  .container .column,\n  .container .columns {\n    padding-left: 20px;\n    padding-right: 20px; }\n  .desktop-1,\n  .tablet-1 {\n    width: 280px; }\n  .desktop-2,\n  .tablet-2 {\n    width: 280px; }\n  .desktop-3,\n  .tablet-3 {\n    width: 280px; }\n  .desktop-4,\n  .tablet-4 {\n    width: 280px; }\n  .desktop-5,\n  .tablet-5 {\n    width: 280px; }\n  .desktop-6,\n  .tablet-6 {\n    width: 280px; }\n  .desktop-7,\n  .tablet-7 {\n    width: 280px; }\n  .desktop-8,\n  .tablet-8 {\n    width: 280px; }\n  .desktop-9,\n  .tablet-9 {\n    width: 280px; }\n  .desktop-10,\n  .tablet-10 {\n    width: 280px; }\n  .desktop-11,\n  .tablet-11 {\n    width: 280px; }\n  .desktop-12,\n  .tablet-12 {\n    width: 280px; }\n  .offset-1 {\n    margin-left: 0; }\n  .offset-2 {\n    margin-left: 0; }\n  .offset-3 {\n    margin-left: 0; }\n  .offset-4 {\n    margin-left: 0; }\n  .offset-5 {\n    margin-left: 0; }\n  .offset-6 {\n    margin-left: 0; }\n  .offset-7 {\n    margin-left: 0; }\n  .offset-8 {\n    margin-left: 0; }\n  .offset-9 {\n    margin-left: 0; }\n  .offset-10 {\n    margin-left: 0; }\n  .offset-11 {\n    margin-left: 0; }\n  .pull-1,\n  .push-1,\n  .tablet-pull-1,\n  .tablet-push-1 {\n    left: 0; }\n  .pull-2,\n  .push-2,\n  .tablet-pull-2,\n  .tablet-push-2 {\n    left: 0; }\n  .pull-3,\n  .push-3,\n  .tablet-pull-3,\n  .tablet-push-3 {\n    left: 0; }\n  .pull-4,\n  .push-4,\n  .tablet-pull-4,\n  .tablet-push-4 {\n    left: 0; }\n  .pull-5,\n  .push-5,\n  .tablet-pull-5,\n  .tablet-push-5 {\n    left: 0; }\n  .pull-6,\n  .push-6,\n  .tablet-pull-6,\n  .tablet-push-6 {\n    left: 0; }\n  .pull-7,\n  .push-7,\n  .tablet-pull-7,\n  .tablet-push-7 {\n    left: 0; }\n  .pull-8,\n  .push-8,\n  .tablet-pull-8,\n  .tablet-push-8 {\n    left: 0; }\n  .pull-9,\n  .push-9,\n  .tablet-pull-9,\n  .tablet-push-9 {\n    left: 0; }\n  .pull-10,\n  .push-10,\n  .tablet-pull-10,\n  .tablet-push-10 {\n    left: 0; }\n  .pull-11,\n  .push-11,\n  .tablet-pull-11,\n  .tablet-push-11 {\n    left: 0; }\n  .mobile-one-fifth {\n    width: 20%; }\n  .mobile-one-fourth {\n    width: 25%; }\n  .mobile-one-third {\n    width: 33.333333%; }\n  .mobile-half {\n    width: 50%; } }\n\n/* Mobile - Landscape */\n@media screen and (min-width: 480px) and (max-width: 767px) {\n  .container {\n    width: 400px; }\n  .desktop-1,\n  .tablet-1 {\n    width: 100%; }\n  .desktop-2,\n  .tablet-2 {\n    width: 100%; }\n  .desktop-3,\n  .tablet-3 {\n    width: 100%; }\n  .desktop-4,\n  .tablet-4 {\n    width: 100%; }\n  .desktop-5,\n  .tablet-5 {\n    width: 100%; }\n  .desktop-6,\n  .tablet-6 {\n    width: 100%; }\n  .desktop-7,\n  .tablet-7 {\n    width: 100%; }\n  .desktop-8,\n  .tablet-8 {\n    width: 100%; }\n  .desktop-9,\n  .tablet-9 {\n    width: 100%; }\n  .desktop-10,\n  .tablet-10 {\n    width: 100%; }\n  .desktop-11,\n  .tablet-11 {\n    width: 100%; }\n  .desktop-12,\n  .tablet-12 {\n    width: 100%; }\n  .mobile-one-fifth {\n    width: 20%; }\n  .mobile-one-fourth {\n    width: 25%; }\n  .mobile-one-third {\n    width: 33.333333%; }\n  .mobile-half {\n    width: 50%; } }\n\n.show-on-widescreen,\n.show-on-tablet,\n.show-under-tablet,\n.show-on-mobile {\n  display: none !important; }\n\n/* Viewport-specific Visibility Classes */\n@media screen and (min-width: 1300px) {\n  .hide-on-widescreen {\n    display: none !important; } }\n\n@media screen and (min-width: 960px) {\n  .show-under-tablet {\n    display: none !important; }\n  .show-on-mobile {\n    display: none !important; } }\n\n@media screen and (max-width: 959px) {\n  .hide-under-tablet {\n    display: none !important; }\n  .show-under-tablet {\n    display: block !important; } }\n\n@media screen and (min-width: 768px) and (max-width: 959px) {\n  .hide-on-tablet {\n    display: none !important; }\n  .show-on-tablet {\n    display: block !important; } }\n\n@media screen and (max-width: 767px) {\n  .hide-on-mobile {\n    display: none !important; }\n  .show-on-mobile {\n    display: block !important; } }\n\n/* #Clearing\n================================================== */\n/* Self Clearing Goodness */\n.container:after {\n  content: \" \";\n  display: block;\n  height: 0;\n  clear: both;\n  visibility: hidden; }\n\n/* Use clearfix class on parent to clear nested columns,\nor wrap each row of columns in a <div class=\"row\"> */\n.clearfix:before,\n.clearfix:after,\n.row:before,\n.row:after {\n  content: ' ';\n  display: block;\n  overflow: hidden;\n  visibility: hidden;\n  width: 0;\n  height: 0; }\n\n.row:after,\n.clearfix:after {\n  clear: both; }\n\n.row,\n.clearfix {\n  zoom: 1; }\n\n/* You can also use a <br class=\"clear\" /> to clear columns */\n.clear {\n  clear: both;\n  display: block;\n  overflow: hidden;\n  visibility: hidden;\n  width: 0;\n  height: 0; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 170 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(171);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(163)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./style.scss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./style.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 171 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(162)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "/*--------------------------------------------------------------------------\n\n\n\tTypefolio\n\n\tLESS-based responsive grid system\n\n\t0. YUI Library is used for CSS reset (http://yuilibrary.com/yui/docs/cssreset/)\n\t1. Body\n\t2. Typography\n\t3. Pages\n\t\t3.0. Common Elements\n\t\t3.1. Navigation\n\t\t3.2. Header\n\t\t3.3. Home\n\t\t3.4. About\n\t\t3.5. Works\n\t\t3.6. Shop\n\t\t3.7. Archive (Blog)\n\t\t3.8. Contact\n\t\t3.9. Footer\n\t4. jQuery Plugins\n\t\t4.1. iosSlider\n\t\t4.2. Flexslider\n\n\n--------------------------------------------------------------------------*/\n/*--------------------------------------------------------------------------\n\t1. Body\n--------------------------------------------------------------------------*/\nbody {\n  color: #111;\n  font-family: \"HelveticaNeue\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  font-size: 14px;\n  line-height: 28px;\n  -webkit-font-smoothing: antialiased;\n  /* Fix for webkit rendering */\n  -webkit-text-size-adjust: 100%; }\n\n@media screen and (max-width: 767px) {\n  body {\n    font-size: 12px;\n    line-height: 23px; } }\n\n/*--------------------------------------------------------------------------\n\t2. Typography\n--------------------------------------------------------------------------*/\n/* Headings */\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-weight: bold; }\n\n/* Links */\na,\na:visited {\n  color: #333;\n  text-decoration: none;\n  outline: 0; }\n\na:hover,\na:focus {\n  color: black; }\n\np a,\np a:visited {\n  line-height: inherit; }\n\n/* Visibility */\n.hide {\n  display: none !important; }\n\n/* Selection Highlighted Text */\n::selection {\n  background: #22eedd;\n  color: white;\n  text-shadow: none; }\n\n::-moz-selection {\n  background: #22eedd;\n  color: white;\n  text-shadow: none; }\n\n/* Formatting */\nem,\ni,\n.italic {\n  font-style: italic; }\n\nb, strong {\n  font-weight: bold; }\n\n.underline {\n  display: inline-block;\n  padding-bottom: 4px;\n  border-bottom: 1px solid #22eedd; }\n\n/* Colors */\n.font-color-primary {\n  color: #22eedd; }\n\n.background-color-primary {\n  background: #22eedd; }\n\n.font-color-secondary {\n  color: #a33; }\n\n.font-color-black {\n  color: black; }\n\n.font-color-white {\n  color: white; }\n\n.background-color-white {\n  background: white; }\n\n/*--------------------------------------------------------------------------\n\t3. Pages\n--------------------------------------------------------------------------*/\n/*---------------------------------------------------\n\t\t\t3.0 Common Elements\n\t---------------------------------------------------*/\n/* Responsive images */\nimg {\n  max-width: 100%; }\n\n/* Used to remove whitespace below an image */\n.remove-line-height {\n  line-height: 0; }\n\n/* Vertical spacing */\n.padding-vertical {\n  padding-top: 50px;\n  padding-bottom: 50px; }\n\n/* Used frequently to apply a light border on top */\n.border-top {\n  border-top: 1px solid #f5f5f5;\n  padding-top: 30px; }\n\n/* Featured image */\n.post img.featured {\n  margin-bottom: 50px; }\n\n/* Buttons */\nbutton,\n.button,\na.button {\n  color: white;\n  background: #22eedd;\n  font-size: 14px;\n  font-weight: bold;\n  text-align: center;\n  padding: 20px 25px 18px 25px;\n  border-bottom: 2px solid #11ddcc;\n  cursor: pointer;\n  display: inline-block;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  -webkit-border-radius: 4px;\n  -moz-border-radius: 4px;\n  -ms-border-radius: 4px;\n  -o-border-radius: 4px;\n  border-radius: 4px; }\n\nbutton.small,\n.button.small,\na.button.small {\n  font-size: 14px;\n  line-height: 24px;\n  padding: 16px 24px;\n  -webkit-border-radius: 3px;\n  -moz-border-radius: 3px;\n  -ms-border-radius: 3px;\n  -o-border-radius: 3px;\n  border-radius: 3px; }\n\nbutton.full,\n.button.full,\na.button.full {\n  display: block;\n  width: 100%;\n  -webkit-border-radius: 5px;\n  -moz-border-radius: 5px;\n  -ms-border-radius: 5px;\n  -o-border-radius: 5px;\n  border-radius: 5px;\n  padding: 30px 40px 26px 40px;\n  border-bottom: 4px solid #11ddcc; }\n\nbutton:hover,\n.button:hover,\na.button:hover {\n  background: #12e5d3; }\n\nbutton.black,\n.button.black,\na.button.black {\n  color: white;\n  background: #000;\n  border-color: #111; }\n\nbutton.black:hover,\n.button.black:hover,\na.button.black:hover {\n  color: #22eedd;\n  background: #111; }\n\n/* Forms */\nform p,\nlabel,\nlegend {\n  font-size: 15px;\n  line-height: 24px; }\n\nlabel {\n  display: block;\n  color: #111;\n  font-size: 13px;\n  line-height: 23px;\n  margin: 20px 0; }\n\ninput[type=text],\ninput[type=url],\ninput[type=tel],\ninput[type=number],\ninput[type=color],\ninput[type=email],\ninput[type=password],\ntextarea,\nselect {\n  width: 100%;\n  padding: 20px 25px;\n  color: #111;\n  margin: 0 0 15px 0;\n  border: 1px solid #ddd;\n  outline: none;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box; }\n\ninput[type=text]:focus,\ninput[type=url]:focus,\ninput[type=tel]:focus,\ninput[type=number]:focus,\ninput[type=color]:focus,\ninput[type=email]:focus,\ninput[type=password]:focus,\ntextarea:focus,\nselect:focus {\n  color: #22eedd;\n  border: 1px solid #22eedd; }\n\n/* Placeholder */\n::-webkit-input-placeholder {\n  color: #ddd; }\n\n::-moz-placeholder {\n  color: #ddd; }\n\n:-ms-input-placeholder {\n  color: #ddd; }\n\ninput:-moz-placeholder {\n  color: #ddd; }\n\n/* Input - submit */\ninput[type=submit] {\n  border: none; }\n\n/* Required */\nspan.required {\n  color: #22eedd; }\n\n/* Page elements */\n.page p.title-desc {\n  color: #ddd;\n  font-weight: bold;\n  margin-top: 0; }\n\n.page p.page-desc {\n  color: #222;\n  font-family: 'Roboto Slab', Georgia, serif;\n  font-size: 34px;\n  line-height: 60px;\n  font-weight: 300;\n  margin-top: 30px;\n  margin-bottom: 50px; }\n\n@media screen and (max-width: 767px) {\n  .page p.page-desc {\n    font-size: 24px;\n    line-height: 42px; } }\n\n@media screen and (max-width: 479px) {\n  .page p.page-desc {\n    font-size: 20px;\n    line-height: 36px; } }\n\n.page p {\n  margin-top: 30px; }\n\n/* Sidebar (sticky) */\n.sidebar {\n  padding-bottom: 20px; }\n\n.sidebar.sticked {\n  background: white;\n  display: none;\n  padding: 0 20px 20px 20px; }\n\n.sidebar.sticked h3.border-top {\n  border-top: 0; }\n\n/* Page Navigation */\n.nav-pages {\n  font-size: 11px;\n  margin-top: 30px; }\n\n.nav-pages a.link-prev,\n.nav-pages a.link-next {\n  color: #555;\n  text-transform: uppercase;\n  letter-spacing: 2px;\n  text-align: center;\n  padding: 25px 0;\n  display: block;\n  width: 50%;\n  float: left;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box; }\n\n.nav-pages a.link-prev span,\n.nav-pages a.link-next span {\n  display: inline-block;\n  padding-bottom: 4px;\n  border-bottom: 1px solid #555555; }\n\n.nav-pages a.link-prev div {\n  padding-right: 33.33333333%; }\n\n@media screen and (min-width: 1300px) {\n  .nav-pages a.link-prev div {\n    padding-right: 50%; } }\n\n@media screen and (max-width: 959px) {\n  .nav-pages a.link-prev div {\n    padding-right: 0%; } }\n\n.nav-pages a.link-next div {\n  padding-left: 33.33333333%; }\n\n@media screen and (min-width: 1300px) {\n  .nav-pages a.link-next div {\n    padding-left: 50%; } }\n\n@media screen and (max-width: 959px) {\n  .nav-pages a.link-next div {\n    padding-left: 0%; } }\n\n.nav-pages a:hover {\n  color: #22eedd; }\n\n.nav-pages a:hover span {\n  border-bottom-color: #22eedd; }\n\n.container .nav-pages a.link-prev,\n.container .nav-pages a.link-next {\n  padding: 20px 0; }\n\n.container .nav-pages a.link-prev {\n  text-align: left; }\n\n.container .nav-pages a.link-next {\n  text-align: right; }\n\n/*---------------------------------------------------\n\t\t\t3.1 Navigation\n\t---------------------------------------------------*/\nul#nav {\n  font-size: 12px;\n  line-height: 21px;\n  font-weight: bold;\n  overflow: visible; }\n\n@media screen and (min-width: 768px) and (max-width: 959px) {\n  ul#nav {\n    font-size: 11px;\n    line-height: 21px; } }\n\n@media screen and (max-width: 767px) {\n  ul#nav {\n    display: none; } }\n\nul#nav li {\n  position: relative; }\n\nul#nav li ul a {\n  color: #555;\n  padding: 25px 0;\n  border-bottom: 1px solid #222; }\n\nul#nav > li {\n  zoom: 1;\n  width: 25%;\n  display: inline;\n  float: left; }\n\nul#nav > li a {\n  color: #aaa;\n  display: block;\n  padding: 18px 0 15px 0;\n  margin: 0 20px;\n  border-bottom: 1px solid #f5f5f5; }\n\nul#nav > li a span.count {\n  color: #ddd;\n  display: block;\n  font-size: 11px; }\n\nul#nav > li a:hover {\n  color: white;\n  border-bottom: none; }\n\nul#nav > li a:hover span.count {\n  color: white; }\n\nul#nav > li:hover,\nul#nav > li.hover {\n  background: #111;\n  margin: 0; }\n\nul#nav > li:hover a,\nul#nav > li.hover a {\n  color: white;\n  border-bottom: none; }\n\nul#nav > li:hover a span.count,\nul#nav > li.hover a span.count {\n  color: white; }\n\nul#nav > li:hover ul li:last-child > a,\nul#nav > li.hover ul li:last-child > a,\nul#nav > li:hover ul li.last-child > a,\nul#nav > li.hover ul li.last-child > a {\n  border-bottom: none; }\n\nul#nav > li.hasChild:hover a,\nul#nav > li.hasChild.hover a {\n  border-bottom: 1px solid #222; }\n\nul#nav li ul {\n  background: #111;\n  width: 100%;\n  visibility: hidden;\n  position: absolute;\n  z-index: 10;\n  top: 100%;\n  left: 0px; }\n\nul#nav li:hover > ul,\nul#nav li.hover > ul {\n  visibility: visible; }\n\nul#nav li ul a:hover,\nul#nav li ul a:focus {\n  color: #22eedd;\n  border-bottom: 1px solid #222; }\n\nul#nav li ul li:last-child > a,\nul#nav li ul li.last-child > a {\n  border-bottom: none; }\n\nul#nav > li ul ul {\n  position: absolute;\n  top: 0;\n  left: 100%; }\n\n/* Mobile Menu */\n#menu-mobile-wrapper {\n  display: none; }\n\n@media screen and (max-width: 767px) {\n  #menu-mobile-wrapper {\n    display: block; } }\n\n#menu-mobile-wrapper #toggle-menu {\n  cursor: pointer;\n  color: #222;\n  display: block;\n  font-size: 15px;\n  line-height: 25px;\n  padding: 20px 0 20px 30px;\n  border-bottom: 1px solid #f5f5f5; }\n\n#menu-mobile-wrapper ul#menu-mobile {\n  display: none;\n  margin-bottom: 15px;\n  overflow: hidden; }\n\n#menu-mobile-wrapper ul#menu-mobile li {\n  font-size: 12px;\n  line-height: 21px;\n  display: block; }\n\n#menu-mobile-wrapper ul#menu-mobile li a {\n  color: #444;\n  display: block;\n  padding: 12px 0;\n  border-bottom: 1px solid #f5f5f5; }\n\n#menu-mobile-wrapper ul#menu-mobile li a:hover {\n  color: #22eedd; }\n\n/*---------------------------------------------------\n\t\t\t3.2 Header\n\t---------------------------------------------------*/\n#header .logo-wrap {\n  padding: 50px 0 50px 0; }\n\n#header h1 {\n  font-size: 24px;\n  line-height: 34px;\n  font-weight: bold; }\n\n#header p.site-desc {\n  color: #ccc;\n  font-size: 12px;\n  line-height: 19px; }\n\n/*---------------------------------------------------\n\t\t\t3.3 Home\n\t---------------------------------------------------*/\n/* Recent Posts */\n.box-recent h3 {\n  font-size: 16px;\n  line-height: 26px;\n  padding: 30px 0 20px 0; }\n\n.box-recent h3 a {\n  color: #ddd; }\n\n.box-recent a.permalink {\n  display: block;\n  border-top: 1px solid #eee; }\n\n.box-recent a.permalink h4 {\n  color: #444;\n  font-size: 22px;\n  line-height: 36px;\n  font-weight: normal;\n  margin-bottom: 5px; }\n\n.box-recent a.permalink:hover h4 {\n  color: #22eedd; }\n\n.box-recent a.permalink p.meta {\n  color: #22eedd; }\n\n.box-recent a.permalink p.meta span {\n  color: #ccc; }\n\n.box-recent a.permalink:hover {\n  color: #22eedd;\n  border-top: 1px solid #22eedd; }\n\n.box-recent a.permalink:hover p.meta span {\n  color: #22eedd; }\n\n.box-recent .item {\n  padding: 20px 0; }\n\n@media screen and (max-width: 767px) {\n  .box-recent a.permalink h4 {\n    font-size: 16px;\n    line-height: 26px; } }\n\n/* About box */\n.box-about {\n  margin-top: 30px; }\n\n.box-about h3 {\n  margin-bottom: 50px; }\n\n.box-about p.tagline {\n  font-family: 'Roboto Slab', Georgia, serif;\n  font-size: 24px;\n  line-height: 44px;\n  font-weight: 300;\n  margin-top: 30px;\n  margin-bottom: 30px; }\n\n@media screen and (max-width: 767px) {\n  .box-about p.tagline {\n    font-size: 20px;\n    line-height: 36px; } }\n\n/*---------------------------------------------------\n\t\t\t3.4 About\n\t---------------------------------------------------*/\n#about h2 {\n  padding-top: 30px; }\n\n#about .services h3 {\n  font-size: 32px;\n  line-height: 42px; }\n\n#about .services .item {\n  padding: 30px 0; }\n\n#about .services h4 {\n  font-size: 16px;\n  line-height: 26px;\n  display: inline-block;\n  padding-bottom: 5px;\n  border-bottom: 1px solid #111; }\n\n#about .services p {\n  font-size: 15px;\n  line-height: 28px;\n  margin-top: 20px; }\n\n@media screen and (max-width: 767px) {\n  #about .services h4 {\n    margin-top: 40px; }\n  #about .services p {\n    font-size: 12px;\n    line-height: 24px; } }\n\n/*---------------------------------------------------\n\t\t\t3.5 Works\n\t---------------------------------------------------*/\n#works .item {\n  margin-bottom: 40px; }\n\n#works .item h3 {\n  color: #555;\n  font-size: 12px;\n  line-height: 22px;\n  font-weight: bold; }\n\n#works a.permalink:hover h3 {\n  color: #111; }\n\n#works .item span.category {\n  color: #ccc;\n  display: block;\n  font-size: 12px;\n  line-height: 18px;\n  margin-bottom: 10px; }\n\n#works a.permalink:hover span.category {\n  color: #22eedd; }\n\n#works .item p.excerpt {\n  font-size: 13px;\n  line-height: 18px;\n  margin-top: 10px; }\n\n/* Stackgrid */\n#works.stackgrid .item {\n  width: 25%;\n  float: left;\n  margin-bottom: 0;\n  position: relative; }\n\n#works.stackgrid .item img {\n  width: 100%; }\n\n@media screen and (min-width: 1600px) {\n  #works.stackgrid .item {\n    width: 20%; } }\n\n@media screen and (min-width: 960px) and (max-width: 1599px) {\n  #works.stackgrid .item {\n    width: 25%; } }\n\n@media screen and (min-width: 768px) and (max-width: 959px) {\n  #works.stackgrid .item {\n    width: 33.333333%; } }\n\n@media screen and (min-width: 480px) and (max-width: 767px) {\n  #works.stackgrid .item {\n    width: 50%; } }\n\n@media screen and (max-width: 479px) {\n  #works.stackgrid .item {\n    width: 100%; } }\n\n#works.stackgrid .item .box-desc {\n  padding: 15px 30px;\n  text-align: center; }\n\n#works.stackgrid.images-only {\n  /* Navigation */\n  margin-top: 0; }\n\n#works.stackgrid.images-only .item .box-desc {\n  display: none;\n  text-align: left;\n  padding: 25px 30px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box; }\n\n#works.stackgrid.images-only .item .box-desc h3 {\n  color: white; }\n\n#works.stackgrid.images-only .nav-pages {\n  margin-top: 0; }\n\n#works.stackgrid.images-only .nav-pages a.link-prev,\n#works.stackgrid.images-only .nav-pages a.link-next {\n  border-top: none; }\n\n#works.stackgrid.images-only a.link-prev,\n#works.stackgrid.images-only a.link-next {\n  border-top: none; }\n\n#works.stackgrid .item .box-desc span.category {\n  margin-bottom: 2px; }\n\n/* Single */\n#works.single img {\n  margin-bottom: 60px; }\n\n#works.single .box-info {\n  margin-bottom: 40px;\n  font-size: 14px;\n  line-height: 25px; }\n\n#works.single .box-info p.project-desc {\n  color: #ddd;\n  font-weight: bold;\n  margin-top: 0; }\n\n#works.single .box-info h4 {\n  font-size: 11px;\n  line-height: 21px;\n  text-transform: uppercase;\n  letter-spacing: 3px; }\n\n#works.single .box-info h4.border-top {\n  padding-top: 20px; }\n\n#works.single .box-info p {\n  margin-top: 15px; }\n\n@media screen and (max-width: 767px) {\n  #works.single .box-info p {\n    font-size: 12px;\n    line-height: 24px; } }\n\n/*---------------------------------------------------\n\t\t\t3.6 Shop\n\t---------------------------------------------------*/\n/* Shop */\n#shop h2 {\n  font-size: 16px;\n  line-height: 26px;\n  margin-bottom: 30px; }\n\n#shop .shop-info p {\n  color: #111;\n  font-size: 13px;\n  line-height: 26px;\n  margin-top: 20px; }\n\n@media screen and (min-width: 960px) {\n  #shop .shop-info h2 {\n    margin-bottom: 40px; }\n  #shop .shop-info p {\n    margin-top: 40px; } }\n\n#shop .cart-item {\n  font-size: 12px;\n  line-height: 22px;\n  margin-bottom: 40px; }\n\n#shop .cart-item .item-info {\n  margin-top: 15px; }\n\n#shop .cart-item .item-name {\n  width: 55%;\n  float: left; }\n\n#shop .cart-item .item-name h4 {\n  color: #aaa;\n  font-weight: bold; }\n\n#shop .cart-item .item-name span.category {\n  color: #ccc; }\n\n#shop .cart-item .item-price {\n  color: #222;\n  width: 30%;\n  float: right;\n  text-align: right;\n  border-left: 1px solid #f5f5f5; }\n\n#shop .cart-item .item-price span.markdown {\n  color: #aaa;\n  text-decoration: line-through;\n  display: block; }\n\n#shop .cart-item .item-price span.item_price {\n  color: #f54;\n  display: block; }\n\n#shop .cart-item a:hover .item-name h4 {\n  color: #222; }\n\n#shop .cart-item a:hover .item-name span.category {\n  color: #999; }\n\n#shop .cart-item a:hover .item-price {\n  border-color: #ddd; }\n\n@media screen and (max-width: 767px) {\n  #shop .cart-item {\n    font-size: 11px;\n    line-height: 21px; }\n  #shop .cart-item .item-info {\n    margin-top: 10px; }\n  #shop .cart-item .item-name {\n    width: 100%;\n    float: none; }\n  #shop .cart-item .item-price {\n    width: 100%;\n    float: none;\n    text-align: left;\n    border-left: none; } }\n\nform#item-selection {\n  margin-top: 30px;\n  margin-bottom: 10px; }\n\nh2.item-name {\n  position: relative; }\n\nh2.item-name span.item-price {\n  color: #ff5544;\n  float: right; }\n\n#shop .sidecart {\n  padding-bottom: 20px; }\n\n#shop .sidecart span.simpleCart_quantity {\n  font-weight: bold; }\n\n#shop .sidecart h2 a:hover {\n  color: #22eedd; }\n\n#shop .sidecart h4 {\n  color: #aaa; }\n\n#shop .sidecart h4 a {\n  display: block; }\n\n#shop .sidecart p.desc {\n  color: #aaa;\n  margin-top: 20px; }\n\nsection#cart h3 {\n  padding: 30px 0; }\n\nsection#cart h3 a {\n  color: #333; }\n\nsection#cart .sidebar p.title-desc {\n  margin-bottom: 20px; }\n\n#shop p.vertical-divider,\n#cart p.vertical-divider {\n  color: #ddd;\n  font-size: 16px;\n  font-style: italic;\n  font-weight: bold;\n  text-align: center;\n  padding: 15px 0; }\n\n/* Cart */\n.cart-header {\n  font-weight: bold; }\n\n.cart-header > div {\n  padding: 20px 0;\n  border-top: 1px solid #f5f5f5;\n  border-bottom: 1px solid #f5f5f5; }\n\n.product-item {\n  margin-top: 20px; }\n\n.product-item:after {\n  content: \".\";\n  visibility: hidden;\n  display: block;\n  height: 0;\n  clear: both; }\n\n/* Cart - for a width of 660px */\n.product-thumbnail,\n.product-name,\n.product-price,\n.product-quantity,\n.product-subtotal,\n.product-remove {\n  float: left; }\n\n.product-thumbnail {\n  width: 100px; }\n\n.product-name {\n  width: 200px;\n  margin-left: 20px; }\n\n.product-price {\n  width: 80px;\n  margin-left: 20px; }\n\n.product-quantity {\n  width: 60px;\n  margin-left: 20px; }\n\n.product-subtotal {\n  width: 80px;\n  margin-left: 20px; }\n\n.product-remove {\n  width: 60px;\n  margin-left: 20px; }\n\n@media screen and (min-width: 1300px) {\n  .product-name {\n    width: 260px; }\n  .product-price {\n    width: 100px; }\n  .product-quantity {\n    width: 100px; }\n  .product-subtotal {\n    width: 100px; }\n  .product-remove {\n    width: 100px; } }\n\n#checkout label {\n  display: block;\n  color: #111;\n  font-size: 13px;\n  line-height: 23px;\n  margin: 10px 0 6px 0; }\n\n#checkout input[type=text],\n#checkout input[type=url],\n#checkout input[type=tel],\n#checkout input[type=number],\n#checkout input[type=color],\n#checkout input[type=email],\n#checkout input[type=password],\n#checkout textarea,\n#checkout select {\n  width: 100%;\n  color: #111;\n  background: #f5f5f5;\n  padding: 20px 25px;\n  margin: 0 0 12px 0;\n  border: 1px solid #ddd;\n  outline: none;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box; }\n\n#checkout input[type=text]:focus,\n#checkout input[type=url]:focus,\n#checkout input[type=tel]:focus,\n#checkout input[type=number]:focus,\n#checkout input[type=color]:focus,\n#checkout input[type=email]:focus,\n#checkout input[type=password]:focus,\n#checkout textarea:focus,\n#checkout select:focus {\n  color: #22eedd;\n  background: white;\n  border: 1px solid #22eedd; }\n\n/* Placeholder */\n#checkout ::-webkit-input-placeholder {\n  color: #ddd; }\n\n#checkout ::-moz-placeholder {\n  color: #ddd; }\n\n#checkout :-ms-input-placeholder {\n  color: #ddd; }\n\n#checkout input:-moz-placeholder {\n  color: #ddd; }\n\n/* Input - submit */\n#checkout input[type=submit] {\n  border: none; }\n\n/*---------------------------------------------------\n\t\t\t3.7 Archive (Blog)\n\t---------------------------------------------------*/\n#archive .entry {\n  margin-bottom: 80px; }\n\n#archive .entry .box-content {\n  padding-top: 30px; }\n\n/* Meta */\n#archive .box-meta {\n  padding-top: 30px; }\n\n#archive .box-meta span.category,\n#archive .box-meta span.date {\n  color: #ccc;\n  font-size: 12px;\n  line-height: 22px; }\n\n#archive .box-meta span.category {\n  color: #333;\n  font-weight: bold; }\n\n/* Tags */\n#archive .entry .box-tags {\n  margin-top: 30px; }\n\n#archive .entry h4 {\n  font-family: 'Roboto Slab', Georgia, serif;\n  font-size: 26px;\n  line-height: 40px;\n  font-weight: 300;\n  margin-bottom: 28px; }\n\n#archive .entry p {\n  color: #111;\n  margin-top: 40px;\n  font-size: 16px;\n  line-height: 32px; }\n\n#archive .entry a:hover h4 {\n  color: #22eedd; }\n\n#archive .entry a:hover p {\n  color: #111; }\n\n#archive .entry p.tags {\n  font-size: 12px;\n  line-height: 22px;\n  margin-top: 0; }\n\n#archive .entry p.tags a {\n  color: #111;\n  display: inline-block;\n  padding-bottom: 3px;\n  border-bottom: 1px solid #111;\n  margin-right: 5px; }\n\n#archive .entry p.tags a:hover {\n  color: #22eedd;\n  border-bottom: 1px solid #22eedd; }\n\n@media screen and (max-width: 959px) {\n  #archive .entry p {\n    font-size: 13px;\n    line-height: 25px; }\n  #archive .entry .box-content {\n    border-top: none; } }\n\n/* BLockquote */\n#archive .entry blockquote {\n  margin-bottom: 15px; }\n\n#archive .entry blockquote p {\n  font-family: 'Roboto Slab', Georgia, serif;\n  font-size: 36px;\n  line-height: 60px;\n  font-style: italic;\n  font-weight: 300;\n  margin-bottom: 10px; }\n\n#archive .entry blockquote footer {\n  color: #22eedd;\n  font-size: 12px;\n  line-height: 22px;\n  font-style: italic;\n  display: inline-block;\n  margin-top: 10px;\n  padding-top: 4px;\n  border-top: 1px solid #22eedd; }\n\n@media screen and (max-width: 959px) {\n  #archive .entry blockquote p {\n    font-size: 22px;\n    line-height: 40px; } }\n\n/*---------------------------------------------------\n\t\t\t3.9 Footer\n\t---------------------------------------------------*/\n#footer {\n  font-size: 13px;\n  line-height: 24px;\n  padding: 30px 0; }\n\n#footer p {\n  margin-top: 30px; }\n\n#footer p a {\n  color: #22eedd; }\n\n#footer ul#social li {\n  display: inline-block;\n  float: left; }\n\n#footer ul#social li a {\n  display: block;\n  padding: 30px 40px 30px 0; }\n\n@media screen and (max-width: 767px) {\n  #footer ul#social {\n    margin-top: 30px; }\n  #footer ul#social li {\n    display: block;\n    float: none; }\n  #footer ul#social li a {\n    display: block;\n    padding: 20px 0;\n    border-top: 1px solid #eee; } }\n\n/*--------------------------------------------------------------------------\n\t4. jQuery Plugins\n--------------------------------------------------------------------------*/\n/*---------------------------------------------------\n\t\t\t4.1 iosSlider\n\t---------------------------------------------------*/\n.containerOuter {\n  background: #111;\n  height: 357px;\n  overflow: hidden; }\n\n.iosContainer {\n  position: relative;\n  width: 100%;\n  height: 357px;\n  margin: 0 auto;\n  overflow: visible; }\n\n.iosContainer .iosSliderContainer {\n  width: 100%;\n  height: 357px;\n  margin: 0;\n  overflow: visible; }\n\n.iosSlider {\n  position: relative;\n  top: 0;\n  left: 0;\n  overflow: visible;\n  width: 100%;\n  height: 357px; }\n\n.iosSlider .slider {\n  width: 10000px;\n  height: 100%; }\n\n.iosSlider .slider .item {\n  float: left;\n  width: 920px;\n  height: 100%; }\n\n.iosSlider .slider .item img {\n  width: 100%; }\n\n.iosThumb2Load {\n  height: 93px;\n  background: #111; }\n\n.iosThumb2Load .slider {\n  width: 100%;\n  height: 100%; }\n\n.iosThumb2Load .button-thumb {\n  float: left;\n  margin: 0;\n  width: 240px;\n  height: 93px;\n  opacity: 0.5;\n  -ms-filter: progid:DXImageTransform.Microsoft.Alpha opacity=50;\n  filter: alpha(opacity=50); }\n\n.iosThumb2Load .selected {\n  opacity: 1;\n  -ms-filter: progid:DXImageTransform.Microsoft.Alpha opacity=100;\n  filter: alpha(opacity=100); }\n\n@media screen and (min-width: 1300px) {\n  .iosSlider .slider .item {\n    width: 1160px; }\n  .containerOuter,\n  .iosContainer,\n  .iosContainer .iosSliderContainer,\n  .iosSlider {\n    height: 450px; } }\n\n@media screen and (min-width: 768px) and (max-width: 959px) {\n  .iosSlider .slider .item {\n    width: 660px; }\n  .containerOuter,\n  .iosContainer,\n  .iosContainer .iosSliderContainer,\n  .iosSlider {\n    height: 256px; } }\n\n@media screen and (max-width: 767px) {\n  .iosSlider .slider .item {\n    width: 280px; }\n  .containerOuter,\n  .iosContainer,\n  .iosContainer .iosSliderContainer,\n  .iosSlider {\n    height: 109px; }\n  .iosThumb2Load {\n    visibility: hidden;\n    margin: 0;\n    height: 0; } }\n\n@media screen and (min-width: 480px) and (max-width: 767px) {\n  .iosSlider .slider .item {\n    width: 400px; }\n  .containerOuter,\n  .iosContainer,\n  .iosContainer .iosSliderContainer,\n  .iosSlider {\n    height: 150px; }\n  .iosThumb2Load {\n    visibility: hidden;\n    margin: 0;\n    height: 0; } }\n\n/*---------------------------------------------------\n\t\t\t4.2 FlexSlider\n\t---------------------------------------------------*/\n/*\n\t* \tjQuery FlexSlider v2.0\n\t* \thttp://www.woothemes.com/flexslider/\n\t*\n\t* \tCopyright 2012 WooThemes\n\t* \tFree to use under the GPLv2 license.\n\t* \thttp://www.gnu.org/licenses/gpl-2.0.html\n\t*\n\t* \tContributing author: Tyler Smith (@mbmufffin)\n\t*/\n/* FlexSlider Necessary Styles\n\t*********************************/\n.flexslider .slides > div {\n  display: none;\n  -webkit-backface-visibility: hidden; }\n\n/* Hide the slides before the JS is loaded. Avoids image jumping */\n.flexslider .slides img {\n  display: block;\n  width: 100%; }\n\n.flex-pauseplay span {\n  text-transform: capitalize; }\n\n/* Clearfix for the .slides element */\n.slides:after {\n  content: \".\";\n  display: block;\n  clear: both;\n  visibility: hidden;\n  line-height: 0;\n  height: 0; }\n\nhtml[xmlns] .slides {\n  display: block; }\n\n* html .slides {\n  height: 1%; }\n\n/* FlexSlider for TypeFolio\n\t*********************************/\n.flexslider {\n  background: white;\n  position: relative;\n  zoom: 1;\n  overflow: hidden; }\n\n.flex-viewport {\n  max-height: 2000px;\n  -webkit-transition: all 1s ease;\n  -moz-transition: all 1s ease;\n  transition: all 1s ease; }\n\n.loading .flex-viewport {\n  max-height: 300px; }\n\n.flexslider .slides {\n  zoom: 1; }\n\n/* Direction Nav */\n.flex-direction-nav {\n  *height: 0; }\n\n.flex-direction-nav a {\n  width: 30px;\n  height: 30px;\n  margin: -20px 0 0;\n  display: block;\n  position: absolute;\n  top: 50%;\n  z-index: 10;\n  cursor: pointer;\n  text-indent: -9999px;\n  opacity: 0;\n  -webkit-transition: all 0.3s ease; }\n\n.flex-direction-nav .flex-next {\n  background-position: 100% 0;\n  right: -36px; }\n\n.flex-direction-nav .flex-prev {\n  left: -36px; }\n\n.flexslider:hover .flex-next {\n  opacity: 0.8;\n  right: 5px; }\n\n.flexslider:hover .flex-prev {\n  opacity: 0.8;\n  left: 5px; }\n\n.flexslider:hover .flex-next:hover,\n.flexslider:hover .flex-prev:hover {\n  opacity: 1; }\n\n.flex-direction-nav .flex-disabled {\n  opacity: 0.3 !important;\n  filter: alpha(opacity=30);\n  cursor: default; }\n\n/* Control Nav */\n.flex-control-nav {\n  width: 100%;\n  position: absolute;\n  bottom: -40px;\n  text-align: center; }\n\n.flex-control-nav li {\n  margin: 0 6px;\n  display: inline-block;\n  zoom: 1;\n  *display: inline; }\n\n.flex-control-paging li a {\n  width: 11px;\n  height: 11px;\n  display: block;\n  background: #666;\n  background: rgba(0, 0, 0, 0.5);\n  cursor: pointer;\n  text-indent: -9999px;\n  -webkit-border-radius: 20px;\n  -moz-border-radius: 20px;\n  -o-border-radius: 20px;\n  border-radius: 20px;\n  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3); }\n\n.flex-control-paging li a:hover {\n  background: #333;\n  background: rgba(0, 0, 0, 0.7); }\n\n.flex-control-paging li a.flex-active {\n  background: black;\n  background: rgba(0, 0, 0, 0.9);\n  cursor: default; }\n\n.flex-control-thumbs {\n  margin: 5px 0 0;\n  position: static;\n  overflow: hidden; }\n\n.flex-control-thumbs li {\n  width: 25%;\n  float: left;\n  margin: 0; }\n\n.flex-control-thumbs img {\n  width: 100%;\n  display: block;\n  opacity: .7;\n  cursor: pointer; }\n\n.flex-control-thumbs img:hover {\n  opacity: 1; }\n\n.flex-control-thumbs .flex-active {\n  opacity: 1;\n  cursor: default; }\n\n.flexslider-nav-carousel {\n  background: #111;\n  margin-bottom: 30px; }\n\n.item-nav {\n  cursor: pointer;\n  padding: 27px 0;\n  border-right: 1px solid #222; }\n\n.item-nav h4 {\n  color: #444;\n  font-size: 20px;\n  line-height: 30px; }\n\n.item-nav span.category {\n  display: inline-block;\n  color: #444;\n  font-size: 11px;\n  line-height: 21px;\n  text-transform: uppercase;\n  letter-spacing: 2px;\n  margin-top: 10px;\n  border-top: 1px solid #333;\n  padding-top: 10px; }\n\n.item-nav.flex-active h4 {\n  color: white; }\n\n.item-nav.flex-active span.category {\n  color: #777;\n  border-top: 1px solid #22eedd; }\n\n@media screen and (max-width: 860px) {\n  .flex-direction-nav .flex-prev {\n    opacity: 1;\n    left: 0; }\n  .flex-direction-nav .flex-next {\n    opacity: 1;\n    right: 0; } }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 172 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "3eda358746e27418b3a54e6966053ff1.png";
+
+/***/ },
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */"use strict";
+
+	if (false) {
+	  (function () {
+	    var ReactHotAPI = require("/x/react-web-pack-test/node_modules/react-hot-api/modules/index.js"),
+	        React = require("react");module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(React);
+	  })();
+	}try {
+	  (function () {
+
 	    //Modules
 	    'use strict';
 
@@ -30068,7 +30313,7 @@
 
 	    var _react2 = _interopRequireDefault(_react);
 
-	    var _utilities = __webpack_require__(166);
+	    var _utilities = __webpack_require__(174);
 
 	    var _utilities2 = _interopRequireDefault(_utilities);
 
@@ -30166,7 +30411,7 @@
 	}
 
 /***/ },
-/* 166 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */"use strict";
@@ -30235,16 +30480,85 @@
 	}
 
 /***/ },
-/* 167 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "e3761a972270b6db0940a7443d615901.gif";
+	module.exports = __webpack_require__.p + "0eaa50c33ed1ea23d3b5b85b08a1c4a1.png";
 
 /***/ },
-/* 168 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "14270637273b7570b93cfff394dbde43.svg";
+	module.exports = __webpack_require__.p + "226b6f39b48ac06da83179849d46020c.png";
+
+/***/ },
+/* 177 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "47d4613d3a7ed43d5131f664a1aa05b2.png";
+
+/***/ },
+/* 178 */
+/***/ function(module, exports) {
+
+	module.exports = {
+		"portfolioItems": [
+			{
+				"title": "Tape Generator",
+				"subTitle": "Youtube SoundCloud Integration",
+				"description": "A simple interface that lets the user chose a Soundcloud track with a Youtube background. Integrates both APIs. It uses query strings to store the the track id and youtube id. Click on the cassette tape.",
+				"demoTitle": "Live Demo",
+				"demoLinks": [
+					{
+						"title": "Generator Demo",
+						"link": "http://corporatebusinesssuccess.com/tape/"
+					},
+					{
+						"title": "PLayer Demo",
+						"link": "http://corporatebusinesssuccess.com/tape/?trackID=262744979&videoID=VqLrZ36k7Z0"
+					}
+				]
+			},
+			{
+				"title": "Drum Pads",
+				"subTitle": "React Javascript sound board",
+				"description": "A responsive sound board built using ReactJS. Sounds recorded in downtown Portland.",
+				"demoTitle": "Live Demo",
+				"demoLinks": [
+					{
+						"title": "Live Demo",
+						"link": "http://Advolkit.com"
+					}
+				],
+				"codeTitle": "Code Examples",
+				"codeLinks": [
+					{
+						"title": "Source",
+						"link": "https://github.com/patomation/react-drum-pads"
+					}
+				]
+			},
+			{
+				"title": "Responsive Vintage Computer",
+				"subTitle": "Responsive html5",
+				"description": "A responsive computer that becomes full screen when  viewed on mobile. Try resizing your browser when using the demo.",
+				"demoTitle": "Live Demo",
+				"demoLinks": [
+					{
+						"title": "Live Demo",
+						"link": "http://patomation.github.io/projects/vintage-computer/"
+					}
+				],
+				"codeTitle": "Code Examples",
+				"codeLinks": [
+					{
+						"title": "Source Code",
+						"link": "https://github.com/patomation/react-responsive-vintage-computer"
+					}
+				]
+			}
+		]
+	};
 
 /***/ }
 /******/ ]);
