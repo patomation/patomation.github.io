@@ -177,6 +177,8 @@
 
 	    (0, _reactDom.render)(_react2['default'].createElement(_reactRouter.Router, { history: document.location.hostname == "localhost" ? _reactRouter.hashHistory : _reactRouter.browserHistory }, _react2['default'].createElement(_reactRouter.Route, { path: '/', component: App }, _react2['default'].createElement(_reactRouter.Route, { path: 'resume', component: _componentsResume2['default'] }), _react2['default'].createElement(_reactRouter.Route, { path: 'foundationdemo', component: _componentsFoundationDemo2['default'] }), _react2['default'].createElement(_reactRouter.Route, { path: 'portfolio', component: Portfolio }, _react2['default'].createElement(_reactRouter.Route, { path: '/portfolio/:itemId', component: PortfolioItem })), _react2['default'].createElement(_reactRouter.Route, { path: '*', component: NoMatch }))), document.getElementById('root'));
 
+	    _reactRouter.browserHistory.push(document.location.hostname == "localhost" ? '/#/portfolio' : '/portfolio');
+
 	    /* REACT HOT LOADER */
 	  }).call(undefined);
 	} finally {
