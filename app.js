@@ -200,7 +200,7 @@
 	      }
 	    });
 
-	    _reactDom2['default'].render(_react2['default'].createElement(App, null), document.getElementById('App'));
+	    _reactDom2['default'].render(_react2['default'].createElement(App, null), document.getElementById('root'));
 
 	    /* REACT HOT LOADER */
 	  }).call(undefined);
