@@ -48,7 +48,7 @@
 
 	if (false) {
 	  (function () {
-	    var ReactHotAPI = require("/x/react-web-pack-test/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"),
+	    var ReactHotAPI = require("/x/react-web-pack-test/node_modules/react-hot-api/modules/index.js"),
 	        React = require("react");module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(React);
 	  })();
 	}try {
@@ -81,101 +81,37 @@
 
 	    __webpack_require__(228);
 
+	    // import '../node_modules/foundation-icons/foundation-icons.css'
+
 	    //Components
 
-	    var _componentsFoundationDemo = __webpack_require__(230);
-
-	    var _componentsFoundationDemo2 = _interopRequireDefault(_componentsFoundationDemo);
-
-	    var _componentsResume = __webpack_require__(231);
+	    var _componentsResume = __webpack_require__(230);
 
 	    var _componentsResume2 = _interopRequireDefault(_componentsResume);
 
-	    //Images
+	    var _componentsPortfolio = __webpack_require__(231);
 
-	    var _imagesHeaderImage1Png = __webpack_require__(232);
+	    var _componentsPortfolio2 = _interopRequireDefault(_componentsPortfolio);
 
-	    var _imagesHeaderImage1Png2 = _interopRequireDefault(_imagesHeaderImage1Png);
+	    var _componentsPortfolioItem = __webpack_require__(232);
+
+	    var _componentsPortfolioItem2 = _interopRequireDefault(_componentsPortfolioItem);
+
+	    var _componentsNoMatch = __webpack_require__(233);
+
+	    var _componentsNoMatch2 = _interopRequireDefault(_componentsNoMatch);
+
+	    var _componentsApp = __webpack_require__(234);
+
+	    var _componentsApp2 = _interopRequireDefault(_componentsApp);
 
 	    //DATA
 
-	    var _dataJson = __webpack_require__(233);
+	    var _dataJson = __webpack_require__(236);
 
 	    var _dataJson2 = _interopRequireDefault(_dataJson);
 
-	    var App = _react2['default'].createClass({
-	      displayName: 'App',
-
-	      componentDidMount: function componentDidMount() {},
-	      render: function render() {
-	        return _react2['default'].createElement('div', null, _react2['default'].createElement('div', { className: 'row floating-text-parent' }, _react2['default'].createElement('div', { className: 'floating-text' }, _react2['default'].createElement('h1', null, 'Patrick Kelly'), _react2['default'].createElement('p', null, 'Full Stack Developer, Designer, Animator and Kitboarder')), _react2['default'].createElement('img', { src: _imagesHeaderImage1Png2['default'] })), _react2['default'].createElement('div', { className: 'row' }, _react2['default'].createElement('ul', { className: 'menu' }, _react2['default'].createElement('li', null, _react2['default'].createElement(_reactRouter.Link, { to: '/portfolio' }, 'Portfolio')), _react2['default'].createElement('li', null, _react2['default'].createElement(_reactRouter.Link, { to: '/resume' }, 'Resume')))), _react2['default'].createElement('div', { className: 'row' }, this.props.children), _react2['default'].createElement('div', { className: 'row' }, _react2['default'].createElement('ul', { className: 'menu' }, _react2['default'].createElement('li', null, _react2['default'].createElement('a', { href: 'https://www.facebook.com/patricknolankelly', className: 'hoverMe' }, 'Facebook')), _react2['default'].createElement('li', null, _react2['default'].createElement('a', { href: 'https://www.linkedin.com/in/patomation', className: 'hoverMe' }, 'LinkedIn')))));
-	      }
-	    });
-
-	    var NoMatch = _react2['default'].createClass({
-	      displayName: 'NoMatch',
-
-	      render: function render() {
-	        return _react2['default'].createElement('div', null, 'Woops!');
-	      }
-	    });
-
-	    var Portfolio = _react2['default'].createClass({
-	      displayName: 'Portfolio',
-
-	      render: function render() {
-	        return _react2['default'].createElement('div', null, _react2['default'].createElement('div', { className: 'row', style: { padding: '2em' } }, this.props.children), _react2['default'].createElement('h3', null, 'Portfolio'), _react2['default'].createElement('div', { className: 'row' }, _dataJson2['default'].portfolioItems.map(function (item) {
-	          return _react2['default'].createElement('div', { key: item.id, className: 'small-4 columns floating-text-parent' }, _react2['default'].createElement(_reactRouter.Link, { to: '/portfolio/' + item.id }, item.name, _react2['default'].createElement('div', { className: 'floating-text' }, _react2['default'].createElement('h4', null, item.title), _react2['default'].createElement('div', null, item.subTitle)), _react2['default'].createElement('img', { src: item.image })));
-	        })));
-	      }
-	    });
-
-	    var PortfolioItem = _react2['default'].createClass({
-	      displayName: 'PortfolioItem',
-
-	      findItemById: function findItemById(itemId) {
-	        return _lodash2['default'].find(_dataJson2['default'].portfolioItems, { 'id': itemId });
-	      },
-
-	      getInitialState: function getInitialState() {
-	        return {
-	          "item": this.findItemById(this.props.params.itemId)
-	        };
-	      },
-	      componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	        this.setState({
-	          "item": this.findItemById(nextProps.params.itemId)
-	        });
-	      },
-	      componentDidMount: function componentDidMount() {
-	        this.setState({
-	          "item": this.findItemById(this.props.params.itemId)
-	        });
-	      },
-	      getButtons: function getButtons(items) {
-	        console.log(items);
-	        return items.map(function (item, index) {
-	          return _react2['default'].createElement('span', { className: 'paddingBottom1em', key: index }, _react2['default'].createElement('a', { href: item.link, className: 'button' }, item.title));
-	        });
-	      },
-
-	      getCodeLinks: function getCodeLinks(item) {
-	        if (item.codeLinks) {
-	          return _react2['default'].createElement('div', { className: 'box-info' }, _react2['default'].createElement('h4', { className: 'border-top' }, item.codeTitle), _react2['default'].createElement('p', null, this.getButtons(item.codeLinks)));
-	        }
-	      },
-
-	      getDemoLinks: function getDemoLinks(item) {
-	        if (item.demoLinks) {
-	          return _react2['default'].createElement('div', { className: 'box-info' }, _react2['default'].createElement('h4', { className: 'border-top' }, item.demoTitle), _react2['default'].createElement('p', null, this.getButtons(item.demoLinks)));
-	        }
-	      },
-	      render: function render() {
-	        return _react2['default'].createElement('div', { className: '' }, _react2['default'].createElement('div', { className: 'small-4 columns' }, _react2['default'].createElement('h5', null, this.state.item.title), _react2['default'].createElement('h6', null, this.state.item.subTitle), _react2['default'].createElement('p', null, this.state.item.description), this.getDemoLinks(this.state.item), this.getCodeLinks(this.state.item)), _react2['default'].createElement('div', { className: 'small-8 columns' }, _react2['default'].createElement('image', { src: this.state.item.image })));
-	      }
-	    });
-
-	    (0, _reactDom.render)(_react2['default'].createElement(_reactRouter.Router, { history: document.location.hostname == "localhost" ? _reactRouter.hashHistory : _reactRouter.browserHistory }, _react2['default'].createElement(_reactRouter.Route, { path: '/', component: App }, _react2['default'].createElement(_reactRouter.Route, { path: 'resume', component: _componentsResume2['default'] }), _react2['default'].createElement(_reactRouter.Route, { path: 'foundationdemo', component: _componentsFoundationDemo2['default'] }), _react2['default'].createElement(_reactRouter.Route, { path: 'portfolio', component: Portfolio }, _react2['default'].createElement(_reactRouter.Route, { path: '/portfolio/:itemId', component: PortfolioItem })), _react2['default'].createElement(_reactRouter.Route, { path: '*', component: NoMatch }))), document.getElementById('root'));
+	    (0, _reactDom.render)(_react2['default'].createElement(_reactRouter.Router, { history: document.location.hostname == "localhost" ? _reactRouter.hashHistory : _reactRouter.browserHistory }, _react2['default'].createElement(_reactRouter.Route, { path: '/', component: _componentsApp2['default'] }, _react2['default'].createElement(_reactRouter.Route, { path: 'resume', component: _componentsResume2['default'] }), _react2['default'].createElement(_reactRouter.Route, { path: 'portfolio', portfolioItems: _dataJson2['default'].portfolioItems, component: _componentsPortfolio2['default'] }, _react2['default'].createElement(_reactRouter.Route, { path: '/portfolio/:itemId', portfolioItems: _dataJson2['default'].portfolioItems, component: _componentsPortfolioItem2['default'] })), _react2['default'].createElement(_reactRouter.Route, { path: '*', component: _componentsNoMatch2['default'] }))), document.getElementById('root'));
 
 	    _reactRouter.browserHistory.push(document.location.hostname == "localhost" ? '/#/portfolio' : '/portfolio');
 
@@ -358,14 +294,55 @@
 /***/ function(module, exports) {
 
 	// shim for using process in browser
-
 	var process = module.exports = {};
+
+	// cached from whatever global is present so that test runners that stub it
+	// don't break things.  But we need to wrap it in a try catch in case it is
+	// wrapped in strict mode code which doesn't define any globals.  It's inside a
+	// function because try/catches deoptimize in certain engines.
+
+	var cachedSetTimeout;
+	var cachedClearTimeout;
+
+	(function () {
+	    try {
+	        cachedSetTimeout = setTimeout;
+	    } catch (e) {
+	        cachedSetTimeout = function () {
+	            throw new Error('setTimeout is not defined');
+	        }
+	    }
+	    try {
+	        cachedClearTimeout = clearTimeout;
+	    } catch (e) {
+	        cachedClearTimeout = function () {
+	            throw new Error('clearTimeout is not defined');
+	        }
+	    }
+	} ())
+	function runTimeout(fun) {
+	    if (cachedSetTimeout === setTimeout) {
+	        return setTimeout(fun, 0);
+	    } else {
+	        return cachedSetTimeout.call(null, fun, 0);
+	    }
+	}
+	function runClearTimeout(marker) {
+	    if (cachedClearTimeout === clearTimeout) {
+	        clearTimeout(marker);
+	    } else {
+	        cachedClearTimeout.call(null, marker);
+	    }
+	}
 	var queue = [];
 	var draining = false;
 	var currentQueue;
 	var queueIndex = -1;
 
 	function cleanUpNextTick() {
+	    if (!draining || !currentQueue) {
+	        return;
+	    }
 	    draining = false;
 	    if (currentQueue.length) {
 	        queue = currentQueue.concat(queue);
@@ -381,7 +358,7 @@
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = setTimeout(cleanUpNextTick);
+	    var timeout = runTimeout(cleanUpNextTick);
 	    draining = true;
 
 	    var len = queue.length;
@@ -398,7 +375,7 @@
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    clearTimeout(timeout);
+	    runClearTimeout(timeout);
 	}
 
 	process.nextTick = function (fun) {
@@ -410,7 +387,7 @@
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        setTimeout(drainQueue, 0);
+	        runTimeout(drainQueue);
 	    }
 	};
 
@@ -22379,7 +22356,7 @@
 			}
 
 			if (Array.isArray(val)) {
-				return val.sort().map(function (val2) {
+				return val.slice().sort().map(function (val2) {
 					return strictUriEncode(key) + '=' + strictUriEncode(val2);
 				}).join('&');
 			}
@@ -42423,68 +42400,7 @@
 
 	if (false) {
 	  (function () {
-	    var ReactHotAPI = require("/x/react-web-pack-test/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"),
-	        React = require("react");module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(React);
-	  })();
-	}try {
-	  (function () {
-
-	    "use strict";
-
-	    Object.defineProperty(exports, "__esModule", {
-	      value: true
-	    });
-
-	    function _interopRequireDefault(obj) {
-	      return obj && obj.__esModule ? obj : { "default": obj };
-	    }
-
-	    var _react = __webpack_require__(1);
-
-	    var _react2 = _interopRequireDefault(_react);
-
-	    var FoundationDemo = _react2["default"].createClass({
-	      displayName: "FoundationDemo",
-
-	      render: function render() {
-	        return _react2["default"].createElement("div", null, _react2["default"].createElement("div", { className: "row" }, _react2["default"].createElement("div", { className: "large-12 columns" }, _react2["default"].createElement("h1", null, "Welcome to Foundation"))), _react2["default"].createElement("div", { className: "row" }, _react2["default"].createElement("div", { className: "large-12 columns" }, _react2["default"].createElement("div", { className: "callout" }, _react2["default"].createElement("h3", null, "We’re stoked you want to try Foundation! "), _react2["default"].createElement("p", null, "To get going, this file (index.html) includes some basic styles you can modify, play around with, or totally destroy to get going."), _react2["default"].createElement("p", null, "Once youve exhausted the fun in this document, you should check out:"), _react2["default"].createElement("div", { className: "row" }, _react2["default"].createElement("div", { className: "large-4 medium-4 columns" }, _react2["default"].createElement("p", null, _react2["default"].createElement("a", { href: "http://foundation.zurb.com/docs" }, "Foundation Documentation"), _react2["default"].createElement("br", null), "Everything you need to know about using the framework.")), _react2["default"].createElement("div", { className: "large-4 medium-4 columns" }, _react2["default"].createElement("p", null, _react2["default"].createElement("a", { href: "http://zurb.com/university/code-skills" }, "Foundation Code Skills"), _react2["default"].createElement("br", null), "These online courses offer you a chance to better understand how Foundation works and how you can master it to create awesome projects.")), _react2["default"].createElement("div", { className: "large-4 medium-4 columns" }, _react2["default"].createElement("p", null, _react2["default"].createElement("a", { href: "http://foundation.zurb.com/forum" }, "Foundation Forum"), _react2["default"].createElement("br", null), "Join the Foundation community to ask a question or show off your knowlege."))), _react2["default"].createElement("div", { className: "row" }, _react2["default"].createElement("div", { className: "large-4 medium-4 medium-push-2 columns" }, _react2["default"].createElement("p", null, _react2["default"].createElement("a", { href: "http://github.com/zurb/foundation" }, "Foundation on Github"), _react2["default"].createElement("br", null), "Latest code, issue reports, feature requests and more.")), _react2["default"].createElement("div", { className: "large-4 medium-4 medium-pull-2 columns" }, _react2["default"].createElement("p", null, _react2["default"].createElement("a", { href: "https://twitter.com/ZURBfoundation" }, "@zurbfoundation"), _react2["default"].createElement("br", null), "Ping us on Twitter if you have questions. When you build something with this wed love to see it (and send you a totally boss sticker).")))))), _react2["default"].createElement("div", { className: "row" }, _react2["default"].createElement("div", { className: "large-8 medium-8 columns" }, _react2["default"].createElement("h5", null, "Here’s your basic grid:"), _react2["default"].createElement("div", { className: "row" }, _react2["default"].createElement("div", { className: "large-12 columns" }, _react2["default"].createElement("div", { className: "primary callout" }, _react2["default"].createElement("p", null, _react2["default"].createElement("strong", null, "This is a twelve column section in a row."), " Each of these includes a div.callout element so you can see where the columns are - its not required at all for the grid.")))), _react2["default"].createElement("div", { className: "row" }, _react2["default"].createElement("div", { className: "large-6 medium-6 columns" }, _react2["default"].createElement("div", { className: "primary callout" }, _react2["default"].createElement("p", null, "Six columns"))), _react2["default"].createElement("div", { className: "large-6 medium-6 columns" }, _react2["default"].createElement("div", { className: "primary callout" }, _react2["default"].createElement("p", null, "Six columns")))), _react2["default"].createElement("div", { className: "row" }, _react2["default"].createElement("div", { className: "large-4 medium-4 small-4 columns" }, _react2["default"].createElement("div", { className: "primary callout" }, _react2["default"].createElement("p", null, "Four columns"))), _react2["default"].createElement("div", { className: "large-4 medium-4 small-4 columns" }, _react2["default"].createElement("div", { className: "primary callout" }, _react2["default"].createElement("p", null, "Four columns"))), _react2["default"].createElement("div", { className: "large-4 medium-4 small-4 columns" }, _react2["default"].createElement("div", { className: "primary callout" }, _react2["default"].createElement("p", null, "Four columns")))), _react2["default"].createElement("hr", null), _react2["default"].createElement("h5", null, "We bet you’ll need a form somewhere:"), _react2["default"].createElement("form", null, _react2["default"].createElement("div", { className: "row" }, _react2["default"].createElement("div", { className: "large-12 columns" }, _react2["default"].createElement("label", null, "Input Label"), _react2["default"].createElement("input", { type: "text", placeholder: "large-12.columns" }))), _react2["default"].createElement("div", { className: "row" }, _react2["default"].createElement("div", { className: "large-4 medium-4 columns" }, _react2["default"].createElement("label", null, "Input Label"), _react2["default"].createElement("input", { type: "text", placeholder: "large-4.columns" })), _react2["default"].createElement("div", { className: "large-4 medium-4 columns" }, _react2["default"].createElement("label", null, "Input Label"), _react2["default"].createElement("input", { type: "text", placeholder: "large-4.columns" })), _react2["default"].createElement("div", { className: "large-4 medium-4 columns" }, _react2["default"].createElement("div", { className: "row collapse" }, _react2["default"].createElement("label", null, "Input Label"), _react2["default"].createElement("div", { className: "input-group" }, _react2["default"].createElement("input", { type: "text", placeholder: "small-9.columns", className: "input-group-field" }), _react2["default"].createElement("span", { className: "input-group-label" }, ".com"))))), _react2["default"].createElement("div", { className: "row" }, _react2["default"].createElement("div", { className: "large-12 columns" }, _react2["default"].createElement("label", null, "Select Box"), _react2["default"].createElement("select", null, _react2["default"].createElement("option", { value: "husker" }, "Husker"), _react2["default"].createElement("option", { value: "starbuck" }, "Starbuck"), _react2["default"].createElement("option", { value: "hotdog" }, "Hot Dog"), _react2["default"].createElement("option", { value: "apollo" }, "Apollo")))), _react2["default"].createElement("div", { className: "row" }, _react2["default"].createElement("div", { className: "large-6 medium-6 columns" }, _react2["default"].createElement("label", null, "Choose Your Favorite"), _react2["default"].createElement("input", { type: "radio", name: "pokemon", value: "Red", id: "pokemonRed" }), _react2["default"].createElement("label", { htmlFor: "pokemonRed" }, "Radio 1"), _react2["default"].createElement("input", { type: "radio", name: "pokemon", value: "Blue", id: "pokemonBlue" }), _react2["default"].createElement("label", { htmlFor: "pokemonBlue" }, "Radio 2")), _react2["default"].createElement("div", { className: "large-6 medium-6 columns" }, _react2["default"].createElement("label", null, "Check these out"), _react2["default"].createElement("input", { id: "checkbox1", type: "checkbox" }), _react2["default"].createElement("label", { htmlFor: "checkbox1" }, "Checkbox 1"), _react2["default"].createElement("input", { id: "checkbox2", type: "checkbox" }), _react2["default"].createElement("label", { htmlFor: "checkbox2" }, "Checkbox 2"))), _react2["default"].createElement("div", { className: "row" }, _react2["default"].createElement("div", { className: "large-12 columns" }, _react2["default"].createElement("label", null, "Textarea Label"), _react2["default"].createElement("textarea", { placeholder: "small-12.columns" }))))), _react2["default"].createElement("div", { className: "large-4 medium-4 columns" }, _react2["default"].createElement("h5", null, "Try one of these buttons:"), _react2["default"].createElement("p", null, _react2["default"].createElement("a", { href: "#", className: "button" }, "Simple Button"), _react2["default"].createElement("br", null), _react2["default"].createElement("a", { href: "#", className: "success button" }, "Success Btn"), _react2["default"].createElement("br", null), _react2["default"].createElement("a", { href: "#", className: "alert button" }, "Alert Btn"), _react2["default"].createElement("br", null), _react2["default"].createElement("a", { href: "#", className: "secondary button" }, "Secondary Btn")), _react2["default"].createElement("div", { className: "callout" }, _react2["default"].createElement("h5", null, "So many components, girl!"), _react2["default"].createElement("p", null, "A whole kitchen sink of goodies comes with Foundation. Check out the docs to see them all, along with details on making them your own."), _react2["default"].createElement("a", { href: "http://foundation.zurb.com/sites/docs/", className: "small button" }, "Go to Foundation Docs")))));
-	      }
-	    });
-
-	    exports["default"] = FoundationDemo;
-	    module.exports = exports["default"];
-
-	    /* REACT HOT LOADER */
-	  }).call(undefined);
-	} finally {
-	  if (false) {
-	    (function () {
-	      var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false;if (module.exports && module.makeHot) {
-	        var makeExportsHot = require("/x/react-web-pack-test/node_modules/react-hot-loader/makeExportsHot.js");if (makeExportsHot(module, require("react"))) {
-	          foundReactClasses = true;
-	        }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
-	          module.hot.accept(function (err) {
-	            if (err) {
-	              console.error("Cannot apply hot update to " + "foundation-demo.js" + ": " + err.message);
-	            }
-	          });
-	        }
-	      }module.hot.dispose(function (data) {
-	        data.makeHot = module.makeHot;data.foundReactClasses = foundReactClasses;
-	      });
-	    })();
-	  }
-	}
-
-/***/ },
-/* 231 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */"use strict";
-
-	if (false) {
-	  (function () {
-	    var ReactHotAPI = require("/x/react-web-pack-test/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"),
+	    var ReactHotAPI = require("/x/react-web-pack-test/node_modules/react-hot-api/modules/index.js"),
 	        React = require("react");module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(React);
 	  })();
 	}try {
@@ -42526,7 +42442,73 @@
 	        }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
 	          module.hot.accept(function (err) {
 	            if (err) {
-	              console.error("Cannot apply hot update to " + "resume.js" + ": " + err.message);
+	              console.error("Cannot apply hot update to " + "Resume.js" + ": " + err.message);
+	            }
+	          });
+	        }
+	      }module.hot.dispose(function (data) {
+	        data.makeHot = module.makeHot;data.foundReactClasses = foundReactClasses;
+	      });
+	    })();
+	  }
+	}
+
+/***/ },
+/* 231 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */"use strict";
+
+	if (false) {
+	  (function () {
+	    var ReactHotAPI = require("/x/react-web-pack-test/node_modules/react-hot-api/modules/index.js"),
+	        React = require("react");module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(React);
+	  })();
+	}try {
+	  (function () {
+
+	    'use strict';
+
+	    Object.defineProperty(exports, '__esModule', {
+	      value: true
+	    });
+
+	    function _interopRequireDefault(obj) {
+	      return obj && obj.__esModule ? obj : { 'default': obj };
+	    }
+
+	    var _react = __webpack_require__(1);
+
+	    var _react2 = _interopRequireDefault(_react);
+
+	    var _reactRouter = __webpack_require__(159);
+
+	    var Portfolio = _react2['default'].createClass({
+	      displayName: 'Portfolio',
+
+	      render: function render() {
+
+	        return _react2['default'].createElement('div', null, _react2['default'].createElement('div', { className: 'row', style: { padding: '2em' } }, this.props.children), _react2['default'].createElement('h3', null, 'Portfolio'), _react2['default'].createElement('div', { className: 'row' }, this.props.route.portfolioItems.map(function (item) {
+	          return _react2['default'].createElement('div', { key: item.id, className: 'small-3 columns floating-text-parent' }, _react2['default'].createElement(_reactRouter.Link, { to: '/portfolio/' + item.id }, item.name, _react2['default'].createElement('div', { className: 'floating-text' }, _react2['default'].createElement('h4', null, item.title), _react2['default'].createElement('div', null, item.subTitle)), _react2['default'].createElement('img', { src: item.image })));
+	        })));
+	      }
+	    });
+
+	    exports['default'] = Portfolio;
+	    module.exports = exports['default'];
+
+	    /* REACT HOT LOADER */
+	  }).call(undefined);
+	} finally {
+	  if (false) {
+	    (function () {
+	      var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false;if (module.exports && module.makeHot) {
+	        var makeExportsHot = require("/x/react-web-pack-test/node_modules/react-hot-loader/makeExportsHot.js");if (makeExportsHot(module, require("react"))) {
+	          foundReactClasses = true;
+	        }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
+	          module.hot.accept(function (err) {
+	            if (err) {
+	              console.error("Cannot apply hot update to " + "portfolio.js" + ": " + err.message);
 	            }
 	          });
 	        }
@@ -42541,20 +42523,260 @@
 /* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "3fa6f6db77f435831d5854b569f83388.png";
+	/* REACT HOT LOADER */"use strict";
+
+	if (false) {
+	  (function () {
+	    var ReactHotAPI = require("/x/react-web-pack-test/node_modules/react-hot-api/modules/index.js"),
+	        React = require("react");module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(React);
+	  })();
+	}try {
+	  (function () {
+
+	    'use strict';
+
+	    Object.defineProperty(exports, '__esModule', {
+	      value: true
+	    });
+
+	    function _interopRequireDefault(obj) {
+	      return obj && obj.__esModule ? obj : { 'default': obj };
+	    }
+
+	    var _react = __webpack_require__(1);
+
+	    var _react2 = _interopRequireDefault(_react);
+
+	    var PortfolioItem = _react2['default'].createClass({
+	      displayName: 'PortfolioItem',
+
+	      findItemById: function findItemById(itemId) {
+	        return _.find(this.props.route.portfolioItems, { 'id': itemId });
+	      },
+
+	      getInitialState: function getInitialState() {
+	        return {
+	          "item": this.findItemById(this.props.params.itemId)
+	        };
+	      },
+	      componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	        this.setState({
+	          "item": this.findItemById(nextProps.params.itemId)
+	        });
+	      },
+	      componentDidMount: function componentDidMount() {
+	        this.setState({
+	          "item": this.findItemById(this.props.params.itemId)
+	        });
+	      },
+	      getButtons: function getButtons(items) {
+	        return items.map(function (item, index) {
+	          return _react2['default'].createElement('span', { className: 'paddingBottom1em', key: index }, _react2['default'].createElement('a', { href: item.link, className: 'button' }, item.title));
+	        });
+	      },
+
+	      getCodeLinks: function getCodeLinks(item) {
+	        if (item.codeLinks) {
+	          return _react2['default'].createElement('div', { className: 'box-info' }, _react2['default'].createElement('h4', { className: 'border-top' }, item.codeTitle), _react2['default'].createElement('p', null, this.getButtons(item.codeLinks)));
+	        }
+	      },
+
+	      getDemoLinks: function getDemoLinks(item) {
+	        if (item.demoLinks) {
+	          return _react2['default'].createElement('div', { className: 'box-info' }, _react2['default'].createElement('h4', { className: 'border-top' }, item.demoTitle), _react2['default'].createElement('p', null, this.getButtons(item.demoLinks)));
+	        }
+	      },
+	      render: function render() {
+	        return _react2['default'].createElement('div', { className: '' }, _react2['default'].createElement('div', { className: 'small-4 columns' }, _react2['default'].createElement('h5', null, this.state.item.title), _react2['default'].createElement('h6', null, this.state.item.subTitle), _react2['default'].createElement('p', null, this.state.item.description), this.getDemoLinks(this.state.item), this.getCodeLinks(this.state.item)), _react2['default'].createElement('div', { className: 'small-8 columns' }, _react2['default'].createElement('image', { src: this.state.item.image })));
+	      }
+	    });
+
+	    exports['default'] = PortfolioItem;
+	    module.exports = exports['default'];
+
+	    /* REACT HOT LOADER */
+	  }).call(undefined);
+	} finally {
+	  if (false) {
+	    (function () {
+	      var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false;if (module.exports && module.makeHot) {
+	        var makeExportsHot = require("/x/react-web-pack-test/node_modules/react-hot-loader/makeExportsHot.js");if (makeExportsHot(module, require("react"))) {
+	          foundReactClasses = true;
+	        }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
+	          module.hot.accept(function (err) {
+	            if (err) {
+	              console.error("Cannot apply hot update to " + "PortfolioItem.js" + ": " + err.message);
+	            }
+	          });
+	        }
+	      }module.hot.dispose(function (data) {
+	        data.makeHot = module.makeHot;data.foundReactClasses = foundReactClasses;
+	      });
+	    })();
+	  }
+	}
 
 /***/ },
 /* 233 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */"use strict";
+
+	if (false) {
+	  (function () {
+	    var ReactHotAPI = require("/x/react-web-pack-test/node_modules/react-hot-api/modules/index.js"),
+	        React = require("react");module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(React);
+	  })();
+	}try {
+	  (function () {
+
+	    'use strict';
+
+	    Object.defineProperty(exports, '__esModule', {
+	      value: true
+	    });
+
+	    function _interopRequireDefault(obj) {
+	      return obj && obj.__esModule ? obj : { 'default': obj };
+	    }
+
+	    var _react = __webpack_require__(1);
+
+	    var _react2 = _interopRequireDefault(_react);
+
+	    var NoMatch = _react2['default'].createClass({
+	      displayName: 'NoMatch',
+
+	      render: function render() {
+	        return _react2['default'].createElement('div', null, 'Woops!');
+	      }
+	    });
+
+	    exports['default'] = NoMatch;
+	    module.exports = exports['default'];
+
+	    /* REACT HOT LOADER */
+	  }).call(undefined);
+	} finally {
+	  if (false) {
+	    (function () {
+	      var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false;if (module.exports && module.makeHot) {
+	        var makeExportsHot = require("/x/react-web-pack-test/node_modules/react-hot-loader/makeExportsHot.js");if (makeExportsHot(module, require("react"))) {
+	          foundReactClasses = true;
+	        }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
+	          module.hot.accept(function (err) {
+	            if (err) {
+	              console.error("Cannot apply hot update to " + "NoMatch.js" + ": " + err.message);
+	            }
+	          });
+	        }
+	      }module.hot.dispose(function (data) {
+	        data.makeHot = module.makeHot;data.foundReactClasses = foundReactClasses;
+	      });
+	    })();
+	  }
+	}
+
+/***/ },
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */"use strict";
+
+	if (false) {
+	  (function () {
+	    var ReactHotAPI = require("/x/react-web-pack-test/node_modules/react-hot-api/modules/index.js"),
+	        React = require("react");module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(React);
+	  })();
+	}try {
+	  (function () {
+
+	    'use strict';
+
+	    Object.defineProperty(exports, '__esModule', {
+	      value: true
+	    });
+
+	    function _interopRequireDefault(obj) {
+	      return obj && obj.__esModule ? obj : { 'default': obj };
+	    }
+
+	    var _react = __webpack_require__(1);
+
+	    var _react2 = _interopRequireDefault(_react);
+
+	    var _reactRouter = __webpack_require__(159);
+
+	    var _imagesHeaderImage1Png = __webpack_require__(235);
+
+	    var _imagesHeaderImage1Png2 = _interopRequireDefault(_imagesHeaderImage1Png);
+
+	    var App = _react2['default'].createClass({
+	      displayName: 'App',
+
+	      componentDidMount: function componentDidMount() {},
+	      render: function render() {
+	        return _react2['default'].createElement('div', null, _react2['default'].createElement('div', { className: 'row floating-text-parent' }, _react2['default'].createElement('div', { className: 'floating-text' }, _react2['default'].createElement('h1', null, 'Patrick Kelly'), _react2['default'].createElement('p', null, 'FrontEnd Developer, Designer, Animator and Kitboarder')), _react2['default'].createElement('img', { src: _imagesHeaderImage1Png2['default'] })), _react2['default'].createElement('div', { className: 'row' }, _react2['default'].createElement('ul', { className: 'menu' }, _react2['default'].createElement('li', null, _react2['default'].createElement(_reactRouter.Link, { to: '/portfolio' }, 'Portfolio')), _react2['default'].createElement('li', null, _react2['default'].createElement(_reactRouter.Link, { to: '/resume' }, 'Resume')))), _react2['default'].createElement('div', { className: 'row' }, this.props.children), _react2['default'].createElement('div', { className: 'row' }, _react2['default'].createElement('ul', { className: 'menu' }, _react2['default'].createElement('li', null, _react2['default'].createElement('a', { href: 'https://www.facebook.com/patricknolankelly', className: 'hoverMe' }, 'Facebook')), _react2['default'].createElement('li', null, _react2['default'].createElement('a', { href: 'https://www.linkedin.com/in/patomation', className: 'hoverMe' }, 'LinkedIn')))));
+	      }
+	    });
+
+	    exports['default'] = App;
+	    module.exports = exports['default'];
+
+	    /* REACT HOT LOADER */
+	  }).call(undefined);
+	} finally {
+	  if (false) {
+	    (function () {
+	      var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false;if (module.exports && module.makeHot) {
+	        var makeExportsHot = require("/x/react-web-pack-test/node_modules/react-hot-loader/makeExportsHot.js");if (makeExportsHot(module, require("react"))) {
+	          foundReactClasses = true;
+	        }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
+	          module.hot.accept(function (err) {
+	            if (err) {
+	              console.error("Cannot apply hot update to " + "App.js" + ": " + err.message);
+	            }
+	          });
+	        }
+	      }module.hot.dispose(function (data) {
+	        data.makeHot = module.makeHot;data.foundReactClasses = foundReactClasses;
+	      });
+	    })();
+	  }
+	}
+
+/***/ },
+/* 235 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "3fa6f6db77f435831d5854b569f83388.png";
+
+/***/ },
+/* 236 */
 /***/ function(module, exports) {
 
 	module.exports = {
 		"portfolioItems": [
 			{
+				"id": "sequencer3",
+				"title": "Sequencer",
+				"subTitle": "Github hoseted sound sequencer game",
+				"description": "A simple set timout sound sequencer using sounds I recorded downtown portland.",
+				"image": "http://patomation.github.io/images/thumbs-assets/4.png",
+				"demoTitle": "Live Demo",
+				"demoLinks": [
+					{
+						"title": "Demo",
+						"link": "http://patomation.github.io/projects/pixel-screen"
+					}
+				]
+			},
+			{
 				"id": "tape-generator",
 				"title": "Tape Generator",
 				"subTitle": "Youtube SoundCloud Integration",
 				"description": "A simple interface that lets the user chose a Soundcloud track with a Youtube background. Integrates both APIs. It uses query strings to store the the track id and youtube id. Click on the cassette tape.",
-				"image": "http://patomation.github.io/0eaa50c33ed1ea23d3b5b85b08a1c4a1.png",
+				"image": "http://patomation.github.io/images/thumbs-assets/3.png",
 				"demoTitle": "Live Demo",
 				"demoLinks": [
 					{
@@ -42562,7 +42784,7 @@
 						"link": "http://corporatebusinesssuccess.com/tape/"
 					},
 					{
-						"title": "PLayer Demo",
+						"title": "Player Demo",
 						"link": "http://corporatebusinesssuccess.com/tape/?trackID=262744979&videoID=VqLrZ36k7Z0"
 					}
 				]
@@ -42572,7 +42794,7 @@
 				"title": "Drum Pads",
 				"subTitle": "React Javascript sound board",
 				"description": "A responsive sound board built using ReactJS. Sounds recorded in downtown Portland.",
-				"image": "http://patomation.github.io/226b6f39b48ac06da83179849d46020c.png",
+				"image": "http://patomation.github.io/images/thumbs-assets/2.png",
 				"demoTitle": "Live Demo",
 				"demoLinks": [
 					{
@@ -42593,7 +42815,7 @@
 				"title": "Responsive Vintage Computer",
 				"subTitle": "Responsive html5",
 				"description": "A responsive computer that becomes full screen when  viewed on mobile. Try resizing your browser when using the demo.",
-				"image": "http://patomation.github.io/47d4613d3a7ed43d5131f664a1aa05b2.png",
+				"image": "http://patomation.github.io/images/thumbs-assets/1.png",
 				"demoTitle": "Live Demo",
 				"demoLinks": [
 					{
