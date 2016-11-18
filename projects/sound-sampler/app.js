@@ -79,34 +79,35 @@
 
 	    var _classesAudioManager2 = _interopRequireDefault(_classesAudioManager);
 
-	    var _classesMidiManager = __webpack_require__(268);
+	    var _classesMidiManager = __webpack_require__(272);
 
 	    var _classesMidiManager2 = _interopRequireDefault(_classesMidiManager);
 
-	    var _classesHotkeyManager = __webpack_require__(269);
+	    var _classesHotkeyManager = __webpack_require__(273);
 
 	    var _classesHotkeyManager2 = _interopRequireDefault(_classesHotkeyManager);
 
 	    //Components
 
-	    var _componentsSoundSampler = __webpack_require__(270);
+	    var _componentsSoundSampler = __webpack_require__(274);
 
 	    var _componentsSoundSampler2 = _interopRequireDefault(_componentsSoundSampler);
 
-	    var _componentsPad = __webpack_require__(271);
+	    var _componentsPad = __webpack_require__(275);
 
 	    var _componentsPad2 = _interopRequireDefault(_componentsPad);
 
-	    var _componentsPads = __webpack_require__(272);
+	    var _componentsPads = __webpack_require__(276);
 
 	    var _componentsPads2 = _interopRequireDefault(_componentsPads);
 
-	    var _componentsWaveForm = __webpack_require__(273);
+	    var _componentsWaveForm = __webpack_require__(277);
 
 	    var _componentsWaveForm2 = _interopRequireDefault(_componentsWaveForm);
 
 	    var audioManager = new _classesAudioManager2['default']();
 	    var hotkeyManager = new _classesHotkeyManager2['default']();
+	    var midiManager = new _classesMidiManager2['default']();
 
 	    var App = _react2['default'].createClass({
 	      displayName: 'App',
@@ -118,66 +119,103 @@
 	      },
 
 	      componentDidMount: function componentDidMount() {
-	        audioManager.makeWavesurfer();
+	        audioManager.init();
 	        hotkeyManager.onHotkeyKeyPress((function (index) {
-	          audioManager.play(index);
+	          audioManager.onPlay(index);
 	          this.updateState();
 	        }).bind(this));
 	        this.updateState();
+	        midiManager.test();
+	        midiManager.onMidiKeyPress((function (index) {
+	          audioManager.onPlay(index);
+	          this.updateState();
+	        }).bind(this));
 	      },
 
-	      clear: function functionName(index) {
-	        audioManager.clear(index);
+	      onClearClick: function functionName(index) {
+	        audioManager.onClearClick(index);
 	        this.updateState();
 	      },
 
-	      clearLocalStorage: function clearLocalStorage() {
-	        audioManager.clearLocalStorage();
+	      onClearLocalStorageClick: function onClearLocalStorageClick() {
+	        audioManager.onClearLocalStorageClick();
 	      },
 
 	      updateState: function updateState() {
+	        console.log('audioManager.getActiveIndex()');
+	        console.log(audioManager.getActiveIndex());
 	        this.setState({
 	          names: audioManager.getNames(),
 	          active: audioManager.getActive(),
 	          enabled: audioManager.getEnabled(),
-	          selected: audioManager.getSelected()
+	          selected: audioManager.getSelected(),
+	          activeIndex: audioManager.getActiveIndex()
 	        });
 	      },
 
-	      play: function play(index) {
-	        audioManager.play(index);
+	      onPlay: function onPlay(index) {
+	        audioManager.onPlay(index);
 	        this.updateState();
 	      },
 
-	      record: function record(index) {
-	        audioManager.record(index);
+	      onRecordClick: function onRecordClick(index) {
+	        audioManager.onRecordClick(index);
 	        this.updateState();
 	      },
 
-	      stopRecording: function stopRecording(index) {
-	        audioManager.stopRecording(index);
+	      setDragItem: function setDragItem(index) {
+	        audioManager.setDragFromIndex(index);
+	      },
+
+	      setDropItem: function setDropItem(index, event) {
+	        audioManager.setDropToIndex(index, event);
 	        this.updateState();
 	      },
 
-	      download: function download() {
-	        audioManager.download();
+	      onStopRecordingClick: function onStopRecordingClick(index) {
+	        audioManager.onStopRecordingClick(index);
+	        this.updateState();
 	      },
 
-	      trim: function trim() {
-	        audioManager.trim();
+	      onDownloadClick: function onDownloadClick() {
+	        audioManager.onDownloadClick();
+	      },
+
+	      onTrimClick: function onTrimClick() {
+	        audioManager.onTrimClick();
+	      },
+
+	      getWaveforms: function getWaveforms(numberOfInstances) {
+	        var waveforms = new Array();
+	        for (var count = 0; count < numberOfInstances; count++) {
+	          waveforms.push(_react2['default'].createElement('div', { style: {
+	              // opacity: this.state.activeIndex === 0 ? '1' : '0',
+	              position: this.state.activeIndex === count ? 'relative' : 'absolute',
+	              top: '0',
+	              left: this.state.activeIndex === count ? '0' : '-100%',
+	              width: '100%'
+	            },
+	            id: "waveform" + count,
+	            key: "waveform" + count }));
+	        }
+	        return waveforms;
 	      },
 
 	      render: function render() {
-	        return _react2['default'].createElement('div', { className: 'app' }, _react2['default'].createElement(_componentsSoundSampler2['default'], null, _react2['default'].createElement('nav', { className: 'toolbar' }, _react2['default'].createElement('button', { className: 'download', onClick: this.download }, 'download'), _react2['default'].createElement('button', null, ' + '), _react2['default'].createElement('button', null, ' - '), _react2['default'].createElement('button', { className: 'trim', onClick: this.trim }, 'trim')), _react2['default'].createElement('div', { id: 'waveform' }), _react2['default'].createElement(_componentsWaveForm2['default'], null), _react2['default'].createElement(_componentsPads2['default'], {
-	          clear: this.clear,
+	        console.log('this.state.activeIndex');
+	        console.log(this.state.activeIndex);
+	        return _react2['default'].createElement('div', { className: 'app' }, _react2['default'].createElement(_componentsSoundSampler2['default'], null, _react2['default'].createElement('nav', { className: 'toolbar' }, _react2['default'].createElement('button', { className: 'download', onClick: this.onDownloadClick }, 'download'), _react2['default'].createElement('button', null, ' + '), _react2['default'].createElement('button', null, ' - '), _react2['default'].createElement('button', { className: 'trim', onClick: this.onTrimClick }, 'trim')), this.getWaveforms(16), _react2['default'].createElement(_componentsWaveForm2['default'], null), _react2['default'].createElement(_componentsPads2['default'], {
+	          clear: this.onClearClick,
 	          getName: this.getName,
 	          enabled: this.state.enabled,
 	          active: this.state.active,
 	          selected: this.state.selected,
 	          names: this.state.names,
-	          play: this.play,
-	          record: this.record,
-	          stopRecording: this.stopRecording }, _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null))), _react2['default'].createElement('button', { onClick: this.clearLocalStorage }, 'Clear Local Storage'));
+	          play: this.onPlay,
+	          record: this.onRecordClick,
+	          stopRecording: this.onStopRecordingClick,
+	          setDragItem: this.setDragItem,
+	          setDropItem: this.setDropItem }, _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null), _react2['default'].createElement(_componentsPad2['default'], null))), _react2['default'].createElement('button', { onClick: this.onClearLocalStorageClick }, 'Clear Local Storage'));
 	      }
 	    });
 
@@ -20218,155 +20256,136 @@
 
 	    var _recorderManager2 = _interopRequireDefault(_recorderManager);
 
-	    var _node_modulesJszipLibIndex = __webpack_require__(166);
+	    //Modules
 
-	    var _node_modulesJszipLibIndex2 = _interopRequireDefault(_node_modulesJszipLibIndex);
+	    var _modulesExportWAV = __webpack_require__(166);
 
-	    var _node_modulesJszipUtilsLibIndex = __webpack_require__(263);
+	    var _modulesExportWAV2 = _interopRequireDefault(_modulesExportWAV);
 
-	    var _node_modulesJszipUtilsLibIndex2 = _interopRequireDefault(_node_modulesJszipUtilsLibIndex);
+	    var _modulesDataURItoBlob = __webpack_require__(167);
 
-	    var _node_modulesFileSaverFileSaver = __webpack_require__(264);
+	    var _modulesDataURItoBlob2 = _interopRequireDefault(_modulesDataURItoBlob);
 
-	    var _node_modulesFileSaverFileSaver2 = _interopRequireDefault(_node_modulesFileSaverFileSaver);
+	    var _modulesDownloadBlobs = __webpack_require__(168);
 
-	    // var encoder = require('encode-wav');
-	    // import encoder from '../../node_modules/encode-wav/index';
-	    // import * as encoder from 'encode-wav';
-	    // import encodeWav from '../lib/encode-wav/index'
+	    var _modulesDownloadBlobs2 = _interopRequireDefault(_modulesDownloadBlobs);
 
-	    var _exportWAV = __webpack_require__(267);
+	    var _modulesReadAsDataURL = __webpack_require__(270);
 
-	    var _exportWAV2 = _interopRequireDefault(_exportWAV);
+	    var _modulesReadAsDataURL2 = _interopRequireDefault(_modulesReadAsDataURL);
+
+	    var _modulesGetWaveSurferSegment = __webpack_require__(271);
+
+	    var _modulesGetWaveSurferSegment2 = _interopRequireDefault(_modulesGetWaveSurferSegment);
 
 	    var AudioManager = (function () {
 	      function AudioManager() {
 	        _classCallCheck(this, AudioManager);
 
-	        this.activeIndex = 0;
+	        this.activeIndex = null;
 	        this.audioBlobs = new Array(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-	        //Insert local storage blobds
+	        //Insert local storage blobs
 	        this.audioBlobs = this.audioBlobs.map((function (audioObject, index) {
-	          if (this.localStorageGetItem(index) === null) {
+	          if (localStorage.getItem('dataurl_' + index) === null) {
 	            return null;
 	          } else {
-	            return this.dataURItoBlob(this.localStorageGetItem(index));
+	            return (0, _modulesDataURItoBlob2['default'])(localStorage.getItem('dataurl_' + index));
 	          }
 	        }).bind(this));
 
-	        this.audioStart = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-	        this.audioEnd = new Array(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+	        //Set Region starts
+	        if (localStorage.getItem('audioStart') === null) {
+	          this.audioStart = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+	        } else {
+	          this.audioStart = JSON.parse(localStorage.getItem('audioStart'));
+	        }
+
+	        //Set Region Ends
+	        if (localStorage.getItem('audioEnd') === null) {
+	          this.audioEnd = new Array(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+	        } else {
+	          this.audioEnd = JSON.parse(localStorage.getItem('audioEnd'));
+	        }
+
+	        this.dragFromIndex = null;
+	        this.dropToIndex = null;
 	        this.names = new Array('name', 'name', 'name', 'name', 'name', 'name', 'name', 'name', 'name', 'name', 'name', 'name', 'name', 'name', 'name', 'name');
-	        this.playPosition = null;
-	        this.wavesurfer = null;
+	        this.playPositions = new Array(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 	        this.recordingManager = null;
 	        this.recordingManager = new _recorderManager2['default']();
 	        this.recordingManager.init();
+	        this.wavesurfer = null;
+	        this.wavesurfers = new Array();
 	      }
 
 	      _createClass(AudioManager, [{
-	        key: 'arrayBufferToBase64',
-	        value: function arrayBufferToBase64(buffer) {
-	          var binary = '';
-	          var bytes = new Uint8Array(buffer);
-	          var len = bytes.byteLength;
-	          for (var i = 0; i < len; i++) {
-	            binary += String.fromCharCode(bytes[i]);
-	          }
-	          return window.btoa(binary);
-	        }
-	      }, {
-	        key: 'clear',
-	        value: function clear(index) {
-	          //Clears object
-	          this.audioBlobs[index] = null;
-	          // Update local storeage
-	          this.locaStorageRemoveItem(index);
-	          //clear old regions
-	          this.wavesurfer.clearRegions();
-	          //clears waveform
-	          this.wavesurfer.empty();
-	        }
-	      }, {
-	        key: 'clearLocalStorage',
-	        value: function clearLocalStorage() {
-	          localStorage.clear();
-	        }
-	      }, {
-	        key: 'dataURItoBlob',
-	        value: function dataURItoBlob(dataURI) {
-	          // convert base64 to raw binary data held in a string
-	          // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
-	          var byteString = atob(dataURI.split(',')[1]);
-
-	          // separate out the mime component
-	          var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-
-	          // write the bytes of the string to an ArrayBuffer
-	          var ab = new ArrayBuffer(byteString.length);
-	          var ia = new Uint8Array(ab);
-	          for (var i = 0; i < byteString.length; i++) {
-	            ia[i] = byteString.charCodeAt(i);
-	          }
-
-	          // write the ArrayBuffer to a blob, and you're done
-	          var blob = new Blob([ab], { type: mimeString });
-	          return blob;
-	        }
-	      }, {
-	        key: 'download',
-	        value: function download() {
-	          var zip = new _node_modulesJszipLibIndex2['default']();
-	          var count = 0;
-	          var zipFilename = "zipFilename.zip";
-	          var blob = this.audioBlobs[0];
-
-	          //Create urls
-	          var downloadItems = new Array();
-
-	          this.audioBlobs.forEach(function (blob, index) {
+	        key: 'init',
+	        value: function init() {
+	          // Create all the wave surfer instances
+	          this.wavesurfers = this.createWavesurferInstances(16);
+	          // Load what can be loaded...
+	          this.audioBlobs.forEach((function (blob, index) {
 	            if (blob !== null) {
-	              downloadItems.push({
-	                url: URL.createObjectURL(blob),
-	                name: "sample_" + index + ".wav"
-	              });
+	              this.load(this.wavesurfers[index], blob).then((function () {
+	                this.handleRegion(this.wavesurfers[index], index);
+	              }).bind(this));
 	            }
-	          });
+	          }).bind(this));
+	        }
 
-	          downloadItems.forEach(function (downloadItem) {
-	            // loading a file and add it in a zip file
-	            _node_modulesJszipUtilsLibIndex2['default'].getBinaryContent(downloadItem.url, function (err, data) {
-	              var filename = downloadItem.name;
-	              // console.log(filename);
-	              if (err) {
-	                throw err; // or handle the error
-	              }
-	              //  console.log(data);
-	              zip.file(filename, data, { binary: true });
-
-	              count++;
-	              if (count == downloadItems.length) {
-	                zip.generateAsync({ type: "blob" }).then(function (content) {
-	                  // console.log(content);
-	                  _node_modulesFileSaverFileSaver2['default'].saveAs(content, zipFilename);
-	                });
-	              }
+	        // Overwrites destination blob and stuff with source index blob yada yada
+	      }, {
+	        key: 'copyPad',
+	        value: function copyPad(sourceIndex, destinationIndex) {
+	          // Overwrites region start time
+	          this.audioStart[destinationIndex] = this.audioStart[sourceIndex];
+	          // Overwrites region end time
+	          this.audioEnd[destinationIndex] = this.audioEnd[sourceIndex];
+	          //Overwrites Blob
+	          this.store(destinationIndex, this.audioBlobs[sourceIndex]);
+	        }
+	      }, {
+	        key: 'createWavesurferInstances',
+	        value: function createWavesurferInstances(numberOfInstances) {
+	          var wavesurfers = new Array();
+	          for (var count = 0; count < numberOfInstances; count++) {
+	            var wavesurfer = _libWavesurferWavesurfer2['default'].create({
+	              container: '#waveform' + count,
+	              waveColor: '#43d449',
+	              progressColor: '#2353a0'
 	            });
-	          });
+	            // debugger;
+	            // console.log('wavesurfer.backend.ac', wavesurfer.backend.ac);
+	            // var filter = wavesurfer.backend.ac.createBiquadFilter();
+	            // var filter = wavesurfer.backend.ac.createDelay();
+	            // var filter = wavesurfer.backend.ac.createAnalyser();
+	            // var filter = wavesurfer.backend.ac.createDynamicsCompressor();
+	            // var filter = wavesurfer.backend.ac.createGain();
+	            // var filter = wavesurfer.backend.ac.createWaveShaper();
+	            // wavesurfer.backend.setFilter(filter);
+	            wavesurfers.push(wavesurfer);
+	            this.onRegionUpdate(wavesurfer, count);
+	            this.onRegionOut(wavesurfer, count);
+	            this.onAudioprocess(wavesurfer, count);
+	          }
+	          return wavesurfers;
 	        }
 	      }, {
 	        key: 'getNames',
 	        value: function getNames() {
 	          return this.names;
 	        }
-
-	        //TODO
 	      }, {
 	        key: 'getActive',
 	        value: function getActive() {
 	          return this.audioBlobs.map((function (audioObject, index) {
 	            return false;
 	          }).bind(this));
+	        }
+	      }, {
+	        key: 'getActiveIndex',
+	        value: function getActiveIndex() {
+	          return this.activeIndex;
 	        }
 	      }, {
 	        key: 'getEnabled',
@@ -20391,72 +20410,85 @@
 	          }).bind(this));
 	        }
 	      }, {
+	        key: 'handleRegion',
+	        value: function handleRegion(wavesurfer, index) {
+	          //Save Duration as region end position once only
+	          if (this.audioEnd[index] === null) {
+	            this.audioEnd[index] = wavesurfer.backend.getDuration() * .99;
+	          }
+	          //clear old regions
+	          wavesurfer.clearRegions();
+	          //Make new region
+	          wavesurfer.addRegion({
+	            id: 1,
+	            start: this.audioStart[index],
+	            end: this.audioEnd[index],
+	            drag: true,
+	            color: 'rgba(255, 255, 255, 0.1)'
+	          });
+	          //Store regions
+	          this.storeRegions();
+	        }
+	      }, {
 	        key: 'load',
-	        value: function load(blob) {
+	        value: function load(wavesurfer, blob) {
 	          //load blob into wave surfer
-	          this.wavesurfer.loadBlob(blob);
+	          wavesurfer.loadBlob(blob);
 
 	          //Returns promise when wavesurfer ready
 	          return new Promise((function (resolve, reject) {
 	            //get rid of old event
-	            this.wavesurfer.un('ready');
+	            wavesurfer.un('ready');
 	            //Make new ready event
-	            this.wavesurfer.on('ready', function () {
+	            wavesurfer.on('ready', function () {
 	              resolve();
 	            });
 	          }).bind(this));
 	        }
-
-	        //Get Item From Local Storage
-	      }, {
-	        key: 'localStorageGetItem',
-	        value: function localStorageGetItem(index) {
-	          return localStorage.getItem('dataurl_' + index);
-	        }
-
-	        //Put blob in local storage
-	      }, {
-	        key: 'localStorageSetItem',
-	        value: function localStorageSetItem(index, blob) {
-	          this.readAsDataURL(blob).then(function (dataurl) {
-	            localStorage.setItem('dataurl_' + index, dataurl);
-	          });
-	        }
-	      }, {
-	        key: 'locaStorageRemoveItem',
-	        value: function locaStorageRemoveItem(index) {
-	          localStorage.removeItem('dataurl_' + index);
-	        }
-	      }, {
-	        key: 'makeWavesurfer',
-	        value: function makeWavesurfer() {
-	          this.wavesurfer = _libWavesurferWavesurfer2['default'].create({
-	            container: '#waveform',
-	            waveColor: '#43d449',
-	            progressColor: '#2353a0'
-	          });
-	          //Add Events
-	          this.onAudioprocess();
-	          // this.onReady();
-	          this.onRegionUpdate();
-	          this.onRegionOut();
-	        }
 	      }, {
 	        key: 'onAudioprocess',
-	        value: function onAudioprocess() {
-	          this.wavesurfer.on('audioprocess', (function (playPosition) {
-	            this.playPosition = playPosition;
+	        value: function onAudioprocess(wavesurfer, index) {
+	          wavesurfer.on('audioprocess', (function (playPosition) {
+	            this.playPositions[index] = playPosition;
 	          }).bind(this));
+	        }
+	      }, {
+	        key: 'onClearClick',
+	        value: function onClearClick(index) {
+	          //Clears object
+	          this.audioBlobs[index] = null;
+	          // Update local storeage
+	          localStorage.removeItem('dataurl_' + index);
+	          //clear old regions
+	          this.wavesurfers[index].clearRegions();
+	          //clears waveform
+	          this.wavesurfers[index].empty();
+	          //Clear start
+	          this.audioStart[index] = 0;
+	          // Clear End
+	          this.audioEnd[index] = null;
+	          //Store regions
+	          this.storeRegions();
+	        }
+	      }, {
+	        key: 'onClearLocalStorageClick',
+	        value: function onClearLocalStorageClick() {
+	          localStorage.clear();
+	        }
+	      }, {
+	        key: 'onDownloadClick',
+	        value: function onDownloadClick() {
+	          (0, _modulesDownloadBlobs2['default'])(this.audioBlobs);
 	        }
 
 	        //Stop Playing when out of region
 	      }, {
 	        key: 'onRegionOut',
-	        value: function onRegionOut() {
-	          this.wavesurfer.on('region-out', (function () {
+	        value: function onRegionOut(wavesurfer, index) {
+	          wavesurfer.on('region-out', (function () {
 	            //Make sure the player isnt stopped at the beginning of playing
-	            if (this.playPosition > this.audioStart[this.activeIndex]) {
-	              this.wavesurfer.stop();
+	            if (this.playPositions[index] > this.audioStart[index]) {
+	              wavesurfer.stop();
 	            }
 	          }).bind(this));
 	        }
@@ -20464,106 +20496,85 @@
 	        //When region is resized save in audio instance for next time
 	      }, {
 	        key: 'onRegionUpdate',
-	        value: function onRegionUpdate() {
-	          this.wavesurfer.on('region-update-end', (function (region) {
-	            this.audioStart[this.activeIndex] = region.start;
-	            this.audioEnd[this.activeIndex] = region.end;
+	        value: function onRegionUpdate(wavesurfer, index) {
+	          wavesurfer.on('region-update-end', (function (region) {
+	            this.audioStart[index] = region.start;
+	            this.audioEnd[index] = region.end;
+	            this.storeRegions();
 	          }).bind(this));
 	        }
 	      }, {
-	        key: 'play',
-	        value: function play(index) {
-	          //Stop Wavesurfer if playing
-	          if (this.wavesurfer.isPlaying()) {
-	            this.wavesurfer.stop();
-	          }
-	          //Make sure audio Object exists
+	        key: 'onPlay',
+	        value: function onPlay(index) {
+	          //plays is audio blob is there
 	          if (this.audioBlobs[index] !== null) {
-	            //Play file if already loaded
-	            if (this.activeIndex === index) {
-	              //reset region
-	              this.setRegion();
-	              // this.wavesurfer.stop();
-	              this.wavesurfer.play(this.audioStart[index]);
-	              //Load audio file only if it hasn't been loaded
-	            } else {
-	                //Load Blob
-	                this.load(this.audioBlobs[index]).then((function () {
-	                  //Set Audio End if not defined
-	                  if (!this.audioEnd[index]) {
-	                    this.setAudioEnd();
-	                  }
-	                  //reset region
-	                  this.setRegion();
-	                  //play when ready
-	                  this.wavesurfer.play(this.audioStart[this.activeIndex]);
-	                }).bind(this));
-	              }
+	            this.wavesurfers[index].play(this.audioStart[index]);
 	          }
-	          // Set active index
 	          this.activeIndex = index;
 	        }
 	      }, {
-	        key: 'readAsDataURL',
-	        value: function readAsDataURL(blob) {
-	          return new Promise(function (resolve, reject) {
-	            var reader = new FileReader();
-	            reader.addEventListener("load", function () {
-	              resolve(reader.result);
-	            }, false);
-	            reader.readAsDataURL(blob);
-	          });
-	        }
-	      }, {
-	        key: 'record',
-	        value: function record(index) {
+	        key: 'onRecordClick',
+	        value: function onRecordClick(index) {
 	          this.activeIndex = index;
 	          this.recordingManager.start();
 	        }
 	      }, {
-	        key: 'setAudioEnd',
-	        value: function setAudioEnd() {
-	          //Save Duration as region end position once only
-	          this.audioEnd[this.activeIndex] = this.wavesurfer.backend.getDuration() * .99;
-	        }
-	      }, {
-	        key: 'setAudioStart',
-	        value: function setAudioStart() {
-	          this.audioStart[this.activeIndex] = 0;
-	        }
-	      }, {
-	        key: 'setFilePath',
-	        value: function setFilePath(index, path) {
-	          this.audioPaths[index] = path;
-	        }
-	      }, {
-	        key: 'setRegion',
-	        value: function setRegion() {
-	          //clear old regions
-	          this.wavesurfer.clearRegions();
-	          //Make new region
-	          this.wavesurfer.addRegion({
-	            id: 1,
-	            start: this.audioStart[this.activeIndex],
-	            end: this.audioEnd[this.activeIndex],
-	            drag: true,
-	            color: 'rgba(255, 255, 255, 0.1)'
-	          });
-	        }
-	      }, {
-	        key: 'stopRecording',
-	        value: function stopRecording(index) {
+	        key: 'onStopRecordingClick',
+	        value: function onStopRecordingClick(index) {
 	          //Stop recording
 	          this.recordingManager.stop();
 	          //Store Blob For Next Time
 	          this.store(index, this.recordingManager.getBlob());
 	          //Load new waveform
-	          this.load(this.recordingManager.getBlob()).then((function () {
-	            //Set Audio End
-	            this.setAudioEnd();
-	            //set Region
-	            this.setRegion();
+	          this.load(this.wavesurfers[index], this.recordingManager.getBlob()).then((function () {
+	            this.handleRegion(this.wavesurfers[index], index);
 	          }).bind(this));
+	        }
+	      }, {
+	        key: 'onTrimClick',
+	        value: function onTrimClick() {
+	          //Get Segment
+	          var newSegment = (0, _modulesGetWaveSurferSegment2['default'])(this.wavesurfers[this.activeIndex], this.audioStart[this.activeIndex], this.audioEnd[this.activeIndex]);
+	          //Make a blob out of audobuffer/segment
+	          var blob = (0, _modulesExportWAV2['default'])(newSegment.getChannelData(0), newSegment.getChannelData(1), newSegment.sampleRate);
+	          //Save for later
+	          this.store(this.activeIndex, blob);
+	          //Load Waveform
+	          this.load(this.wavesurfers[this.activeIndex], blob).then((function () {
+	            //Set start and stop
+	            this.audioStart[this.activeIndex] = 0;
+	            this.audioEnd[this.activeIndex] = null;
+	            //Set Region
+	            this.handleRegion(this.wavesurfers[this.activeIndex], this.activeIndex);
+	          }).bind(this));
+	        }
+	      }, {
+	        key: 'setDragFromIndex',
+	        value: function setDragFromIndex(index) {
+	          this.dragFromIndex = index;
+	        }
+	      }, {
+	        key: 'setDropToIndex',
+	        value: function setDropToIndex(index, event) {
+	          this.dropToIndex = index;
+	          // Dragged n Dropped File ???
+	          var file = event.dataTransfer.files[0];
+	          //If a file was dragged into the pad. Load file...
+	          if (file !== undefined) {
+	            var blob = new Blob([file], { type: 'audio/wav' });
+	            //Save for later
+	            this.store(index, blob);
+	            //Load Waveform
+	            this.load(this.wavesurfers[index], blob).then((function () {
+	              this.handleRegion(this.wavesurfers[index], index);
+	            }).bind(this));
+	            //File was dragged but instead it was a pad that was dragged. Copy pad then.
+	          } else {
+	              this.copyPad(this.dragFromIndex, this.dropToIndex);
+	              this.load(this.wavesurfers[index], this.audioBlobs[index]).then((function () {
+	                this.handleRegion(this.wavesurfers[index], index);
+	              }).bind(this));
+	            }
 	        }
 	      }, {
 	        key: 'store',
@@ -20571,52 +20582,21 @@
 	          //Store Blob in memory
 	          this.audioBlobs[index] = blob;
 	          //Store Blob in local storage
-	          this.localStorageSetItem(index, blob);
-	        }
-
-	        //Depreciated
-	      }, {
-	        key: 'updateLocalStorage',
-	        value: function updateLocalStorage() {
-	          console.log('updateLocalStorage depreciated please update to store()');
-	        }
-	      }, {
-	        key: 'trim',
-	        value: function trim() {
-	          var start = this.audioStart[this.activeIndex]; //sec
-	          var end = this.audioEnd[this.activeIndex]; //sec
-	          var segmentDuration = end - start;
-	          var originalBuffer = this.wavesurfer.backend.buffer;
-	          var newSegment = this.wavesurfer.backend.ac.createBuffer(originalBuffer.numberOfChannels, segmentDuration * originalBuffer.sampleRate, originalBuffer.sampleRate);
-	          for (var chanel = 0; chanel < originalBuffer.numberOfChannels; chanel++) {
-	            var originalChanData = originalBuffer.getChannelData(chanel);
-	            var segmentChanData = newSegment.getChannelData(chanel);
-	            var k = 0;
-	            for (var j = 0, len = originalChanData.length; j < len; j++) {
-	              // ignore the part of the chanel that is before the region
-	              if (j > originalBuffer.sampleRate * start) {
-	                //Example 1sec *44100 sample rate == 44100 samples per sec. Got it?
-	                segmentChanData[k] = originalChanData[j];
-	                k += 1;
-	              }
+	          // If blob is null that means that a blank pad is being copied into an existing one. Lets delete the item.
+	          if (blob == null) {
+	            localStorage.removeItem('dataurl_' + index);
+	            // Otherwise load the blob into local storage if it exists.
+	          } else {
+	              (0, _modulesReadAsDataURL2['default'])(blob).then(function (dataurl) {
+	                localStorage.setItem('dataurl_' + index, dataurl);
+	              });
 	            }
-	          }
-
-	          var blob = (0, _exportWAV2['default'])(newSegment.getChannelData(0), newSegment.getChannelData(1), newSegment.sampleRate);
-
-	          //Save for later
-	          this.store(this.activeIndex, blob);
-
-	          //Load Waveform
-	          this.load(blob).then((function () {
-	            //Set Audio Start and End
-	            this.setAudioStart();
-	            this.setAudioEnd();
-	            //Set region
-	            this.setRegion();
-	            // move the damn playhead back
-	            this.wavesurfer.seekTo(0);
-	          }).bind(this));
+	        }
+	      }, {
+	        key: 'storeRegions',
+	        value: function storeRegions() {
+	          localStorage.setItem('audioStart', JSON.stringify(this.audioStart));
+	          localStorage.setItem('audioEnd', JSON.stringify(this.audioEnd));
 	        }
 	      }]);
 
@@ -23606,6 +23586,298 @@
 /* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* REACT HOT LOADER */"use strict";
+
+	if (false) {
+	  (function () {
+	    var ReactHotAPI = require("/x/sound-sampler/node_modules/react-hot-api/modules/index.js"),
+	        React = require("react");module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(React);
+	  })();
+	}try {
+	  (function () {
+
+	    'use strict';
+
+	    Object.defineProperty(exports, '__esModule', {
+	      value: true
+	    });
+
+	    var mergeBuffers = function mergeBuffers(recBuffers, recLength) {
+	      var result = new Float32Array(recLength);
+	      var offset = 0;
+
+	      for (var i = 0; i < recBuffers.length; i++) {
+	        result.set(recBuffers[i], offset);
+	        offset += recBuffers[i].length;
+	      }
+
+	      return result;
+	    };
+
+	    var interleave = function interleave(leftBuffer, rightBuffer) {
+	      var length = leftBuffer.length + rightBuffer.length;
+	      var result = new Float32Array(length);
+
+	      var idx = 0,
+	          bufIdx = 0;
+
+	      while (idx < length) {
+	        // idx++
+	        result[idx++] = leftBuffer[bufIdx];
+	        result[idx++] = rightBuffer[bufIdx];
+	        bufIdx++;
+	      }
+
+	      return result;
+	    };
+
+	    var writeString = function writeString(view, offset, string) {
+	      for (var i = 0; i < string.length; i++) {
+	        view.setUint8(offset + i, string.charCodeAt(i));
+	      }
+	    };
+
+	    var encodeWAV = function encodeWAV(samples, sampleRate) {
+	      var buffer = new ArrayBuffer(44 + samples.length * 2);
+	      var view = new DataView(buffer);
+
+	      /* RIFF identifier */
+	      writeString(view, 0, 'RIFF');
+	      /* RIFF chunk length */
+	      view.setUint32(4, 36 + samples.length * 2, true);
+	      /* RIFF type */
+	      writeString(view, 8, 'WAVE');
+	      /* format chunk identifier */
+	      writeString(view, 12, 'fmt ');
+	      /* format chunk length */
+	      view.setUint32(16, 16, true);
+	      /* sample format (raw) */
+	      view.setUint16(20, 1, true);
+	      /* channel count */
+	      view.setUint16(22, 2, true);
+	      /* sample rate */
+	      view.setUint32(24, sampleRate, true);
+	      /* byte rate (sample rate * block align) */
+	      view.setUint32(28, sampleRate * 4, true);
+	      /* block align (channel count * bytes per sample) */
+	      view.setUint16(32, 4, true);
+	      /* bits per sample */
+	      view.setUint16(34, 16, true);
+	      /* data chunk identifier */
+	      writeString(view, 36, 'data');
+	      /* data chunk length */
+	      view.setUint32(40, samples.length * 2, true);
+
+	      floatTo16BitPCM(view, 44, samples);
+
+	      return view;
+	    };
+
+	    var floatTo16BitPCM = function floatTo16BitPCM(output, offset, input) {
+	      for (var i = 0; i < input.length; i++, offset += 2) {
+	        var s = Math.max(-1, Math.min(1, input[i]));
+	        output.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+	      }
+	    };
+
+	    var exportWAV = function exportWAV(leftBuffer, rightBuffer, sampleRate) {
+	      var interleaved = interleave(leftBuffer, rightBuffer);
+	      var dataview = encodeWAV(interleaved, sampleRate);
+	      var audioBlob = new Blob([dataview], { type: "audio/wav" });
+
+	      return audioBlob;
+	    };
+
+	    exports['default'] = exportWAV;
+	    module.exports = exports['default'];
+
+	    /* REACT HOT LOADER */
+	  }).call(undefined);
+	} finally {
+	  if (false) {
+	    (function () {
+	      var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false;if (module.exports && module.makeHot) {
+	        var makeExportsHot = require("/x/sound-sampler/node_modules/react-hot-loader/makeExportsHot.js");if (makeExportsHot(module, require("react"))) {
+	          foundReactClasses = true;
+	        }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
+	          module.hot.accept(function (err) {
+	            if (err) {
+	              console.error("Cannot apply hot update to " + "exportWAV.js" + ": " + err.message);
+	            }
+	          });
+	        }
+	      }module.hot.dispose(function (data) {
+	        data.makeHot = module.makeHot;data.foundReactClasses = foundReactClasses;
+	      });
+	    })();
+	  }
+	}
+
+/***/ },
+/* 167 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */"use strict";
+
+	if (false) {
+	  (function () {
+	    var ReactHotAPI = require("/x/sound-sampler/node_modules/react-hot-api/modules/index.js"),
+	        React = require("react");module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(React);
+	  })();
+	}try {
+	  (function () {
+
+	    'use strict';
+
+	    Object.defineProperty(exports, '__esModule', {
+	      value: true
+	    });
+	    var dataURItoBlob = function dataURItoBlob(dataURI) {
+	      // convert base64 to raw binary data held in a string
+	      // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
+	      var byteString = atob(dataURI.split(',')[1]);
+
+	      // separate out the mime component
+	      var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+	      // write the bytes of the string to an ArrayBuffer
+	      var ab = new ArrayBuffer(byteString.length);
+	      var ia = new Uint8Array(ab);
+	      for (var i = 0; i < byteString.length; i++) {
+	        ia[i] = byteString.charCodeAt(i);
+	      }
+
+	      // write the ArrayBuffer to a blob, and you're done
+	      var blob = new Blob([ab], { type: mimeString });
+	      return blob;
+	    };
+
+	    exports['default'] = dataURItoBlob;
+	    module.exports = exports['default'];
+
+	    /* REACT HOT LOADER */
+	  }).call(undefined);
+	} finally {
+	  if (false) {
+	    (function () {
+	      var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false;if (module.exports && module.makeHot) {
+	        var makeExportsHot = require("/x/sound-sampler/node_modules/react-hot-loader/makeExportsHot.js");if (makeExportsHot(module, require("react"))) {
+	          foundReactClasses = true;
+	        }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
+	          module.hot.accept(function (err) {
+	            if (err) {
+	              console.error("Cannot apply hot update to " + "dataURItoBlob.js" + ": " + err.message);
+	            }
+	          });
+	        }
+	      }module.hot.dispose(function (data) {
+	        data.makeHot = module.makeHot;data.foundReactClasses = foundReactClasses;
+	      });
+	    })();
+	  }
+	}
+
+/***/ },
+/* 168 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */"use strict";
+
+	if (false) {
+	  (function () {
+	    var ReactHotAPI = require("/x/sound-sampler/node_modules/react-hot-api/modules/index.js"),
+	        React = require("react");module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(React);
+	  })();
+	}try {
+	  (function () {
+
+	    'use strict';
+
+	    Object.defineProperty(exports, '__esModule', {
+	      value: true
+	    });
+
+	    function _interopRequireDefault(obj) {
+	      return obj && obj.__esModule ? obj : { 'default': obj };
+	    }
+
+	    var _node_modulesJszipLibIndex = __webpack_require__(169);
+
+	    var _node_modulesJszipLibIndex2 = _interopRequireDefault(_node_modulesJszipLibIndex);
+
+	    var _node_modulesJszipUtilsLibIndex = __webpack_require__(266);
+
+	    var _node_modulesJszipUtilsLibIndex2 = _interopRequireDefault(_node_modulesJszipUtilsLibIndex);
+
+	    var _node_modulesFileSaverFileSaver = __webpack_require__(267);
+
+	    var _node_modulesFileSaverFileSaver2 = _interopRequireDefault(_node_modulesFileSaverFileSaver);
+
+	    var downloadBlobs = function downloadBlobs(blobs) {
+	      var zip = new _node_modulesJszipLibIndex2['default']();
+	      var count = 0;
+	      var zipFilename = "zipFilename.zip";
+
+	      //Create urls
+	      var downloadItems = new Array();
+
+	      blobs.forEach(function (blob, index) {
+	        if (blob !== null) {
+	          downloadItems.push({
+	            url: URL.createObjectURL(blob),
+	            name: "sample_" + index + ".wav"
+	          });
+	        }
+	      });
+
+	      downloadItems.forEach(function (downloadItem) {
+	        // loading a file and add it in a zip file
+	        _node_modulesJszipUtilsLibIndex2['default'].getBinaryContent(downloadItem.url, function (err, data) {
+	          var filename = downloadItem.name;
+	          if (err) {
+	            throw err; // or handle the error
+	          }
+	          zip.file(filename, data, { binary: true });
+
+	          count++;
+	          if (count == downloadItems.length) {
+	            zip.generateAsync({ type: "blob" }).then(function (content) {
+	              _node_modulesFileSaverFileSaver2['default'].saveAs(content, zipFilename);
+	            });
+	          }
+	        });
+	      });
+	    };
+
+	    exports['default'] = downloadBlobs;
+	    module.exports = exports['default'];
+
+	    /* REACT HOT LOADER */
+	  }).call(undefined);
+	} finally {
+	  if (false) {
+	    (function () {
+	      var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false;if (module.exports && module.makeHot) {
+	        var makeExportsHot = require("/x/sound-sampler/node_modules/react-hot-loader/makeExportsHot.js");if (makeExportsHot(module, require("react"))) {
+	          foundReactClasses = true;
+	        }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
+	          module.hot.accept(function (err) {
+	            if (err) {
+	              console.error("Cannot apply hot update to " + "downloadBlobs.js" + ": " + err.message);
+	            }
+	          });
+	        }
+	      }module.hot.dispose(function (data) {
+	        data.makeHot = module.makeHot;data.foundReactClasses = foundReactClasses;
+	      });
+	    })();
+	  }
+	}
+
+/***/ },
+/* 169 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	/**
@@ -23643,10 +23915,10 @@
 	        return newObj;
 	    };
 	}
-	JSZip.prototype = __webpack_require__(167);
-	JSZip.prototype.loadAsync = __webpack_require__(254);
-	JSZip.support = __webpack_require__(170);
-	JSZip.defaults = __webpack_require__(225);
+	JSZip.prototype = __webpack_require__(170);
+	JSZip.prototype.loadAsync = __webpack_require__(257);
+	JSZip.support = __webpack_require__(173);
+	JSZip.defaults = __webpack_require__(228);
 
 	// TODO find a better way to handle this version,
 	// a require('package.json').version doesn't work with webpack, see #327
@@ -23656,25 +23928,25 @@
 	    return new JSZip().loadAsync(content, options);
 	};
 
-	JSZip.external = __webpack_require__(216);
+	JSZip.external = __webpack_require__(219);
 	module.exports = JSZip;
 
 
 /***/ },
-/* 167 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var utf8 = __webpack_require__(168);
-	var utils = __webpack_require__(169);
-	var GenericWorker = __webpack_require__(219);
-	var StreamHelper = __webpack_require__(220);
-	var defaults = __webpack_require__(225);
-	var CompressedObject = __webpack_require__(226);
-	var ZipObject = __webpack_require__(231);
-	var generate = __webpack_require__(232);
-	var nodejsUtils = __webpack_require__(194);
-	var NodejsStreamInputAdapter = __webpack_require__(253);
+	var utf8 = __webpack_require__(171);
+	var utils = __webpack_require__(172);
+	var GenericWorker = __webpack_require__(222);
+	var StreamHelper = __webpack_require__(223);
+	var defaults = __webpack_require__(228);
+	var CompressedObject = __webpack_require__(229);
+	var ZipObject = __webpack_require__(234);
+	var generate = __webpack_require__(235);
+	var nodejsUtils = __webpack_require__(197);
+	var NodejsStreamInputAdapter = __webpack_require__(256);
 
 
 	/**
@@ -24056,15 +24328,15 @@
 
 
 /***/ },
-/* 168 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(169);
-	var support = __webpack_require__(170);
-	var nodejsUtils = __webpack_require__(194);
-	var GenericWorker = __webpack_require__(219);
+	var utils = __webpack_require__(172);
+	var support = __webpack_require__(173);
+	var nodejsUtils = __webpack_require__(197);
+	var GenericWorker = __webpack_require__(222);
 
 	/**
 	 * The following functions come from pako, from pako/lib/utils/strings
@@ -24337,16 +24609,16 @@
 
 
 /***/ },
-/* 169 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var support = __webpack_require__(170);
-	var base64 = __webpack_require__(193);
-	var nodejsUtils = __webpack_require__(194);
-	var setImmediate = __webpack_require__(195);
-	var external = __webpack_require__(216);
+	var support = __webpack_require__(173);
+	var base64 = __webpack_require__(196);
+	var nodejsUtils = __webpack_require__(197);
+	var setImmediate = __webpack_require__(198);
+	var external = __webpack_require__(219);
 
 
 	/**
@@ -24821,7 +25093,7 @@
 
 
 /***/ },
-/* 170 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';
@@ -24858,15 +25130,15 @@
 	}
 
 	try {
-	    exports.nodestream = !!__webpack_require__(175).Readable;
+	    exports.nodestream = !!__webpack_require__(178).Readable;
 	} catch(e) {
 	    exports.nodestream = false;
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(171).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(174).Buffer))
 
 /***/ },
-/* 171 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer, global) {/*!
@@ -24879,9 +25151,9 @@
 
 	'use strict'
 
-	var base64 = __webpack_require__(172)
-	var ieee754 = __webpack_require__(173)
-	var isArray = __webpack_require__(174)
+	var base64 = __webpack_require__(175)
+	var ieee754 = __webpack_require__(176)
+	var isArray = __webpack_require__(177)
 
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -26418,10 +26690,10 @@
 	  return i
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(171).Buffer, (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(174).Buffer, (function() { return this; }())))
 
 /***/ },
-/* 172 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -26551,7 +26823,7 @@
 
 
 /***/ },
-/* 173 */
+/* 176 */
 /***/ function(module, exports) {
 
 	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -26641,7 +26913,7 @@
 
 
 /***/ },
-/* 174 */
+/* 177 */
 /***/ function(module, exports) {
 
 	var toString = {}.toString;
@@ -26652,7 +26924,7 @@
 
 
 /***/ },
-/* 175 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -26663,11 +26935,11 @@
 	 * reduce the final size of the bundle (only one stream implementation, not
 	 * two).
 	 */
-	module.exports = __webpack_require__(176);
+	module.exports = __webpack_require__(179);
 
 
 /***/ },
-/* 176 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -26693,15 +26965,15 @@
 
 	module.exports = Stream;
 
-	var EE = __webpack_require__(177).EventEmitter;
-	var inherits = __webpack_require__(178);
+	var EE = __webpack_require__(180).EventEmitter;
+	var inherits = __webpack_require__(181);
 
 	inherits(Stream, EE);
-	Stream.Readable = __webpack_require__(179);
-	Stream.Writable = __webpack_require__(189);
-	Stream.Duplex = __webpack_require__(190);
-	Stream.Transform = __webpack_require__(191);
-	Stream.PassThrough = __webpack_require__(192);
+	Stream.Readable = __webpack_require__(182);
+	Stream.Writable = __webpack_require__(192);
+	Stream.Duplex = __webpack_require__(193);
+	Stream.Transform = __webpack_require__(194);
+	Stream.PassThrough = __webpack_require__(195);
 
 	// Backwards-compat with node 0.4.x
 	Stream.Stream = Stream;
@@ -26800,7 +27072,7 @@
 
 
 /***/ },
-/* 177 */
+/* 180 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -27108,7 +27380,7 @@
 
 
 /***/ },
-/* 178 */
+/* 181 */
 /***/ function(module, exports) {
 
 	if (typeof Object.create === 'function') {
@@ -27137,24 +27409,24 @@
 
 
 /***/ },
-/* 179 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {exports = module.exports = __webpack_require__(180);
-	exports.Stream = __webpack_require__(176);
+	/* WEBPACK VAR INJECTION */(function(process) {exports = module.exports = __webpack_require__(183);
+	exports.Stream = __webpack_require__(179);
 	exports.Readable = exports;
-	exports.Writable = __webpack_require__(185);
-	exports.Duplex = __webpack_require__(184);
-	exports.Transform = __webpack_require__(187);
-	exports.PassThrough = __webpack_require__(188);
+	exports.Writable = __webpack_require__(188);
+	exports.Duplex = __webpack_require__(187);
+	exports.Transform = __webpack_require__(190);
+	exports.PassThrough = __webpack_require__(191);
 	if (!process.browser && process.env.READABLE_STREAM === 'disable') {
-	  module.exports = __webpack_require__(176);
+	  module.exports = __webpack_require__(179);
 	}
 
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 180 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -27181,17 +27453,17 @@
 	module.exports = Readable;
 
 	/*<replacement>*/
-	var isArray = __webpack_require__(181);
+	var isArray = __webpack_require__(184);
 	/*</replacement>*/
 
 
 	/*<replacement>*/
-	var Buffer = __webpack_require__(171).Buffer;
+	var Buffer = __webpack_require__(174).Buffer;
 	/*</replacement>*/
 
 	Readable.ReadableState = ReadableState;
 
-	var EE = __webpack_require__(177).EventEmitter;
+	var EE = __webpack_require__(180).EventEmitter;
 
 	/*<replacement>*/
 	if (!EE.listenerCount) EE.listenerCount = function(emitter, type) {
@@ -27199,18 +27471,18 @@
 	};
 	/*</replacement>*/
 
-	var Stream = __webpack_require__(176);
+	var Stream = __webpack_require__(179);
 
 	/*<replacement>*/
-	var util = __webpack_require__(182);
-	util.inherits = __webpack_require__(178);
+	var util = __webpack_require__(185);
+	util.inherits = __webpack_require__(181);
 	/*</replacement>*/
 
 	var StringDecoder;
 
 
 	/*<replacement>*/
-	var debug = __webpack_require__(183);
+	var debug = __webpack_require__(186);
 	if (debug && debug.debuglog) {
 	  debug = debug.debuglog('stream');
 	} else {
@@ -27222,7 +27494,7 @@
 	util.inherits(Readable, Stream);
 
 	function ReadableState(options, stream) {
-	  var Duplex = __webpack_require__(184);
+	  var Duplex = __webpack_require__(187);
 
 	  options = options || {};
 
@@ -27283,14 +27555,14 @@
 	  this.encoding = null;
 	  if (options.encoding) {
 	    if (!StringDecoder)
-	      StringDecoder = __webpack_require__(186).StringDecoder;
+	      StringDecoder = __webpack_require__(189).StringDecoder;
 	    this.decoder = new StringDecoder(options.encoding);
 	    this.encoding = options.encoding;
 	  }
 	}
 
 	function Readable(options) {
-	  var Duplex = __webpack_require__(184);
+	  var Duplex = __webpack_require__(187);
 
 	  if (!(this instanceof Readable))
 	    return new Readable(options);
@@ -27393,7 +27665,7 @@
 	// backwards compatibility.
 	Readable.prototype.setEncoding = function(enc) {
 	  if (!StringDecoder)
-	    StringDecoder = __webpack_require__(186).StringDecoder;
+	    StringDecoder = __webpack_require__(189).StringDecoder;
 	  this._readableState.decoder = new StringDecoder(enc);
 	  this._readableState.encoding = enc;
 	  return this;
@@ -28112,7 +28384,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 181 */
+/* 184 */
 /***/ function(module, exports) {
 
 	module.exports = Array.isArray || function (arr) {
@@ -28121,7 +28393,7 @@
 
 
 /***/ },
-/* 182 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {// Copyright Joyent, Inc. and other Node contributors.
@@ -28232,16 +28504,16 @@
 	  return Object.prototype.toString.call(o);
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(171).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(174).Buffer))
 
 /***/ },
-/* 183 */
+/* 186 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 184 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -28282,12 +28554,12 @@
 
 
 	/*<replacement>*/
-	var util = __webpack_require__(182);
-	util.inherits = __webpack_require__(178);
+	var util = __webpack_require__(185);
+	util.inherits = __webpack_require__(181);
 	/*</replacement>*/
 
-	var Readable = __webpack_require__(180);
-	var Writable = __webpack_require__(185);
+	var Readable = __webpack_require__(183);
+	var Writable = __webpack_require__(188);
 
 	util.inherits(Duplex, Readable);
 
@@ -28337,7 +28609,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 185 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -28368,18 +28640,18 @@
 	module.exports = Writable;
 
 	/*<replacement>*/
-	var Buffer = __webpack_require__(171).Buffer;
+	var Buffer = __webpack_require__(174).Buffer;
 	/*</replacement>*/
 
 	Writable.WritableState = WritableState;
 
 
 	/*<replacement>*/
-	var util = __webpack_require__(182);
-	util.inherits = __webpack_require__(178);
+	var util = __webpack_require__(185);
+	util.inherits = __webpack_require__(181);
 	/*</replacement>*/
 
-	var Stream = __webpack_require__(176);
+	var Stream = __webpack_require__(179);
 
 	util.inherits(Writable, Stream);
 
@@ -28390,7 +28662,7 @@
 	}
 
 	function WritableState(options, stream) {
-	  var Duplex = __webpack_require__(184);
+	  var Duplex = __webpack_require__(187);
 
 	  options = options || {};
 
@@ -28478,7 +28750,7 @@
 	}
 
 	function Writable(options) {
-	  var Duplex = __webpack_require__(184);
+	  var Duplex = __webpack_require__(187);
 
 	  // Writable ctor is applied to Duplexes, though they're not
 	  // instanceof Writable, they're instanceof Readable.
@@ -28821,7 +29093,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 186 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -28845,7 +29117,7 @@
 	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 	// USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-	var Buffer = __webpack_require__(171).Buffer;
+	var Buffer = __webpack_require__(174).Buffer;
 
 	var isBufferEncoding = Buffer.isEncoding
 	  || function(encoding) {
@@ -29048,7 +29320,7 @@
 
 
 /***/ },
-/* 187 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -29117,11 +29389,11 @@
 
 	module.exports = Transform;
 
-	var Duplex = __webpack_require__(184);
+	var Duplex = __webpack_require__(187);
 
 	/*<replacement>*/
-	var util = __webpack_require__(182);
-	util.inherits = __webpack_require__(178);
+	var util = __webpack_require__(185);
+	util.inherits = __webpack_require__(181);
 	/*</replacement>*/
 
 	util.inherits(Transform, Duplex);
@@ -29263,7 +29535,7 @@
 
 
 /***/ },
-/* 188 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -29293,11 +29565,11 @@
 
 	module.exports = PassThrough;
 
-	var Transform = __webpack_require__(187);
+	var Transform = __webpack_require__(190);
 
 	/*<replacement>*/
-	var util = __webpack_require__(182);
-	util.inherits = __webpack_require__(178);
+	var util = __webpack_require__(185);
+	util.inherits = __webpack_require__(181);
 	/*</replacement>*/
 
 	util.inherits(PassThrough, Transform);
@@ -29315,27 +29587,6 @@
 
 
 /***/ },
-/* 189 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(185)
-
-
-/***/ },
-/* 190 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(184)
-
-
-/***/ },
-/* 191 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(187)
-
-
-/***/ },
 /* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -29346,9 +29597,30 @@
 /* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = __webpack_require__(187)
+
+
+/***/ },
+/* 194 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(190)
+
+
+/***/ },
+/* 195 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(191)
+
+
+/***/ },
+/* 196 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
-	var utils = __webpack_require__(169);
-	var support = __webpack_require__(170);
+	var utils = __webpack_require__(172);
+	var support = __webpack_require__(173);
 	// private property
 	var _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 
@@ -29455,7 +29727,7 @@
 
 
 /***/ },
-/* 194 */
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';
@@ -29493,34 +29765,34 @@
 	    }
 	};
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(171).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(174).Buffer))
 
 /***/ },
-/* 195 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(196);
-	module.exports = __webpack_require__(199).setImmediate;
+	__webpack_require__(199);
+	module.exports = __webpack_require__(202).setImmediate;
 
 /***/ },
-/* 196 */
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $export = __webpack_require__(197)
-	  , $task   = __webpack_require__(212);
+	var $export = __webpack_require__(200)
+	  , $task   = __webpack_require__(215);
 	$export($export.G + $export.B, {
 	  setImmediate:   $task.set,
 	  clearImmediate: $task.clear
 	});
 
 /***/ },
-/* 197 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var global    = __webpack_require__(198)
-	  , core      = __webpack_require__(199)
-	  , ctx       = __webpack_require__(200)
-	  , hide      = __webpack_require__(202)
+	var global    = __webpack_require__(201)
+	  , core      = __webpack_require__(202)
+	  , ctx       = __webpack_require__(203)
+	  , hide      = __webpack_require__(205)
 	  , PROTOTYPE = 'prototype';
 
 	var $export = function(type, name, source){
@@ -29580,7 +29852,7 @@
 	module.exports = $export;
 
 /***/ },
-/* 198 */
+/* 201 */
 /***/ function(module, exports) {
 
 	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
@@ -29589,18 +29861,18 @@
 	if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
 
 /***/ },
-/* 199 */
+/* 202 */
 /***/ function(module, exports) {
 
 	var core = module.exports = {version: '2.3.0'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
-/* 200 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// optional / simple context binding
-	var aFunction = __webpack_require__(201);
+	var aFunction = __webpack_require__(204);
 	module.exports = function(fn, that, length){
 	  aFunction(fn);
 	  if(that === undefined)return fn;
@@ -29621,7 +29893,7 @@
 	};
 
 /***/ },
-/* 201 */
+/* 204 */
 /***/ function(module, exports) {
 
 	module.exports = function(it){
@@ -29630,12 +29902,12 @@
 	};
 
 /***/ },
-/* 202 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var dP         = __webpack_require__(203)
-	  , createDesc = __webpack_require__(211);
-	module.exports = __webpack_require__(207) ? function(object, key, value){
+	var dP         = __webpack_require__(206)
+	  , createDesc = __webpack_require__(214);
+	module.exports = __webpack_require__(210) ? function(object, key, value){
 	  return dP.f(object, key, createDesc(1, value));
 	} : function(object, key, value){
 	  object[key] = value;
@@ -29643,15 +29915,15 @@
 	};
 
 /***/ },
-/* 203 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var anObject       = __webpack_require__(204)
-	  , IE8_DOM_DEFINE = __webpack_require__(206)
-	  , toPrimitive    = __webpack_require__(210)
+	var anObject       = __webpack_require__(207)
+	  , IE8_DOM_DEFINE = __webpack_require__(209)
+	  , toPrimitive    = __webpack_require__(213)
 	  , dP             = Object.defineProperty;
 
-	exports.f = __webpack_require__(207) ? Object.defineProperty : function defineProperty(O, P, Attributes){
+	exports.f = __webpack_require__(210) ? Object.defineProperty : function defineProperty(O, P, Attributes){
 	  anObject(O);
 	  P = toPrimitive(P, true);
 	  anObject(Attributes);
@@ -29664,17 +29936,17 @@
 	};
 
 /***/ },
-/* 204 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(205);
+	var isObject = __webpack_require__(208);
 	module.exports = function(it){
 	  if(!isObject(it))throw TypeError(it + ' is not an object!');
 	  return it;
 	};
 
 /***/ },
-/* 205 */
+/* 208 */
 /***/ function(module, exports) {
 
 	module.exports = function(it){
@@ -29682,24 +29954,24 @@
 	};
 
 /***/ },
-/* 206 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = !__webpack_require__(207) && !__webpack_require__(208)(function(){
-	  return Object.defineProperty(__webpack_require__(209)('div'), 'a', {get: function(){ return 7; }}).a != 7;
+	module.exports = !__webpack_require__(210) && !__webpack_require__(211)(function(){
+	  return Object.defineProperty(__webpack_require__(212)('div'), 'a', {get: function(){ return 7; }}).a != 7;
 	});
 
 /***/ },
-/* 207 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Thank's IE8 for his funny defineProperty
-	module.exports = !__webpack_require__(208)(function(){
+	module.exports = !__webpack_require__(211)(function(){
 	  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
 	});
 
 /***/ },
-/* 208 */
+/* 211 */
 /***/ function(module, exports) {
 
 	module.exports = function(exec){
@@ -29711,11 +29983,11 @@
 	};
 
 /***/ },
-/* 209 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(205)
-	  , document = __webpack_require__(198).document
+	var isObject = __webpack_require__(208)
+	  , document = __webpack_require__(201).document
 	  // in old IE typeof document.createElement is 'object'
 	  , is = isObject(document) && isObject(document.createElement);
 	module.exports = function(it){
@@ -29723,11 +29995,11 @@
 	};
 
 /***/ },
-/* 210 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.1 ToPrimitive(input [, PreferredType])
-	var isObject = __webpack_require__(205);
+	var isObject = __webpack_require__(208);
 	// instead of the ES6 spec version, we didn't implement @@toPrimitive case
 	// and the second argument - flag - preferred type is a string
 	module.exports = function(it, S){
@@ -29740,7 +30012,7 @@
 	};
 
 /***/ },
-/* 211 */
+/* 214 */
 /***/ function(module, exports) {
 
 	module.exports = function(bitmap, value){
@@ -29753,14 +30025,14 @@
 	};
 
 /***/ },
-/* 212 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var ctx                = __webpack_require__(200)
-	  , invoke             = __webpack_require__(213)
-	  , html               = __webpack_require__(214)
-	  , cel                = __webpack_require__(209)
-	  , global             = __webpack_require__(198)
+	var ctx                = __webpack_require__(203)
+	  , invoke             = __webpack_require__(216)
+	  , html               = __webpack_require__(217)
+	  , cel                = __webpack_require__(212)
+	  , global             = __webpack_require__(201)
 	  , process            = global.process
 	  , setTask            = global.setImmediate
 	  , clearTask          = global.clearImmediate
@@ -29795,7 +30067,7 @@
 	    delete queue[id];
 	  };
 	  // Node.js 0.8-
-	  if(__webpack_require__(215)(process) == 'process'){
+	  if(__webpack_require__(218)(process) == 'process'){
 	    defer = function(id){
 	      process.nextTick(ctx(run, id, 1));
 	    };
@@ -29833,7 +30105,7 @@
 	};
 
 /***/ },
-/* 213 */
+/* 216 */
 /***/ function(module, exports) {
 
 	// fast apply, http://jsperf.lnkit.com/fast-apply/5
@@ -29854,13 +30126,13 @@
 	};
 
 /***/ },
-/* 214 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(198).document && document.documentElement;
+	module.exports = __webpack_require__(201).document && document.documentElement;
 
 /***/ },
-/* 215 */
+/* 218 */
 /***/ function(module, exports) {
 
 	var toString = {}.toString;
@@ -29870,7 +30142,7 @@
 	};
 
 /***/ },
-/* 216 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* global Promise */
@@ -29883,7 +30155,7 @@
 	if (typeof Promise !== "undefined") {
 	    ES6Promise = Promise;
 	} else {
-	    ES6Promise = __webpack_require__(217);
+	    ES6Promise = __webpack_require__(220);
 	}
 
 	/**
@@ -29895,11 +30167,11 @@
 
 
 /***/ },
-/* 217 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var immediate = __webpack_require__(218);
+	var immediate = __webpack_require__(221);
 
 	/* istanbul ignore next */
 	function INTERNAL() {}
@@ -30154,7 +30426,7 @@
 
 
 /***/ },
-/* 218 */
+/* 221 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -30230,7 +30502,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 219 */
+/* 222 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30499,22 +30771,22 @@
 
 
 /***/ },
-/* 220 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';
 
-	var utils = __webpack_require__(169);
-	var ConvertWorker = __webpack_require__(221);
-	var GenericWorker = __webpack_require__(219);
-	var base64 = __webpack_require__(193);
-	var support = __webpack_require__(170);
-	var external = __webpack_require__(216);
+	var utils = __webpack_require__(172);
+	var ConvertWorker = __webpack_require__(224);
+	var GenericWorker = __webpack_require__(222);
+	var base64 = __webpack_require__(196);
+	var support = __webpack_require__(173);
+	var external = __webpack_require__(219);
 
 	var NodejsStreamOutputAdapter = null;
 	if (support.nodestream) {
 	    try {
-	        NodejsStreamOutputAdapter = __webpack_require__(222);
+	        NodejsStreamOutputAdapter = __webpack_require__(225);
 	    } catch(e) {}
 	}
 
@@ -30722,16 +30994,16 @@
 
 	module.exports = StreamHelper;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(171).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(174).Buffer))
 
 /***/ },
-/* 221 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var GenericWorker = __webpack_require__(219);
-	var utils = __webpack_require__(169);
+	var GenericWorker = __webpack_require__(222);
+	var utils = __webpack_require__(172);
 
 	/**
 	 * A worker which convert chunks to a specified type.
@@ -30757,14 +31029,14 @@
 
 
 /***/ },
-/* 222 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Readable = __webpack_require__(175).Readable;
+	var Readable = __webpack_require__(178).Readable;
 
-	var util = __webpack_require__(223);
+	var util = __webpack_require__(226);
 	util.inherits(NodejsStreamOutputAdapter, Readable);
 
 	/**
@@ -30805,7 +31077,7 @@
 
 
 /***/ },
-/* 223 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -31333,7 +31605,7 @@
 	}
 	exports.isPrimitive = isPrimitive;
 
-	exports.isBuffer = __webpack_require__(224);
+	exports.isBuffer = __webpack_require__(227);
 
 	function objectToString(o) {
 	  return Object.prototype.toString.call(o);
@@ -31377,7 +31649,7 @@
 	 *     prototype.
 	 * @param {function} superCtor Constructor function to inherit prototype from.
 	 */
-	exports.inherits = __webpack_require__(178);
+	exports.inherits = __webpack_require__(181);
 
 	exports._extend = function(origin, add) {
 	  // Don't do anything if add isn't an object
@@ -31398,7 +31670,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(4)))
 
 /***/ },
-/* 224 */
+/* 227 */
 /***/ function(module, exports) {
 
 	module.exports = function isBuffer(arg) {
@@ -31409,7 +31681,7 @@
 	}
 
 /***/ },
-/* 225 */
+/* 228 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31426,16 +31698,16 @@
 
 
 /***/ },
-/* 226 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var external = __webpack_require__(216);
-	var DataWorker = __webpack_require__(227);
-	var DataLengthProbe = __webpack_require__(228);
-	var Crc32Probe = __webpack_require__(229);
-	var DataLengthProbe = __webpack_require__(228);
+	var external = __webpack_require__(219);
+	var DataWorker = __webpack_require__(230);
+	var DataLengthProbe = __webpack_require__(231);
+	var Crc32Probe = __webpack_require__(232);
+	var DataLengthProbe = __webpack_require__(231);
 
 	/**
 	 * Represent a compressed object, with everything needed to decompress it.
@@ -31507,13 +31779,13 @@
 
 
 /***/ },
-/* 227 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(169);
-	var GenericWorker = __webpack_require__(219);
+	var utils = __webpack_require__(172);
+	var GenericWorker = __webpack_require__(222);
 
 	// the size of the generated chunks
 	// TODO expose this as a public variable
@@ -31629,13 +31901,13 @@
 
 
 /***/ },
-/* 228 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(169);
-	var GenericWorker = __webpack_require__(219);
+	var utils = __webpack_require__(172);
+	var GenericWorker = __webpack_require__(222);
 
 	/**
 	 * A worker which calculate the total length of the data flowing through.
@@ -31664,14 +31936,14 @@
 
 
 /***/ },
-/* 229 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var GenericWorker = __webpack_require__(219);
-	var crc32 = __webpack_require__(230);
-	var utils = __webpack_require__(169);
+	var GenericWorker = __webpack_require__(222);
+	var crc32 = __webpack_require__(233);
+	var utils = __webpack_require__(172);
 
 	/**
 	 * A worker which calculate the crc32 of the data flowing through.
@@ -31694,12 +31966,12 @@
 
 
 /***/ },
-/* 230 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(169);
+	var utils = __webpack_require__(172);
 
 	/**
 	 * The following functions come from pako, from pako/lib/zlib/crc32.js
@@ -31778,16 +32050,16 @@
 
 
 /***/ },
-/* 231 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var StreamHelper = __webpack_require__(220);
-	var DataWorker = __webpack_require__(227);
-	var utf8 = __webpack_require__(168);
-	var CompressedObject = __webpack_require__(226);
-	var GenericWorker = __webpack_require__(219);
+	var StreamHelper = __webpack_require__(223);
+	var DataWorker = __webpack_require__(230);
+	var utf8 = __webpack_require__(171);
+	var CompressedObject = __webpack_require__(229);
+	var GenericWorker = __webpack_require__(222);
 
 	/**
 	 * A simple object representing a file in the zip file.
@@ -31908,13 +32180,13 @@
 
 
 /***/ },
-/* 232 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var compressions = __webpack_require__(233);
-	var ZipFileWorker = __webpack_require__(251);
+	var compressions = __webpack_require__(236);
+	var ZipFileWorker = __webpack_require__(254);
 
 	/**
 	 * Find the compression to use.
@@ -31971,12 +32243,12 @@
 
 
 /***/ },
-/* 233 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var GenericWorker = __webpack_require__(219);
+	var GenericWorker = __webpack_require__(222);
 
 	exports.STORE = {
 	    magic: "\x00\x00",
@@ -31987,19 +32259,19 @@
 	        return new GenericWorker("STORE decompression");
 	    }
 	};
-	exports.DEFLATE = __webpack_require__(234);
+	exports.DEFLATE = __webpack_require__(237);
 
 
 /***/ },
-/* 234 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	var USE_TYPEDARRAY = (typeof Uint8Array !== 'undefined') && (typeof Uint16Array !== 'undefined') && (typeof Uint32Array !== 'undefined');
 
-	var pako = __webpack_require__(235);
-	var utils = __webpack_require__(169);
-	var GenericWorker = __webpack_require__(219);
+	var pako = __webpack_require__(238);
+	var utils = __webpack_require__(172);
+	var GenericWorker = __webpack_require__(222);
 
 	var ARRAY_TYPE = USE_TYPEDARRAY ? "uint8array" : "array";
 
@@ -32065,17 +32337,17 @@
 
 
 /***/ },
-/* 235 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Top level file is just a mixin of submodules & constants
 	'use strict';
 
-	var assign    = __webpack_require__(236).assign;
+	var assign    = __webpack_require__(239).assign;
 
-	var deflate   = __webpack_require__(237);
-	var inflate   = __webpack_require__(245);
-	var constants = __webpack_require__(249);
+	var deflate   = __webpack_require__(240);
+	var inflate   = __webpack_require__(248);
+	var constants = __webpack_require__(252);
 
 	var pako = {};
 
@@ -32085,7 +32357,7 @@
 
 
 /***/ },
-/* 236 */
+/* 239 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32193,17 +32465,17 @@
 
 
 /***/ },
-/* 237 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 
-	var zlib_deflate = __webpack_require__(238);
-	var utils        = __webpack_require__(236);
-	var strings      = __webpack_require__(243);
-	var msg          = __webpack_require__(242);
-	var ZStream      = __webpack_require__(244);
+	var zlib_deflate = __webpack_require__(241);
+	var utils        = __webpack_require__(239);
+	var strings      = __webpack_require__(246);
+	var msg          = __webpack_require__(245);
+	var ZStream      = __webpack_require__(247);
 
 	var toString = Object.prototype.toString;
 
@@ -32599,16 +32871,16 @@
 
 
 /***/ },
-/* 238 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils   = __webpack_require__(236);
-	var trees   = __webpack_require__(239);
-	var adler32 = __webpack_require__(240);
-	var crc32   = __webpack_require__(241);
-	var msg     = __webpack_require__(242);
+	var utils   = __webpack_require__(239);
+	var trees   = __webpack_require__(242);
+	var adler32 = __webpack_require__(243);
+	var crc32   = __webpack_require__(244);
+	var msg     = __webpack_require__(245);
 
 	/* Public constants ==========================================================*/
 	/* ===========================================================================*/
@@ -34460,13 +34732,13 @@
 
 
 /***/ },
-/* 239 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 
-	var utils = __webpack_require__(236);
+	var utils = __webpack_require__(239);
 
 	/* Public constants ==========================================================*/
 	/* ===========================================================================*/
@@ -35668,7 +35940,7 @@
 
 
 /***/ },
-/* 240 */
+/* 243 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -35706,7 +35978,7 @@
 
 
 /***/ },
-/* 241 */
+/* 244 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -35753,7 +36025,7 @@
 
 
 /***/ },
-/* 242 */
+/* 245 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -35772,14 +36044,14 @@
 
 
 /***/ },
-/* 243 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// String encode/decode helpers
 	'use strict';
 
 
-	var utils = __webpack_require__(236);
+	var utils = __webpack_require__(239);
 
 
 	// Quick check if we can use fast array to bin string conversion
@@ -35963,7 +36235,7 @@
 
 
 /***/ },
-/* 244 */
+/* 247 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -35998,19 +36270,19 @@
 
 
 /***/ },
-/* 245 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 
-	var zlib_inflate = __webpack_require__(246);
-	var utils        = __webpack_require__(236);
-	var strings      = __webpack_require__(243);
-	var c            = __webpack_require__(249);
-	var msg          = __webpack_require__(242);
-	var ZStream      = __webpack_require__(244);
-	var GZheader     = __webpack_require__(250);
+	var zlib_inflate = __webpack_require__(249);
+	var utils        = __webpack_require__(239);
+	var strings      = __webpack_require__(246);
+	var c            = __webpack_require__(252);
+	var msg          = __webpack_require__(245);
+	var ZStream      = __webpack_require__(247);
+	var GZheader     = __webpack_require__(253);
 
 	var toString = Object.prototype.toString;
 
@@ -36422,17 +36694,17 @@
 
 
 /***/ },
-/* 246 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 
-	var utils         = __webpack_require__(236);
-	var adler32       = __webpack_require__(240);
-	var crc32         = __webpack_require__(241);
-	var inflate_fast  = __webpack_require__(247);
-	var inflate_table = __webpack_require__(248);
+	var utils         = __webpack_require__(239);
+	var adler32       = __webpack_require__(243);
+	var crc32         = __webpack_require__(244);
+	var inflate_fast  = __webpack_require__(250);
+	var inflate_table = __webpack_require__(251);
 
 	var CODES = 0;
 	var LENS = 1;
@@ -37966,7 +38238,7 @@
 
 
 /***/ },
-/* 247 */
+/* 250 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38298,13 +38570,13 @@
 
 
 /***/ },
-/* 248 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 
-	var utils = __webpack_require__(236);
+	var utils = __webpack_require__(239);
 
 	var MAXBITS = 15;
 	var ENOUGH_LENS = 852;
@@ -38631,7 +38903,7 @@
 
 
 /***/ },
-/* 249 */
+/* 252 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38687,7 +38959,7 @@
 
 
 /***/ },
-/* 250 */
+/* 253 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38733,16 +39005,16 @@
 
 
 /***/ },
-/* 251 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(169);
-	var GenericWorker = __webpack_require__(219);
-	var utf8 = __webpack_require__(168);
-	var crc32 = __webpack_require__(230);
-	var signature = __webpack_require__(252);
+	var utils = __webpack_require__(172);
+	var GenericWorker = __webpack_require__(222);
+	var utf8 = __webpack_require__(171);
+	var crc32 = __webpack_require__(233);
+	var signature = __webpack_require__(255);
 
 	/**
 	 * Transform an integer into a string in hexadecimal.
@@ -39279,7 +39551,7 @@
 
 
 /***/ },
-/* 252 */
+/* 255 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -39292,13 +39564,13 @@
 
 
 /***/ },
-/* 253 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var utils = __webpack_require__(169);
-	var GenericWorker = __webpack_require__(219);
+	var utils = __webpack_require__(172);
+	var GenericWorker = __webpack_require__(222);
 
 	/**
 	 * A worker that use a nodejs stream as source.
@@ -39372,17 +39644,17 @@
 
 
 /***/ },
-/* 254 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var utils = __webpack_require__(169);
-	var external = __webpack_require__(216);
-	var utf8 = __webpack_require__(168);
-	var utils = __webpack_require__(169);
-	var ZipEntries = __webpack_require__(255);
-	var Crc32Probe = __webpack_require__(229);
-	var nodejsUtils = __webpack_require__(194);
+	var utils = __webpack_require__(172);
+	var external = __webpack_require__(219);
+	var utf8 = __webpack_require__(171);
+	var utils = __webpack_require__(172);
+	var ZipEntries = __webpack_require__(258);
+	var Crc32Probe = __webpack_require__(232);
+	var nodejsUtils = __webpack_require__(197);
 
 	/**
 	 * Check the CRC32 of an entry.
@@ -39460,16 +39732,16 @@
 
 
 /***/ },
-/* 255 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var readerFor = __webpack_require__(256);
-	var utils = __webpack_require__(169);
-	var sig = __webpack_require__(252);
-	var ZipEntry = __webpack_require__(262);
-	var utf8 = __webpack_require__(168);
-	var support = __webpack_require__(170);
+	var readerFor = __webpack_require__(259);
+	var utils = __webpack_require__(172);
+	var sig = __webpack_require__(255);
+	var ZipEntry = __webpack_require__(265);
+	var utf8 = __webpack_require__(171);
+	var support = __webpack_require__(173);
 	//  class ZipEntries {{{
 	/**
 	 * All the entries in the zip file.
@@ -39728,17 +40000,17 @@
 
 
 /***/ },
-/* 256 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(169);
-	var support = __webpack_require__(170);
-	var ArrayReader = __webpack_require__(257);
-	var StringReader = __webpack_require__(259);
-	var NodeBufferReader = __webpack_require__(260);
-	var Uint8ArrayReader = __webpack_require__(261);
+	var utils = __webpack_require__(172);
+	var support = __webpack_require__(173);
+	var ArrayReader = __webpack_require__(260);
+	var StringReader = __webpack_require__(262);
+	var NodeBufferReader = __webpack_require__(263);
+	var Uint8ArrayReader = __webpack_require__(264);
 
 	/**
 	 * Create a reader adapted to the data.
@@ -39764,12 +40036,12 @@
 
 
 /***/ },
-/* 257 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var DataReader = __webpack_require__(258);
-	var utils = __webpack_require__(169);
+	var DataReader = __webpack_require__(261);
+	var utils = __webpack_require__(172);
 
 	function ArrayReader(data) {
 	    DataReader.call(this, data);
@@ -39827,11 +40099,11 @@
 
 
 /***/ },
-/* 258 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var utils = __webpack_require__(169);
+	var utils = __webpack_require__(172);
 
 	function DataReader(data) {
 	    this.data = data; // type : see implementation
@@ -39949,12 +40221,12 @@
 
 
 /***/ },
-/* 259 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var DataReader = __webpack_require__(258);
-	var utils = __webpack_require__(169);
+	var DataReader = __webpack_require__(261);
+	var utils = __webpack_require__(172);
 
 	function StringReader(data) {
 	    DataReader.call(this, data);
@@ -39993,12 +40265,12 @@
 
 
 /***/ },
-/* 260 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var Uint8ArrayReader = __webpack_require__(261);
-	var utils = __webpack_require__(169);
+	var Uint8ArrayReader = __webpack_require__(264);
+	var utils = __webpack_require__(172);
 
 	function NodeBufferReader(data) {
 	    Uint8ArrayReader.call(this, data);
@@ -40018,12 +40290,12 @@
 
 
 /***/ },
-/* 261 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var ArrayReader = __webpack_require__(257);
-	var utils = __webpack_require__(169);
+	var ArrayReader = __webpack_require__(260);
+	var utils = __webpack_require__(172);
 
 	function Uint8ArrayReader(data) {
 	    ArrayReader.call(this, data);
@@ -40046,17 +40318,17 @@
 
 
 /***/ },
-/* 262 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var readerFor = __webpack_require__(256);
-	var utils = __webpack_require__(169);
-	var CompressedObject = __webpack_require__(226);
-	var crc32fn = __webpack_require__(230);
-	var utf8 = __webpack_require__(168);
-	var compressions = __webpack_require__(233);
-	var support = __webpack_require__(170);
+	var readerFor = __webpack_require__(259);
+	var utils = __webpack_require__(172);
+	var CompressedObject = __webpack_require__(229);
+	var crc32fn = __webpack_require__(233);
+	var utf8 = __webpack_require__(171);
+	var compressions = __webpack_require__(236);
+	var support = __webpack_require__(173);
 
 	var MADE_BY_DOS = 0x00;
 	var MADE_BY_UNIX = 0x03;
@@ -40344,7 +40616,7 @@
 
 
 /***/ },
-/* 263 */
+/* 266 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40453,7 +40725,7 @@
 
 
 /***/ },
-/* 264 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* FileSaver.js
@@ -40639,7 +40911,7 @@
 
 	if (typeof module !== "undefined" && module.exports) {
 	  module.exports.saveAs = saveAs;
-	} else if (("function" !== "undefined" && __webpack_require__(265) !== null) && (__webpack_require__(266) !== null)) {
+	} else if (("function" !== "undefined" && __webpack_require__(268) !== null) && (__webpack_require__(269) !== null)) {
 	  !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
 	    return saveAs;
 	  }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -40647,14 +40919,14 @@
 
 
 /***/ },
-/* 265 */
+/* 268 */
 /***/ function(module, exports) {
 
 	module.exports = function() { throw new Error("define cannot be used indirect"); };
 
 
 /***/ },
-/* 266 */
+/* 269 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -40662,7 +40934,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 267 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */"use strict";
@@ -40675,100 +40947,23 @@
 	}try {
 	  (function () {
 
-	    'use strict';
+	    "use strict";
 
-	    Object.defineProperty(exports, '__esModule', {
+	    Object.defineProperty(exports, "__esModule", {
 	      value: true
 	    });
-
-	    var mergeBuffers = function mergeBuffers(recBuffers, recLength) {
-	      var result = new Float32Array(recLength);
-	      var offset = 0;
-
-	      for (var i = 0; i < recBuffers.length; i++) {
-	        result.set(recBuffers[i], offset);
-	        offset += recBuffers[i].length;
-	      }
-
-	      return result;
+	    var readAsDataURL = function readAsDataURL(blob) {
+	      return new Promise(function (resolve, reject) {
+	        var reader = new FileReader();
+	        reader.addEventListener("load", function () {
+	          resolve(reader.result);
+	        }, false);
+	        reader.readAsDataURL(blob);
+	      });
 	    };
 
-	    var interleave = function interleave(leftBuffer, rightBuffer) {
-	      var length = leftBuffer.length + rightBuffer.length;
-	      var result = new Float32Array(length);
-
-	      var idx = 0,
-	          bufIdx = 0;
-
-	      while (idx < length) {
-	        // idx++
-	        result[idx++] = leftBuffer[bufIdx];
-	        result[idx++] = rightBuffer[bufIdx];
-	        bufIdx++;
-	      }
-
-	      return result;
-	    };
-
-	    var writeString = function writeString(view, offset, string) {
-	      for (var i = 0; i < string.length; i++) {
-	        view.setUint8(offset + i, string.charCodeAt(i));
-	      }
-	    };
-
-	    var encodeWAV = function encodeWAV(samples, sampleRate) {
-	      var buffer = new ArrayBuffer(44 + samples.length * 2);
-	      var view = new DataView(buffer);
-
-	      /* RIFF identifier */
-	      writeString(view, 0, 'RIFF');
-	      /* RIFF chunk length */
-	      view.setUint32(4, 36 + samples.length * 2, true);
-	      /* RIFF type */
-	      writeString(view, 8, 'WAVE');
-	      /* format chunk identifier */
-	      writeString(view, 12, 'fmt ');
-	      /* format chunk length */
-	      view.setUint32(16, 16, true);
-	      /* sample format (raw) */
-	      view.setUint16(20, 1, true);
-	      /* channel count */
-	      view.setUint16(22, 2, true);
-	      /* sample rate */
-	      view.setUint32(24, sampleRate, true);
-	      /* byte rate (sample rate * block align) */
-	      view.setUint32(28, sampleRate * 4, true);
-	      /* block align (channel count * bytes per sample) */
-	      view.setUint16(32, 4, true);
-	      /* bits per sample */
-	      view.setUint16(34, 16, true);
-	      /* data chunk identifier */
-	      writeString(view, 36, 'data');
-	      /* data chunk length */
-	      view.setUint32(40, samples.length * 2, true);
-
-	      floatTo16BitPCM(view, 44, samples);
-
-	      return view;
-	    };
-
-	    var floatTo16BitPCM = function floatTo16BitPCM(output, offset, input) {
-	      for (var i = 0; i < input.length; i++, offset += 2) {
-	        var s = Math.max(-1, Math.min(1, input[i]));
-	        output.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
-	      }
-	    };
-
-	    var exportWAV = function exportWAV(leftBuffer, rightBuffer, sampleRate) {
-	      var interleaved = interleave(leftBuffer, rightBuffer);
-	      var dataview = encodeWAV(interleaved, sampleRate);
-	      var audioBlob = new Blob([dataview], { type: "audio/wav" });
-
-	      return audioBlob;
-	    };
-
-	    exports['default'] = exportWAV;
-	    module.exports = exports['default'];
+	    exports["default"] = readAsDataURL;
+	    module.exports = exports["default"];
 
 	    /* REACT HOT LOADER */
 	  }).call(undefined);
@@ -40781,7 +40976,7 @@
 	        }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
 	          module.hot.accept(function (err) {
 	            if (err) {
-	              console.error("Cannot apply hot update to " + "exportWAV.js" + ": " + err.message);
+	              console.error("Cannot apply hot update to " + "readAsDataURL.js" + ": " + err.message);
 	            }
 	          });
 	        }
@@ -40793,7 +40988,72 @@
 	}
 
 /***/ },
-/* 268 */
+/* 271 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */"use strict";
+
+	if (false) {
+	    (function () {
+	        var ReactHotAPI = require("/x/sound-sampler/node_modules/react-hot-api/modules/index.js"),
+	            React = require("react");module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(React);
+	    })();
+	}try {
+	    (function () {
+
+	        "use strict";
+
+	        Object.defineProperty(exports, "__esModule", {
+	            value: true
+	        });
+	        var getWaveSurferSegment = function getWaveSurferSegment(wavesurfer, start, end) {
+
+	            var segmentDuration = end - start;
+	            var originalBuffer = wavesurfer.backend.buffer;
+	            var newSegment = wavesurfer.backend.ac.createBuffer(originalBuffer.numberOfChannels, segmentDuration * originalBuffer.sampleRate, originalBuffer.sampleRate);
+	            for (var chanel = 0; chanel < originalBuffer.numberOfChannels; chanel++) {
+	                var originalChanData = originalBuffer.getChannelData(chanel);
+	                var segmentChanData = newSegment.getChannelData(chanel);
+	                var k = 0;
+	                for (var j = 0, len = originalChanData.length; j < len; j++) {
+	                    // ignore the part of the chanel that is before the region
+	                    if (j > originalBuffer.sampleRate * start) {
+	                        //Example 1sec *44100 sample rate == 44100 samples per sec. Got it?
+	                        segmentChanData[k] = originalChanData[j];
+	                        k += 1;
+	                    }
+	                }
+	            }
+	            return newSegment;
+	        };
+
+	        exports["default"] = getWaveSurferSegment;
+	        module.exports = exports["default"];
+
+	        /* REACT HOT LOADER */
+	    }).call(undefined);
+	} finally {
+	    if (false) {
+	        (function () {
+	            var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false;if (module.exports && module.makeHot) {
+	                var makeExportsHot = require("/x/sound-sampler/node_modules/react-hot-loader/makeExportsHot.js");if (makeExportsHot(module, require("react"))) {
+	                    foundReactClasses = true;
+	                }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
+	                    module.hot.accept(function (err) {
+	                        if (err) {
+	                            console.error("Cannot apply hot update to " + "getWaveSurferSegment.js" + ": " + err.message);
+	                        }
+	                    });
+	                }
+	            }module.hot.dispose(function (data) {
+	                data.makeHot = module.makeHot;data.foundReactClasses = foundReactClasses;
+	            });
+	        })();
+	    }
+	}
+
+/***/ },
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */"use strict";
@@ -40836,6 +41096,7 @@
 	            _createClass(MidiManager, [{
 	                key: "test",
 	                value: function test() {
+	                    var This = this;
 	                    // request MIDI access
 	                    if (navigator.requestMIDIAccess) {
 	                        navigator.requestMIDIAccess({
@@ -40845,16 +41106,68 @@
 	                        alert("No MIDI support in your browser.");
 	                    }
 
+	                    function listInputs(inputs) {
+	                        var input = inputs.value;
+	                        console.log("Input port : [ type:'" + input.type + "' id: '" + input.id + "' manufacturer: '" + input.manufacturer + "' name: '" + input.name + "' version: '" + input.version + "']");
+	                    }
+
+	                    function onMIDIMessage(event) {
+	                        var data = event.data,
+	                            cmd = data[0] >> 4,
+	                            channel = data[0] & 0xf,
+	                            type = data[0] & 0xf0,
+
+	                        // channel agnostic message type. Thanks, Phil Burk.
+	                        note = data[1],
+	                            velocity = data[2];
+	                        // with pressure and tilt off
+	                        // note off: 128, cmd: 8
+	                        // note on: 144, cmd: 9
+	                        // pressure / tilt on
+	                        // pressure: 176, cmd 11:
+	                        // bend: 224, cmd: 14
+
+	                        switch (type) {
+	                            case 144:
+	                                // noteOn message
+	                                //  noteOn(note, velocity);
+	                                break;
+	                            case 128:
+	                                // noteOff message
+	                                console.log(note);
+	                                This.play(note);
+	                                // noteOff(note, velocity);
+	                                break;
+	                        }
+	                    }
+
 	                    // midi functions
 	                    function onMIDISuccess(midiAccess) {
 	                        // when we get a succesful response, run this code
 	                        console.log('MIDI Access Object', midiAccess);
+	                        console.log(midiAccess.inputs.values());
+	                        var inputs = midiAccess.inputs.values();
+	                        for (var input = inputs.next(); input && !input.done; input = inputs.next()) {
+	                            // listen for midi messages
+	                            input.value.onmidimessage = onMIDIMessage;
+	                            // this just lists our inputs in the console
+	                            listInputs(input);
+	                        }
+	                        // listen for connect/disconnect message
+	                        midiAccess.onstatechange = function (e) {
+	                            console.log('connect/disconnect message');
+	                        };
 	                    }
 
 	                    function onMIDIFailure(e) {
 	                        // when we get a failed response, run this code
 	                        console.log("No access to MIDI devices or your browser doesn't support WebMIDI API. Please use WebMIDIAPIShim " + e);
 	                    }
+	                }
+	            }, {
+	                key: "onMidiKeyPress",
+	                value: function onMidiKeyPress(callback) {
+	                    this.play = callback;
 	                }
 	            }]);
 
@@ -40887,7 +41200,7 @@
 	}
 
 /***/ },
-/* 269 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */"use strict";
@@ -40980,7 +41293,7 @@
 	}
 
 /***/ },
-/* 270 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */"use strict";
@@ -41042,7 +41355,7 @@
 	}
 
 /***/ },
-/* 271 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */"use strict";
@@ -41083,6 +41396,21 @@
 	        this.props.play(this.props.id);
 	      },
 
+	      onDragStart: function onDragStart(event) {
+	        this.props.setDragItem(this.props.id);
+	      },
+
+	      //Handles drop event
+	      onDrop: function onDrop(event) {
+	        event.preventDefault();
+	        this.props.setDropItem(this.props.id, event);
+	      },
+
+	      // Allwow drop
+	      onDragOver: function onDragOver(event) {
+	        event.preventDefault();
+	      },
+
 	      onRecordClick: function onRecordClick() {
 	        this.props.record(this.props.id);
 	        this.setState({
@@ -41098,7 +41426,12 @@
 	      },
 
 	      render: function render() {
-	        return _react2['default'].createElement('div', { className: 'pad' + (this.props.active ? ' active' : '') + (this.props.enabled ? ' enabled' : '') + (this.props.selected ? ' selected' : '') }, _react2['default'].createElement('button', {
+	        return _react2['default'].createElement('div', {
+	          className: 'pad' + (this.props.active ? ' active' : '') + (this.props.enabled ? ' enabled' : '') + (this.props.selected ? ' selected' : ''),
+	          draggable: 'true',
+	          onDragStart: this.onDragStart,
+	          onDrop: this.onDrop,
+	          onDragOver: this.onDragOver }, _react2['default'].createElement('button', {
 	          className: 'clear', onClick: this.onClearClick,
 	          style: { display: this.props.enabled ? 'block' : 'none' } }, '✖'), _react2['default'].createElement('button', {
 	          className: 'record',
@@ -41135,7 +41468,7 @@
 	}
 
 /***/ },
-/* 272 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */"use strict";
@@ -41179,7 +41512,9 @@
 	            stopRecording: this.props.stopRecording,
 	            active: this.props.active ? this.props.active[index] : false,
 	            selected: this.props.selected ? this.props.selected[index] : false,
-	            enabled: this.props.enabled ? this.props.enabled[index] : false
+	            enabled: this.props.enabled ? this.props.enabled[index] : false,
+	            setDragItem: this.props.setDragItem,
+	            setDropItem: this.props.setDropItem
 	          });
 	        }).bind(this));
 	        return _react2['default'].createElement('div', { className: 'Pads' }, children);
@@ -41211,7 +41546,7 @@
 	}
 
 /***/ },
-/* 273 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */"use strict";
