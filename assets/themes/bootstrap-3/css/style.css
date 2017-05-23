@@ -1,3 +1,10 @@
+#footer{
+  background-color: #073642;
+}
+.navbar-default, .navbar-collapse, .navbar-header{
+  background-color: #073642;
+}
+
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
