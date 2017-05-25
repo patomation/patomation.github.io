@@ -3012,9 +3012,9 @@ input[type="button"].btn-block {
   border: 1px solid #cccccc;
   border: 1px solid #586e75;
   border-radius: 4px;
-  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  /*-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-  background-clip: padding-box;
+  background-clip: padding-box;*/
 }
 .dropdown-menu.pull-right {
   right: 0;
@@ -3629,7 +3629,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar {
   position: relative;
   min-height: 50px;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   border: 1px solid transparent;
 }
 @media (min-width: 768px) {
