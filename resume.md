@@ -10,11 +10,11 @@ group: navigation
 
 #### Profile | Summary
 
-- Over 5 years technical experience in web design and web development, with an emphasis on understanding customer requirements and work with engineering on those customer features for product releases, enabling pilot customers, reducing product escalations &amp; support costs, streamlining processes &amp; increasing efficiency of resources, effective product demos and project goals.
-- Broad understanding of a variety of programming languages and able to quickly learn new languages and frameworks.
+Over 5 years technical experience in web design and web development, with an emphasis on understanding customer requirements and work with engineering on those customer features for product releases, enabling pilot customers, reducing product escalations &amp; support costs, streamlining processes &amp; increasing efficiency of resources, effective product demos and project goals.
 
-| ∙ Application Designer ∙ Product Development ∙ Web Development ∙ Google Analytics ∙ AWS &amp; Heroku ∙ ReST ∙ SaaS ∙ Html5 ∙ Javascript ∙ Python  ∙ Technical Training ∙ Technical Writer ∙ Brand Marketing ∙ Agile/Sprint/Stories ∙ Information Technology |
-| --- |
+Broad understanding of a variety of programming languages and able to quickly learn new languages and frameworks.
+
+Application Designer ∙ Product Development &amp; Planning ∙ Sprints ∙ Web Development ∙ Google Analytics ∙ AWS &amp; Heroku ∙ ReST ∙ SaaS ∙ Javascript∙ Html5 ∙ less &amp; sass ∙ Bootstrap ∙ Foundation ∙ Python ∙ Technical Trainer ∙ Technical Writer ∙ Brand Marketing ∙ Agile/Sprint/Stories ∙ Information Technology
 
 
 
@@ -44,7 +44,7 @@ June 2013 - September 2014 (1 year 4 months)
 - Constantly researching best practices for better code implementations
 - Strong javascript experience including Jquery.
 - Theming with HTML5, CSS3, LESS / SASS.
- - Experience with nodeJS, Grunt and Compass for quick project development
+- Experience with nodeJS, Grunt and Compass for quick project development
 - Experience with Unix command line BASH and Shell
 - Constant practice using tools such as Git.
 - Maintining boilerplate code that was reused with each client.
@@ -64,11 +64,11 @@ May 2011 - June 2013 (2 years 3 months)
 
 #### EDUCATION, TRAINING  and COMMUNITY SERVICE
 
-- [x] Southern Oregon University.
+Southern Oregon University.
 
-- [x] Boys and Girls Club – 5 years
+Boys and Girls Club – 5 years
 
-- [x] Screen Print Internship – 6 months
+Screen Print Internship – 6 months
 
 #### REFERENCES
 
