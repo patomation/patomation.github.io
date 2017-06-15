@@ -2,7 +2,6 @@
 layout: page
 title: Projects
 permalink: /projects/
-group: navigation
 ---
 
 All Projects Here
