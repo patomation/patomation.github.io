@@ -1,9 +1,13 @@
 # This is the default format.
 # For more see: http://jekyllrb.com/docs/permalinks/
-permalink: /:categories/:year/:month/:day/:title
+permalink: /:title/
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
+include: ["_projects"]
 highlighter: pygments
+
+collections:
+- projects
 
 # Themes are encouraged to use these universal variables
 # so be sure to set them if your theme uses them.
@@ -71,8 +75,8 @@ JB :
   # These paths are to the main pages Jekyll-Bootstrap ships with.
   # Some JB helpers refer to these paths; change them here if needed.
   #
-  archive_path: /archive.html
-  categories_path : /categories.html
+  archive_path: /archive
+  categories_path : /categories
   tags_path : /tags.html
   atom_path : /atom.xml
   rss_path : /rss.xml
