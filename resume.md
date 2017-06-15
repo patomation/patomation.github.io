@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Resume
-header: Posts By Tag
+header: Resume
 group: navigation
 ---
 {% include JB/setup %}
