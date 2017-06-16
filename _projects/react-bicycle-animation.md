@@ -7,5 +7,5 @@ permalink: react-bicycle-animation
 {% include JB/setup %}
 
 
-![React Bicycle Animation](https://patomation.github.io/demos/react-bicycle-animation/thumbnail.png "React Bicycle Animation")
+[![React Bicycle Animation](https://patomation.github.io/demos/react-bicycle-animation/thumbnail.png "React Bicycle Animation")](https://patomation.github.io/demos/react-bicycle-animation)
 ### DEMO: [React Bicycle Animation](https://patomation.github.io/demos/react-bicycle-animation)

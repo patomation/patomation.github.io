@@ -7,5 +7,5 @@ permalink: react-drum-pads
 {% include JB/setup %}
 
 
-![React Drum Pads](https://patomation.github.io/demos/react-drum-pads/thumbnail.png "React Drum Pads")
+[![React Drum Pads](https://patomation.github.io/demos/react-drum-pads/thumbnail.png "React Drum Pads")](https://patomation.github.io/demos/react-drum-pads)
 ### DEMO: [React Drum Pads](https://patomation.github.io/demos/react-drum-pads)

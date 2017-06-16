@@ -7,5 +7,5 @@ permalink: vintage-computer
 {% include JB/setup %}
 
 
-![Vintage Computer](https://patomation.github.io/demos/vintage-computer/thumbnail.png "Vintage Computer")
+[![Vintage Computer](https://patomation.github.io/demos/vintage-computer/thumbnail.png "Vintage Computer")](https://patomation.github.io/demos/vintage-computer)
 ### DEMO: [Vintage Computer](https://patomation.github.io/demos/vintage-computer)

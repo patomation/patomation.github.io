@@ -7,5 +7,5 @@ permalink: wavesurfer
 {% include JB/setup %}
 
 
-![Wavesurfer](https://patomation.github.io/demos/wavesurfer/thumbnail.png "Wavesurfer")
+[![Wavesurfer](https://patomation.github.io/demos/wavesurfer/thumbnail.png "Wavesurfer")](https://patomation.github.io/demos/wavesurfer)
 ### DEMO: [Wavesurfer](https://patomation.github.io/demos/wavesurfer)
