@@ -47,7 +47,7 @@ const writeFile = function(name){
         '---',
         '{% include JB/setup %}',
         '','', //Extra Returns
-        '!['+title+'](https://patomation.github.io/demos/'+name+'/thumbnail.png "'+title+'")', //IMAGE
+        '[!['+title+'](https://patomation.github.io/demos/'+name+'/thumbnail.png "'+title+'")](https://patomation.github.io/demos/'+name+')', //IMAGE
         '### DEMO: ['+title+'](https://patomation.github.io/demos/'+name+')' //LINK
       ];
 
