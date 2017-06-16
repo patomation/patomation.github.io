@@ -4,7 +4,6 @@ title: Resume
 header: Resume
 group: navigation
 ---
-{% include JB/setup %}
 
 ### Patrick Kelly
 
