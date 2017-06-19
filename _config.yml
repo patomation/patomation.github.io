@@ -63,4 +63,5 @@ credits: 'Do it!'
 
 # Build settings
 markdown: kramdown
-permalink: pretty
+# permalink: pretty
+permalink: /:title/

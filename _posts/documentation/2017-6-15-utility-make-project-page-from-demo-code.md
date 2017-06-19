@@ -1,5 +1,6 @@
 ---
-category : utilities
+layout: post
+category : documentation
 tagline: "Writing a template file for each demo code project I add"
 tags : [utilities, template, jekyll, node]
 ---
