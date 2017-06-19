@@ -1,5 +1,4 @@
-const fs = require('fs'),
-      path = 'demos/';
+const fs = require('fs');
 
 const toTitleCase = function(str){
   // Remove dashes
@@ -35,20 +34,21 @@ const writeFile = function(name){
 
   // Make it pretty
   var title = toTitleCase(removeExtension(name)),
-      path = '_projects/'+name+'.md',
+      path = '_posts/2017-07-18-'+name+'.md',
 
       // MD Template
       data = [
         '---',
-        'layout: page',
-        'title: '+title,
-        'header: '+title,
-        'permalink: '+name,
-        '---',
-        '{% include JB/setup %}',
-        '','', //Extra Returns
-        '[!['+title+'](https://patomation.github.io/demos/'+name+'/thumbnail.png "'+title+'")](https://patomation.github.io/demos/'+name+')', //IMAGE
-        '### DEMO: ['+title+'](https://patomation.github.io/demos/'+name+')' //LINK
+        'layout: default',
+        'modal-id: 6',
+        'date: 2014-07-18',
+        'img: '+name+'.JPG',
+        'alt: '+title,
+        'project-date: 2016',
+        'client: ',
+        'category: Web Development',
+        'description: <a href="https://patomation.github.io/demos/'+name+'">PROJECT DEMO</a>',
+        '---'
       ];
 
   return new Promise(function(resolve,reject){
@@ -70,7 +70,7 @@ const writeFile = function(name){
 // Read Directories and save for later
 var promises = [
   readDirectory( 'demos/'),
-  readDirectory( '_projects/')
+  readDirectory( '_posts/')
 ];
 
 //When directories have been read compare them
