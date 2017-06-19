@@ -5,9 +5,18 @@ tagline: "Helpful tips on using git"
 tags : [xcode, keybinding]
 ---
 
-1. Close xCode7
+### Steps:
 
-2. Copy the following code into the file at the path bellow.
+#### 1. Close xCode7
+
+#### 2. Copy the following code into the file indicated by the path below.
+
+##### XCode 7 Path:
+``` url
+/Applications/Xcode.app/Contents/Frameworks/IDEKit.framework/Versions/A/Resources/IDETextKeyBindingSet.plist
+```
+##### CODE:
+
 ```
 <key>My Custom Commands</key>
 <dict>
@@ -25,12 +34,10 @@ tags : [xcode, keybinding]
     <string>selectLine:, copy:</string>
 </dict>
 ```
-[Source by Melodius on stackoverflow](https://stackoverflow.com/questions/27006557/adding-custom-key-bindings-to-xcode)
 
-  xCode 7 Path:
-```
-/Applications/Xcode.app/Contents/Frameworks/IDEKit.framework/Versions/A/Resources/IDETextKeyBindingSet.plist
-```
+- [Source](https://stackoverflow.com/questions/27006557/adding-custom-key-bindings-to-xcode)
 
-3. Open xCode -> preferences -> Keybindings
-4. Search for the commands and add custom hotkeys for them.
+
+#### 3. Open xCode -> preferences -> Keybindings
+
+#### 4. Search for the commands and add custom hotkeys for them.
