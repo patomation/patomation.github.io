@@ -49,6 +49,10 @@ social:
     url: http://bitbucket.org/patomation
   - title: github
     url: http://github.com/patomation
+  - title: linkedin
+    url: https://www.linkedin.com/in/patomation/
+  - title: soundcloud
+    url: https://soundcloud.com/advolkit
 
 # Postal address (add as many lines as necessary)
 address:
