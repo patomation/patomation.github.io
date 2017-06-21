@@ -7,20 +7,21 @@ tags : [git, github, bitbucket]
 
 # Wheels
 
-## Bolt Pattern
+***Bolt Pattern***
 ```
 5 x 114.3 (or 4.5") offset of +40
 ```
 
-## Stock Tire Sizes
+***Stock Tire Sizes***
 - ***14"*** ```P215/70/R14 96T```
 - ***15"*** ```215/65/R15```
 
 
-## [TIRE SIZE CALCULATOR](http://www.miata.net/garage/tirecalc.html)
-## [Offset Calculator](http://www.1010tires.com/Tools/Wheel-Offset-Calculator#)
+***[TIRE SIZE CALCULATOR](http://www.miata.net/garage/tirecalc.html)***
 
-## Compatible Wheels
+***[Offset Calculator](http://www.1010tires.com/Tools/Wheel-Offset-Calculator#)***
+
+***Compatible Wheels***
 - 18 inch Nissan Maxima SE wheels ```245/45/18```
 - Nissan 350z 18" ```225/45/R18``` ```225/50/R18 - rubs?```
 - 1991+Camry,
@@ -35,15 +36,14 @@ tags : [git, github, bitbucket]
 - 90s Dodge Avenger
 - '05 Mustang 16"
 - '05 Accord 16"
--
 
 
 # Other Information
 
-## Other Names:
+***Other Names:***
   - ```lexus EGG 240```
   - ```Esteima```
 
-## [WIKI](https://en.wikipedia.org/wiki/Toyota_Previa)
+***[WIKI](https://en.wikipedia.org/wiki/Toyota_Previa)***
 
-## [FUEL ECONOMY CALCULATOR](http://www.fuelly.com/car/toyota/previa/1991/EGG240/47720)
+***[FUEL ECONOMY CALCULATOR](http://www.fuelly.com/car/toyota/previa/1991/EGG240/47720)***
