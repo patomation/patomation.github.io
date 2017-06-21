@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    {% include head.html %}
+    <body id="page-top" class="index">
+    {% include nav-page.html %}
+
+    <!-- Content -->
+    <header id="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                  <div class="intro-text">
+                      <span class="name">{{ page.title }}</span>
+                      <hr class="star-light">
+                      <span class="skills">{{ page.description }}</span>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <section id="blog">
+        <div class="container">
+            <ul class="row fa-ul">
+                {% for post in site.posts %}
+                {% if post.category == 'blog' %}
+                <li class="col-sm-12"> <i class="fa-li fa fa-cog fa-spin fa-3x fa-fw"></i>
+                    <a href="{{ post.url }}" class="">
+                        <h3>{{ post.title }}</h3>
+                    </a>
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+
+    {% include footer.html %}
+    {% include js.html %}
+    </body>
+</html>
