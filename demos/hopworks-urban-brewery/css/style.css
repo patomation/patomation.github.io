@@ -1,0 +1,404 @@
+/* CLEAR DEFALT FORMATING */
+/*             
+{
+	margin:0;
+	padding:0;
+}
+*/
+
+body
+{
+	margin:0; /* gets rid of space that was at top and left of content wraper*/
+	padding:0;
+}
+
+ul
+{
+	list-style-type:none; /* disables bullet points*/
+}
+a
+{
+	text-decoration:none; /*removes underline of hyperlinks*/
+}
+
+/*---------- FONTS------------*/
+@font-face {
+	font-family: BebasNeue;
+	src: url('../fonts/BebasNeue.otf');
+}
+@font-face {
+	font-family: LuxuryGold;
+	src: url('../fonts/LuxuryGold.otf');
+}
+
+.custom_font{
+	font-family: BebasNeue; /* no .ttf */
+	font-size:2.5em;
+}
+
+/* --------------------------  CONTENT WRAPER  -----------------------*/
+	/*set as size of iphone for now */
+
+#container
+{
+	overflow:hidden; /*Acts like a mask: content stays inside*/
+	/*display:inline-block;*/
+	width:100%; 
+	max-width:800px; /*SI template 760, iphone 640 */
+	height:100%;
+	margin: 0 auto;
+	padding: 0;
+	/*background-color:#FF0066;*/ /*Pink*/
+	background-image: url(../images/Chain_pattern.png);
+	background-repeat: repeat-y;
+	background-size:10%;
+	background-position: 0px 0px;
+}
+
+	/*------CHAIN ANIMATION------*/
+	.chainAnimationWraper
+	{
+		display:block;
+		float:right;
+		background-color:blue;  /* temp color*/
+		height:100%;
+		min-height:600px;
+		/*height:696px;*/
+		width:10%;
+		position:absolute;
+		top:0;
+		/*right:10px;*/
+		left:30%;
+		/*right:10px;*/ /*Turn this on for responsive*/
+		overflow:hidden; /*chain will get masked off by this box/wrapper so it wont show outsied box*/
+		margin: 0;
+		padding: 0;
+		
+	}
+	#chainAnimation
+	{
+		display:block;
+		height:100%;
+		width:100%;
+		background-image: url(../images/Chain_pattern.png);
+		background-repeat: repeat;
+		background-position: left top;
+		/*background-color:red;*/
+		background-size:100%;
+		background-position: 0px 0px;
+	}
+	/*------END CHAIN ANIMATION------*/
+
+/*temp stuff to show what the design should look like*/
+/*.designTemp 
+{
+	position:absolute;
+	width:100%;
+	height:745px;
+	background-image: url(../images/design-temp.jpg);
+    background-position: left top;
+	opacity:0.3;
+}*/
+
+/* --------------------------  END CONTENT WRAPER  -----------------------*/
+
+/* --------------------------  HEADER STUF -----------------------*/
+.header /*Header Wrapper*/
+{
+	background-color:#d1d2d4; /*Gray Header Box*/
+	width:100%;
+	height:130px;
+	margin: 0px;
+	padding: 0px;
+	display:block;
+}
+
+#logo 
+{
+	float:left;
+	display:block;
+	width:40%;/*Adjusting this will change the size of image*/
+	height:100%;/*this will effect the croping hight, but not scale of image*/
+	background-image: url(../images/logo.png);
+    background-repeat: no-repeat;
+    background-position: center;
+	background-size:90%;/*this links the scale of image to width of div box*/
+    padding:0px 0 0 0 ;
+    margin:0px 0px 0px 0px;
+	/*background-color:blue;*/
+
+	
+}
+.clearPad
+{
+	height:30%;
+	display:block;
+	/*background-color:green;*/
+}
+#webBTN 
+{
+	float:right;
+	display:block;
+	font-family: BebasNeue; /* no .ttf */
+	color:#FCD02A;
+	font-size:1.5em; /*1em = 12points. if doc defalt font size is 12 points. 2em=24px*/
+	background-color:#000000; /*Black*/
+    text-align:center;
+	vertical-align:center;
+	width:50%;
+
+	padding:2% 0;
+	/*padding:10px 41px 10px 41px;*/
+	margin:0;
+    /*margin:45px 120px 0px 0px;*/	
+}
+/* --------------------------  END HEADER STUF -----------------------*/
+
+
+
+/* --------------------------  BODY WRAPER-----------------------*/
+	.bodyWraper/*parent wraper*/
+	{
+		/*position:relitive;*/
+		display:block;
+		height:715px;
+		/*height:100%;*/
+		width:100%;
+		
+	
+		margin: 0px 0px 0px 0px;
+	}
+	/* --------------------------  CAN CONTENT -----------------------*/
+	.canContent /*Content Wrapper*/
+	{
+		overflow:hidden;
+		display:block;
+		width:100%;
+		/*height:437px;*/
+		height:70%;
+		margin: 0px 0px 0px 0px;
+		padding: 0px;
+		position:relitive;
+	}
+	.blank /*this might be very temporary*/
+	{
+		/*background-color:#FF3300;*/ /* Orange or Redish*/
+		width:100%;
+		height:50px;
+	}
+	#canWrapper
+	{
+		
+		overflow:hidden;
+		/*position:absolute;*//*this allows the can to float above the data box*/
+		width:40%;/*this effects scaling based on the code bellow background-size:100%. Get it?*/
+		height:100%; /*was 340*/
+		float:left;
+		display:inline-block;
+		padding:0px;
+		margin:0px 0px 0px 0px;
+		/*background-color:green;*/
+		/*border: 1px solid black;*/
+	}
+	#can 
+	{
+		/*position:relitive;*/
+		float:right;
+		display:inline-block;
+		width:90%;/*was 225 */
+		height:100%;
+		background-repeat: no-repeat;
+		background-position: left top;
+		background-size:100%;
+		padding:0px;
+		margin:0px -15% 0px 0%;
+		/*background-color:green;*/
+		/*border: 0px solid black;*/
+	}
+	.canImage1
+	{
+		background-image: url(../images/1_IPA.png);
+	}
+	.canImage2
+	{
+		background-image: url(../images/2_RED.png);
+	}
+	.canImage3
+	{
+		background-image: url(../images/3_AB.png);
+	}
+	.canImage4
+	{
+		background-image: url(../images/4_LAGER.png);
+	}
+	
+	.canInfoList
+	{
+		margin:15px 0px 0px 0px;
+	}
+
+	.canInfoWrapper
+	{
+		overflow:hidden;
+		display:inline-block;
+		width:50%;
+		height:35%;
+		/*background-color:green;*/
+		padding:0px;
+		margin:17% 0px 0px 0px;	
+	}	
+	#canInfo
+	{
+		display:inline-block;
+		/*min-width:100px;*/
+		width:100%;
+		height:100%;
+		background-color:#000000; /* Black*/
+		color:#FFFFFF;/*white*/
+		padding:0px;
+		margin:0px 0px 0px 0px;		
+	}
+	.canTitle
+	{
+		font-family: BebasNeue; /* no .ttf */
+		font-size:2.5em;/*was 2.5em*/
+		color:#FCD02A;
+	}
+	.canInfoBullet
+	{
+		font-family: LuxuryGold;/* no .ttf */
+		font-size:1.5em;/*was 24px*/
+		margin: 5px 0px 0px 0px;
+		padding:0px;
+		color:#FFFFFF;
+	}
+	/* --------------------------  END MAIN CONTENT -----------------------*/
+	/* --------------------------  Footer Wraper -----------------------*/
+		.footerWraper
+		{
+			/*position:absolute;*/
+			display:block;
+			/*min-width:640px;*/
+			width:100%;
+			/*width:640px;*/
+			height:40%;
+			margin: 0px 0px 0px 0px;
+			bottom:0;
+			/*background-color:blue;*/
+			
+			
+		}
+		/* --------------------------  NAVIGATION  -----------------------*/
+		.canNavWrapper/*Content Wrapper*/
+		{
+			display:block;
+			
+			width:100%;
+			/*height:100%;*/
+			margin: 0px;
+			padding: 0px;
+			text-align:center;
+			vertical-align:bottom;
+			/*background-color:red;*/ /* red*/
+		}
+
+		/*Buttons*/
+		/*.arrowThing
+		{
+			display:inline-block;
+			width:84px;
+			height:84px;			
+			padding:0px;
+			margin:0px 0px 0px 0px;
+			background-image: url(../images/arrowThing.png);
+			background-repeat: no-repeat;
+			background-position: left top;
+			background-color:green;
+
+		}*/
+		.canBTN
+		{
+			/*float:left;*/
+			display:inline-block;
+			width:12%;/*was 84 x 84 */
+			height:94px; /* */
+			padding:0px;
+			margin:0px 2.5% 0px 2.5%;/*was 0 42px 0 0  */
+			background-repeat: no-repeat;
+			background-position: left top;	
+		}
+		#canBTN1
+		{
+			background-image: url(../images/canBTN-01.png);
+			background-size:100%;
+		}
+		#canBTN2
+		{
+			background-image: url(../images/canBTN-02.png);
+			background-size:100%;
+		}		
+		#canBTN3
+		{
+			background-image: url(../images/canBTN-03.png);
+			background-size:100%;
+		}		
+		#canBTN4
+		{
+			background-image: url(../images/canBTN-04.png);
+			background-size:100%;
+			background-position:0 0;
+		}
+		
+		/* --------------------------  END NAVIGATION  -----------------------*/
+		/* --------------------------  Footer Box -----------------------*/
+		#footerBox/*Content Wrapper*/
+		{
+			display:block;
+			font-family: BebasNeue; /* no .ttf */
+			color:#FCD02A;
+			font-size:2.3em; /*1em = 12points. if doc defalt font size is 12 points. 2em=24px*/
+			background-color:#000000; /*Black*/
+			width:100%;
+			height:100%;
+			margin: 0px 0px 0px 0px;
+			padding: 0px  0px  0px  0px;
+			text-align:center;
+		}
+		#footerText
+		{
+			margin: 0px 0px 0px 0px;
+			padding: 2px  0px  0px  25px;
+		}
+		
+		/* --------------------------  END Footer Box -----------------------*/
+	/* --------------------------  END Footer Wraper -----------------------*/
+/* --------------------------  END BODY WRAPER-----------------------*/
+
+
+/* --------------------------  ANIMATION CLASSES  -----------------------*/
+/*Animation works like this: opacity starts at 0 and moves to 1 in the html script*/
+.ANfade{opacity:0;}
+
+
+/* --------------------------  END ANIMATION CLASSES  -----------------------*/
+
+/*
+@media only screen and (max-width: 650px) {
+
+    .canTitle { font-size: 2em; }
+	.canInfoBullet { font-size: 1.5em; }
+}*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+	.canTitle { font-size: 1.5em; }
+	.canInfoBullet { font-size: 1em; }
+	.bodyWraper{height:400px; }
+	.canBTN {height:40px; }
+	
+}
+@media (min-width: 481px) and (max-width: 800px) {
+	.canTitle { font-size: 1.5em; }
+	.canInfoBullet { font-size: 1em; }
+	.bodyWraper{height:500px; }
+	.canBTN {height:80px; }
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HUB</title>
+	<meta name="viewport" content="width=device-width" />
+	<script src="js/lib/jquery.min.js" type="text/javascript"></script>
+	<script src="js/lib/TweenMax.min.js" type="text/javascript"></script>
+	<script src="js/animations.js" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+	<script>
+		$(document).ready(function() {
+			$(".ANfade").delay(300).animate( {opacity: 1}, 500 );
+			
+			TweenLite.from(logo, .5, {delay:0.5, margin:"-100px 0 0 0", ease:Bounce.easeOut});
+			TweenLite.from(webBTN, .5, {delay:0.75, margin:"-100px 120px 0 0", ease:Bounce.easeOut});
+			TweenLite.from(chainAnimation, .5, {delay:1, margin:"0 0 0 100px", ease:Bounce.easeOut});
+			TweenLite.from(footerText, .5, {delay:1.25, margin:"0 0 0 -300px", ease:Bounce.easeOut});
+
+			TweenMax.from(can, .5, {delay:1.5, margin:"0 0 0 -400px"});
+			TweenMax.from(canInfo, .5, {delay:2, margin:"0 0 0 -400px"});	
+			TweenMax.from(canInfoTitle, .5, {delay:2, margin:"0 0 0 -400px"});
+			TweenMax.from(canInfoLine1, .5, {delay:2.25, margin:"0 0 0 -400px"});
+			TweenMax.from(canInfoLine2, .5, {delay:2.5, margin:"0 0 0 -400px"});
+			TweenMax.from(canInfoLine3, .5, {delay:2.75, margin:"0 0 0 -400px"});	
+		});	
+	</script>
+</head>
+<body>
+	<div id="container">
+		<div class="designTemp"></div>
+
+		<div class="header">
+		  <a id="logo" href="http://hopworksbeer.com/" ></a>
+		  <div class="clearPad"></div>
+		  <a id="webBTN" href="http://hopworksbeer.com/beer" >DRINK BEER NOW</a> 
+
+		</div>
+		<div class="bodyWraper">
+			
+			<div class="canContent">
+				<div class="blank">&nbsp;</div>
+				<div id="canWrapper"><!--this floats above stuff-->
+					<div id="can" class="canImage1"></div>
+				</div>
+				<div class="canInfoWrapper">
+					<div id="canInfo">
+						<!-- Can info. Dependent on nav bellow --> 
+						<UL class="canInfoList">
+							<li id="canInfoTitle"  class="canTitle">ORGANIC HOPWORKS IPA</li>
+							<li id="canInfoLine1"  class="canInfoBullet">ABV: 6.6&#37;</li><!--need to add percent hex code here after 66-->
+							<li id="canInfoLine2"  class="canInfoBullet">IBU: 75</li>
+							<li id="canInfoLine3"  class="canInfoBullet">Plato: 15</li>
+						</UL>
+					</div>	
+				</div>
+			</div>
+			<div class="footerWraper">
+				<div class="canNavWrapper">&nbsp;
+					<div class="arrowThing"></div>
+					<a onclick="canBTNclick(1);" id="canBTN1" class="canBTN" href="#" onclick="return:false;"></a><!-- onclick return:false keeps page from relading. need # for href otherwhise it will reload page-->
+					<a onclick="canBTNclick(2);" id="canBTN2" class="canBTN" href="#"  onclick="return:false;"></a>
+					<a onclick="canBTNclick(3);" id="canBTN3" class="canBTN" href="#"  onclick="return:false;"></a>
+					<a onclick="canBTNclick(4);" id="canBTN4" class="canBTN" href="#"  onclick="return:false;"></a>
+				</div>
+				<div id="footerBox"><p id="footerText">Choose Your Flavor<p></div>	
+			</div>
+		</div>	
+	<!--<div class="chainAnimationWraper">
+			<div id="chainAnimation"></div>
+	</div>-->
+	</div>
+
+
+
+</body>
+</html>
