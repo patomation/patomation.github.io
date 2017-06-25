@@ -1,0 +1,4 @@
+I feel that I am an amazing fit because of my extensive experience working along side other developers and designers. I have been keeping up with my Javascript practice by continuing to work on personal projects over the last year. I would love to work on some interesting and challenging projects  and create beautiful ux experiences for the users. I'm also and advocate to researching new technologies as part of my normal work day.
+
+From the last two companies I worked for, Javascript became engrained in me. As well as a strict pull request git practices and a deep understanding of the commands and managing a repo.
+We used ember and other frame works. But mostly we used ReactJS for our ux/ui experiences. We used sass modules files to organize classes to compile one minified css file for faster page load times.
