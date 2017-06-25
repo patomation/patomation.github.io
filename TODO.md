@@ -1,0 +1,5 @@
+- [ ] Illustrate profile picture
+- [ ] Dust off old shop igniter projects and add to demos
+    - Rush
+    - hub
+- [ ] Learn Ember - Apache  Cordova
