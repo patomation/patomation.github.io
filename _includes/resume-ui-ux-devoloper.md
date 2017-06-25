@@ -6,7 +6,7 @@ Over 5 years technical experience in web design and web development, with an emp
 
 Broad understanding of a variety of programming languages and able to quickly learn new languages and frameworks.
 
-Application Designer ∙ Product Development &amp; Planning ∙ Sprints ∙ Web Development ∙ Google Analytics ∙ AWS &amp; Heroku ∙ ReST ∙ SaaS ∙ Javascript∙ Html5 ∙ less &amp; sass ∙ Bootstrap ∙ Foundation ∙ Python ∙ Technical Trainer ∙ Technical Writer ∙ Brand Marketing ∙ Agile/Sprint/Stories ∙ Information Technology
+Application Designer ∙ Product Development &amp; Planning ∙ Sprints ∙ Web Development ∙ Google Analytics ∙ AWS &amp; Heroku ∙ ReST ∙ SaaS ∙ Javascript∙ Html5 ∙ less &amp; sass ∙ Bootstrap ∙ Foundation ∙ Python ∙ Technical Trainer ∙ Technical Writer ∙ Brand Marketing ∙ Agile/Sprint/Stories ∙ Information Technology ∙ MVC
 
 
 
@@ -23,6 +23,17 @@ September 2014 - November 2015 (1 year 3 months)
 - Search Engine Optimization.
 - SSH connection to servers to troubleshoot deployments.
 - Maintained test coverage for Yeoman app boilerplate scaffolding.
+- Communicated with other developers and assessed each other's needs.
+- Worked as UX designer as well handling implementation.
+- Worked with other UX designers in the Seattle office via email, video conferencing and JIRA.
+- UI/UX Development
+- Javascript
+- SASS, css and strict organization of classes as modules.
+- Ember
+- ReactJS
+- nodeJS  
+- Researching new technologies by building on open-source collective information and processes.
+- Created beautiful and usable user interfaces.
 
 **Front End UX Developer <br />
 ShopIgniter, Inc.  -–  Portland, OR <br />**

@@ -2,15 +2,26 @@
 
 #### Profile | Summary
 
-Over 5 years technical experience in web design and web development, with an emphasis on understanding customer requirements and work with engineering on those customer features for product releases, enabling pilot customers, reducing product escalations &amp; support costs, streamlining processes &amp; increasing efficiency of resources, effective product demos and project goals.
+Over 5 years technical experience. Over 10 years customer service experience both in person and over the phone. Understanding customer requirements and interact closing with the entire development team on those features for product releases, enabling pilot customers, reducing product escalations &amp; support costs, streamlining processes &amp; increasing efficiency of resources, effective product demos and project goals &amp; making sure issues are clearly communicated and tracked. Work with modern and highly scalable systems.
 
-Broad understanding of a variety of programming languages and able to quickly learn new languages and frameworks.
+Broad understanding of a variety of programming languages and able to quickly learn new languages and frameworks. Experience with platforms such as windows, mac, and linux.
 
-Application Designer ∙ Product Development &amp; Planning ∙ Sprints ∙ Web Development ∙ Google Analytics ∙ AWS &amp; Heroku ∙ ReST ∙ SaaS ∙ Javascript∙ Html5 ∙ less &amp; sass ∙ Bootstrap ∙ Foundation ∙ Python ∙ Technical Trainer ∙ Technical Writer ∙ Brand Marketing ∙ Agile/Sprint/Stories ∙ Information Technology
+Product Development &amp; Planning ∙ Sprints ∙ Technical Trainer ∙ Technical Writer ∙ Brand Marketing ∙ Agile/Sprint/Stories ∙ Information Technology Mac & Windows client and server operating systems ∙ Exchange ∙ Office 365 ∙ Dell desktops
 
 
 
 #### Professional Experience:
+**Warehouse Manager <br />
+Aboy Electric and Plumbing Supply  -–  Porltand, OR <br />**
+November 2015 - Currently
+
+- Resurrected old Windows (xp and 7) machines giving employees access to more workstations.
+- Replaced monitors and keyboard equipment.
+- Created scripts for making inventory more efficient
+- Customer service by phone.
+- Consulting customers and assisted them in repairing their homes.
+- Sales approach towards increasing profits.
+- Received new product and added to inventory.
 
 **Front End Developer <br />
 Mixpo  -–  Portland, OR <br />**
@@ -23,6 +34,8 @@ September 2014 - November 2015 (1 year 3 months)
 - Search Engine Optimization.
 - SSH connection to servers to troubleshoot deployments.
 - Maintained test coverage for Yeoman app boilerplate scaffolding.
+- Scale the company's IT resources by assisting other developers with there environments.
+- Managed internal and external projects.
 
 **Front End UX Developer <br />
 ShopIgniter, Inc.  -–  Portland, OR <br />**
@@ -57,6 +70,8 @@ May 2011 - June 2013 (2 years 3 months)
 #### EDUCATION, TRAINING  and COMMUNITY SERVICE
 
 Southern Oregon University.
+
+Friends of Trees - 1 yearrm -
 
 Boys and Girls Club – 5 years
 
