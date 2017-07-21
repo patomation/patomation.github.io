@@ -39,3 +39,20 @@ git checkout -- file
 ```
 git reset
 ```
+
+#### Move Branch from github to bitbucket
+git clone localy
+```
+git clone
+```
+change origin
+```
+git remote set-url origin ssh://git@bitbucket.org/username/my-code-project.git
+```
+push for the first time
+```
+git push --set-upstream origin master
+```
+
+
+ 
