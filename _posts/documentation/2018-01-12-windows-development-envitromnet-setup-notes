@@ -1,1 +1,24 @@
 
+A nicer terminal to use in windows... Cygwin with oh my zsh.
+
+Oh-My-ZSH
+
+1. cygwin Download: https://cygwin.com/install.html
+note:[when ever you need to install new packages, run the installer again]
+2. Run setup select following packages
+  -zsh
+  -git
+  -nano
+  -wget
+3. Make ZSH default shell
+```
+nano ~/.bash_profile
+```
+add to top 
+```
+exec zsh
+```
+save in home/username.
+Restart cygwin in zsh now.
+
+
