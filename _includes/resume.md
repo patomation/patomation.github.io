@@ -30,6 +30,13 @@ November 2015 - Current
 - Drag n Drop
 - API/microservices development
 
+**Node command line utilitys**
+November 2015 - Current
+- Automating workloads
+- Bulk downloads
+- SoundCloud Hacking
+- Numerous command line tools made for every occasion
+
 **Front End Developer <br />
 Mixpo  -–  Portland, OR <br />**
 September 2014 - November 2015 (1 year 3 months)
