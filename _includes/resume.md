@@ -30,7 +30,7 @@ November 2015 - Current
 - Drag n Drop
 - API/microservices development
 
-**Node command line utilitys**
+**Node command line utilities**
 November 2015 - Current
 - Automating workloads
 - Bulk downloads
