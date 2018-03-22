@@ -2,7 +2,7 @@
 
 #### Profile | Summary
 
-Over 5 years technical experience in web design and web development, with an emphasis on understanding customer requirements and work with engineering on those customer features for product releases, enabling pilot customers, reducing product escalations &amp; support costs, streamlining processes &amp; increasing efficiency of resources, effective product demos and project goals.
+Over 7 years technical experience in web design and development, with an emphasis on understanding customer requirements and work with engineering on those customer features for product releases, enabling pilot customers, reducing product escalations &amp; support costs, streamlining processes &amp; increasing efficiency of resources, effective product demos and project goals. Agile team
 
 Broad understanding of a variety of programming languages and able to quickly learn new languages and frameworks.
 
@@ -11,6 +11,24 @@ Application Designer ∙ Product Development &amp; Planning ∙ Sprints ∙ Web 
 
 
 #### Professional Experience:
+**React App Projects: Audio Chopper App and Gif Video DJ**
+November 2015 - Current
+
+- React
+- Redux
+- Typescript
+- ES6+
+- NPM
+- Webpack
+- Electron [Chromium apps]
+- CSS (Sass) [Separate Modules for each class]
+- UI/UX design (Photoshop Illustrator)
+- Unit testing with Jest
+- Automated testing with Selenium
+- Midi hardware integrations
+- Audio Waveform Rendering
+- Drag n Drop
+- API/microservices development
 
 **Front End Developer <br />
 Mixpo  -–  Portland, OR <br />**
