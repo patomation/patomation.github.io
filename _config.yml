@@ -1,10 +1,13 @@
 # Site settings
-title: Patomation
+title: Patrick Kelly
 email: patomation@gmail.com
 url: https://patomation.github.io
-description: "Patrick Kelly is a designer and full stack developer. Give him a job."
+phone: '+66 80 626 2530'
+
 keywords: "fullstack, full stack, developer, js, javascript, design, nodejs, node, npm, python, css, sass, less, saas, bootstarp, angular"
-skills: "Web Developer - Graphic Artist - User Experience Designer"
+skills: "Design - Translation - Copy Wrighting- Web Consulting"
+description: "Patrick Kelly is a designer and full stack developer with over 5 years experience."
+
 meta_author: Kelly Patrick
 
 # Google webmaster tools
