@@ -1,5 +1,12 @@
 ---
 layout: default
 title: Blog
-description: Musings as I take a journey through development and other projects.
+description: Different ideas and documentation
 ---
+<ul>
+  {% for post in site.posts %}
+    <li>
+      <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+  {% endfor %}
+</ul>
