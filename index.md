@@ -1,44 +1,38 @@
-### Patrick Kelly
+---
+layout: home
+---
+
+{:#portfolio}
+# Portfolio
+
+
+
+| ![](/img/portfolio/drum-machine.JPG) | ![](/img/portfolio/gnome.JPG) |
+
+| ![](/img/portfolio/hopworks-urban-brewery.JPG) | ![](/img/portfolio/northern-thai-escapes-1.png) |
+
+| ![](/img/portfolio/react-bicycle-animation.JPG) | ![](/img/portfolio/sound-sampler-electron-app.JPG) |
+
+| ![](/img/portfolio/vintage-computer.JPG) | ![](/img/portfolio/weather-app.JPG) |
+
+
+{:#resume}
+# Resume
 
 #### Profile | Summary
 
-Over 7 years technical experience in web design and development, with an emphasis on understanding customer requirements and work with engineering on those customer features for product releases, enabling pilot customers, reducing product escalations &amp; support costs, streamlining processes &amp; increasing efficiency of resources, effective product demos and project goals. Agile team
+Over 5 years technical experience in web design and web development, with an emphasis on understanding customer requirements and work with engineering on those customer features for product releases, enabling pilot customers, reducing product escalations &amp; support costs, streamlining processes &amp; increasing efficiency of resources, effective product demos and project goals.
 
 Broad understanding of a variety of programming languages and able to quickly learn new languages and frameworks.
 
-Application Designer ∙ Product Development &amp; Planning ∙ Sprints ∙ Web Development ∙ Google Analytics ∙ AWS &amp; Heroku ∙ ReST ∙ SaaS ∙ Javascript∙ Html5 ∙ less &amp; sass ∙ Bootstrap ∙ Foundation ∙ Python ∙ Technical Trainer ∙ Technical Writer ∙ Brand Marketing ∙ Agile/Sprint/Stories ∙ Information Technology
+Application Designer  Product Development &amp; Planning  Sprints  Web Development  Google Analytics  AWS &amp; Heroku  ReST  SaaS  Javascript Html5  less &amp; sass  Bootstrap  Foundation  Python  Technical Trainer  Technical Writer  Brand Marketing  Agile/Sprint/Stories  Information Technology  MVC
 
 
 
 #### Professional Experience:
-**React App Projects: Audio Chopper App and Gif Video DJ**
-November 2015 - Current
-
-- React
-- Redux
-- Typescript
-- ES6+
-- NPM
-- Webpack
-- Electron [Chromium apps]
-- CSS (Sass) [Separate Modules for each class]
-- UI/UX design (Photoshop Illustrator)
-- Unit testing with Jest
-- Automated testing with Selenium
-- Midi hardware integrations
-- Audio Waveform Rendering
-- Drag n Drop
-- API/microservices development
-
-**Node command line utilities**
-November 2015 - Current
-- Automating workloads
-- Bulk downloads
-- SoundCloud Hacking
-- Numerous command line tools made for every occasion
 
 **Front End Developer <br />
-Mixpo  -–  Portland, OR <br />**
+Mixpo  -  Portland, OR <br />**
 September 2014 - November 2015 (1 year 3 months)
 
 - ShopIgniter was acquired by Mixpo.
@@ -48,9 +42,20 @@ September 2014 - November 2015 (1 year 3 months)
 - Search Engine Optimization.
 - SSH connection to servers to troubleshoot deployments.
 - Maintained test coverage for Yeoman app boilerplate scaffolding.
+- Communicated with other developers and assessed each other's needs.
+- Worked as UX designer as well handling implementation.
+- Worked with other UX designers in the Seattle office via email, video conferencing and JIRA.
+- UI/UX Development
+- Javascript
+- SASS, css and strict organization of classes as modules.
+- Ember
+- ReactJS
+- nodeJS  
+- Researching new technologies by building on open-source collective information and processes.
+- Created beautiful and usable user interfaces.
 
 **Front End UX Developer <br />
-ShopIgniter, Inc.  -–  Portland, OR <br />**
+ShopIgniter, Inc.  -  Portland, OR <br />**
 June 2013 - September 2014 (1 year 4 months)
 
 - Building custom themes and creating concepts and new ideas for clients.
@@ -67,7 +72,7 @@ June 2013 - September 2014 (1 year 4 months)
 - Maintaining boilerplate code that was reused with each client.
 
 **Animator / Designer <br />
-AngelVision Technologies / Dark Water Studios  -–  Beaverton, OR <br />**
+AngelVision Technologies / Dark Water Studios  -  Beaverton, OR <br />**
 May 2011 - June 2013 (2 years 3 months)
 
 - Designed and developed graphical user interface panels for adobe After Efect's and Flash.
@@ -83,9 +88,9 @@ May 2011 - June 2013 (2 years 3 months)
 
 Southern Oregon University.
 
-Boys and Girls Club – 5 years
+Boys and Girls Club  5 years
 
-Screen Print Internship – 6 months
+Screen Print Internship  6 months
 
 #### REFERENCES
 

@@ -1,5 +1,5 @@
 ---
-layout: blog
+layout: default
 title: Blog
 description: Musings as I take a journey through development and other projects.
 ---
