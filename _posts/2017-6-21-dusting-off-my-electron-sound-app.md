@@ -160,7 +160,7 @@ Looks like everything worked well. I was able to create a mac package.
 
 
 
-# [DOWNLOAD IT HERE](../sound-sampler-app-download/)
+# [DOWNLOAD IT HERE](../downloads/sound-sampler-app-download/)
 
 
 
