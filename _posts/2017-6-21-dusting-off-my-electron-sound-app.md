@@ -1,6 +1,6 @@
 ---
 layout: post
-category : blog
+category : blog2
 tagline: ""
 tags : [electron, javascript, node]
 ---
