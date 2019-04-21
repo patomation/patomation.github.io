@@ -18,7 +18,9 @@ github_username:
 markdown: kramdown
 # theme: minima
 
-remote_theme: patomation/simple-jekyll-theme@0.0.3
+remote_theme: patomation/simple-jekyll-theme@0.0.5
+
+google_anylitics: UA-70015022-1
 
 plugins:
   - jekyll-feed
