@@ -25,7 +25,7 @@ google_anylitics: UA-70015022-1
 plugins:
   - jekyll-feed
   - jekyll-remote-theme
-
+  - jekyll-seo-tag
 
 # Navigation
 nav:
