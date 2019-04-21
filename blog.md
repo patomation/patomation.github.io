@@ -2,6 +2,7 @@
 layout: default
 title: Blog
 description: Different ideas and documentation
+permalink: /blog/
 ---
 <ul>
   {% for post in site.posts %}
