@@ -18,7 +18,7 @@ github_username:
 markdown: kramdown
 # theme: minima
 
-remote_theme: patomation/simple-jekyll-theme@0.0.7
+remote_theme: patomation/simple-jekyll-theme@0.0.8
 
 google_anylitics: UA-70015022-1
 
