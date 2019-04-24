@@ -5,6 +5,8 @@ tagline: "Helpful tips on using git"
 tags : [git, github, bitbucket]
 ---
 
+# Github cheatsheet
+
 #### OverWrite Master With Branch
 ```
 git checkout mybranch
@@ -13,10 +15,11 @@ git checkout master
 git merge mybranch
 ```
 
-#### Delete All Other Branches
-```
-git branch | grep -v "master" | xargs git branch -D
-```
+
+* * *
+
+## REMOTE
+
 
 #### New Remote
 ```
@@ -40,6 +43,21 @@ git checkout -- file
 git reset
 ```
 
+# Revert To Old Commits
+```
+git reset --hard [commithash]
+```
+
+
+* * *
+
+## BRANCHES:
+
+#### Add remote Branch
+```
+git checkout --track origin/branchname
+```
+
 #### Move Branch from github to bitbucket
 git clone localy
 ```
@@ -54,7 +72,17 @@ push for the first time
 git push --set-upstream origin master
 ```
 
-### Duplicate repo
+#### Delete All Other Branches
+```
+git branch | grep -v "master" | xargs git branch -D
+```
+
+
+* * *
+
+## CLONE REPO
+
+#### Duplicate repo
 Clone into new folder localy
 ```
 git clone http://OLD_project-repo.git.url new-project-repo
