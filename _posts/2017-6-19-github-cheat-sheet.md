@@ -59,7 +59,7 @@ git checkout --track origin/branchname
 ```
 
 #### Move Branch from github to bitbucket
-git clone localy
+git clone locally
 ```
 git clone
 ```
