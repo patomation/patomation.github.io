@@ -91,3 +91,8 @@ sc start LxssManager
 ```
 C:\Users\[WindowsUserName]\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState\rootfs
 ```
+
+# npm permission error fixes
+```
+sudo chown -R $(whoami) ~/.npm
+```
