@@ -92,7 +92,30 @@ sc start LxssManager
 C:\Users\[WindowsUserName]\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState\rootfs
 ```
 
-# npm permission error fixes
+# npm EACCES permission error fixes
+This didn't work but I did it anyway
 ```
 sudo chown -R $(whoami) ~/.npm
+```
+This did work:
+Make new .npm-global directory
+```
+mkdir ~/.npm-global
+```
+Tell npm to use prefix path
+```
+npm config set prefix '~/.npm-global'
+```
+
+Edit profile and add ```vim ~/profile```
+```
+export PATH=~/.npm-global/bin:$PATH
+```
+Update System Variables
+```
+$ source ~/.profile
+```
+Test config by doing install whithout sudo:
+```
+$ npm install -g jshint
 ```
