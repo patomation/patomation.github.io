@@ -16,4 +16,4 @@ tags : [sound-sampler, electron]
 - Export sample files in one zip file
 
 
-![sound-sampler](../img/blog/2017-6-21-dusting-off-my-electron-sound-app_2.png)
+![sound-sampler](../assets/images/blog/2017-6-21-dusting-off-my-electron-sound-app_2.png)

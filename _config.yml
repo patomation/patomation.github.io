@@ -1,7 +1,10 @@
 brand: Patrick Kelly
 title: Patrick Kelly
 email: patomation@gmail.com
-description: "Patrick Kelly is a designer and full stack developer with over 5 years experience."
+description: >-
+  Self taught web designer who loves to travel and drink coffee.
+  Camping enthusiast and mechanic. Lover of dogs.
+profile-image: assets/images/Patrick-Profile-Picture-1.png
 baseurl: "" # the subpath of your site, e.g. /blog
 url: https://patomation.github.io
 phone: '+66 80 626 2530'
@@ -18,7 +21,7 @@ github_username:
 markdown: kramdown
 # theme: minima
 
-remote_theme: patomation/simple-jekyll-theme@0.0.8
+remote_theme: patomation/simple-jekyll-theme@0.1.0
 
 google_anylitics: UA-70015022-1
 
@@ -29,14 +32,12 @@ plugins:
 
 # Navigation
 nav:
-  - title: Home
-    url: /
-  - title: Porfolio
-    url: /#portfolio
-  - title: Resume
-    url: /#resume
-  - title: Blog
-    url: /blog/
+  - title: Projects
+    url: /#projects
+  - title: Contact
+    url: /#contact
+  # - title: Blog
+  #   url: /blog/
   # - title: Contact
   #   url: /contact/
   # - title: About

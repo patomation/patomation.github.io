@@ -9,7 +9,7 @@ tags : [electron, javascript, node]
 
 I have been working with Jekyll over the past few weeks. So I didn't notice that my electron dev skills were getting a bit rusty. I discovered this when I dusted off my electron sound editing app when I discovered that nothing worked when I went to npm serve.
 
-![sound sampler](../img/blog/2017-6-21-dusting-off-my-electron-sound-app_1.png)
+![sound sampler](../assets/images/blog/2017-6-21-dusting-off-my-electron-sound-app_1.png)
 
 Then the next thing I notice was that I was unable to launch the dev tools inspector with the normal chrome way:
 ```
@@ -27,7 +27,7 @@ npm run dev
 ```
 I can't remember clearly, but I think I had to install an npm package to get this to work.
 
-![sound sampler](../img/blog/2017-6-21-dusting-off-my-electron-sound-app_3.png)
+![sound sampler](../assets/images/blog/2017-6-21-dusting-off-my-electron-sound-app_3.png)
 
 As you can see from the screen shot above. The app is working fine. It would seem that it remembered the two sound files I was using last time. Thanks to the localstorage manager module that I wrote:
 
