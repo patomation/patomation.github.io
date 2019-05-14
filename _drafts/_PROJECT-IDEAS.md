@@ -1,5 +1,9 @@
 ## Project Ideas
 
+2. Pitchfork.io - a Crowd mob app.
+Bringing people together.
+A fake app thats like 4square or yelp that organizes people into mobs iwht pitchforks and torches to attack a business or something. Could be fun for a fake app design or even mockup prototype.
+
 
 1. Tape Cluster Drum Machine:
 Use a bunch of the tape objects to load a bunch of loops that are all the same length. Clicking on the tape plays that part of the song in a loop.
@@ -15,4 +19,4 @@ Future. Add a time feature? Volume ect?
 Just take react components:
 - cassette tape
 - PLayer
-and put a bunch of them up all with different audios. 
+and put a bunch of them up all with different audios.
