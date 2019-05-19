@@ -1,5 +1,12 @@
 ## Project Ideas
 
+3. MAke a plugin that adds googly eys to any image.
+  ...for some reason im thinking of the monalisa with eyes that follow you. Is that a 404 page?
+  - Give it some Options
+    - Position, spread between eyes...
+
+
+
 2. Pitchfork.io - a Crowd mob app.
 Bringing people together.
 A fake app thats like 4square or yelp that organizes people into mobs iwht pitchforks and torches to attack a business or something. Could be fun for a fake app design or even mockup prototype.

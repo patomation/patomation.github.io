@@ -58,21 +58,44 @@ Put together a template for blog journaling from a cool video I watched that was
 ## What lesson did I learn?
 Collecting webcam info is tedious.
 Not really sure how to impliment viewing webcams from different sources without having to make custom players for each source.
+React Forms
+I learned that building forms in react sucks if you use outdated technology. Like react-validation.
+I eventually figured out that all the cool kids are using Formik. Then I rewrote my code a third or forth time. Funny how tou dont notice big problems untill you get well into the middle of building something. Especially when its bitg.
 
 ## What could I have done better?
+I could resaerch "best technologies" to do x. Next time. And start by learning a well documented frame work and build around that. Instead of trying to do my own thing and coding what i think is cool stuff only to have to throw it away because it doesnt fit with the framwork.
+I guessI had to build the thing to know what I needed. But If its forms I'm always going to use FORMIK for react.
+
+Most everything else I can make by hand. The funny thing was that formik handles a bunch of the things I was trying to manually code oof.
+I waisted 3-4 days.
+
 
 ## What did I write?
 Wrote in blogging journal
 
+
 ## How did I market my content?
+Ugg, SEO backlinks are a mistery
 
 ## What website changes did I make?
+I worked on a form for Lanna.
 
 ## What should I focus on this week?
 Learn about back links - automate adding thousands of backlinks. <-- mvp?
 
+Lanna mentioned that my old site had better content. I looked at it and I was using a theme. I might just steal some ideas from the old theme and use them in my custom theme. I might bring in some of my old projects...
+- SEO learning - backlink building for lanna Site Priovateguideinchiangmai.com
+- how to turn off react auto complete - anoying
+- Improve website by..
+  - Stying header - animations?
+  - Bring in some old projects. Or rebuild them.
+    - IDEA: make a plugin that lets people add googley eys to a photo?
+  - Talk aboiut projects more on portfolio. Provide some code examples..
+- Trying out the API server and Database for the tour booking app..
 
 ## How often did I rise early to write?
+A couple of times i got up at 8ish and started to write code. Does that count?
+
 
 Monday [20] [May] 2019 [week 2]
 
