@@ -7,7 +7,7 @@ categories: projects
 tags: [jekyll, react, formik, express]
 demo-link:
 repo-link:
-image: assets/images/projects/private-guide-in-chiang-mai-mockup-1.png
+image: /assets/images/projects/private-guide-in-chiang-mai-mockup-1.png
 ---
 
 I took on an ongoing client project to create a tour booking website. It started out as a simple static site that grew to more pages. The booking functionality began as a simple form that used Netlify's handy form feature to email the client. This was what was agreed upon in the original spec.
