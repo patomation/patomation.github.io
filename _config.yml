@@ -1,4 +1,4 @@
-remote_theme: patomation/simple-jekyll-theme@0.1.7
+remote_theme: patomation/simple-jekyll-theme@0.1.9
 brand: Patrick Kelly
 title: Patrick Kelly
 email: patomation@gmail.com
@@ -31,16 +31,9 @@ plugins:
 
 # Navigation
 nav:
-  - title: Projects
-    url: /#projects
-  - title: Contact
-    url: /#contact
-  # - title: Blog
-  #   url: /blog/
-  # - title: Contact
-  #   url: /contact/
-  # - title: About
-  #   url: /about/
+  - title: Blog
+    url: /blog/
+
 
 #Footer Content
 footer:  Copyright © Patrick Kelly 2019
