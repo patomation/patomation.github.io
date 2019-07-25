@@ -23,6 +23,7 @@ markdown: kramdown
 
 
 google_anylitics: UA-70015022-1
+show_excerpts: true;
 
 plugins:
   - jekyll-feed
